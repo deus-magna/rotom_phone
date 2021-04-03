@@ -9,6 +9,10 @@
 .history
 .svn/
 
+# Ignore test-related files
+/coverage.data
+/coverage/
+
 # IntelliJ related
 *.iml
 *.ipr
