@@ -1,0 +1,42 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
+import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
+import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.dart';
+import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
+
+import 'core/network/network_info.dart';
+import 'data/datasource/pokemon/pokemon_remote_datasource.dart';
+import 'data/repositories/pokemon_repository_impl.dart';
+
+final sl = GetIt.instance;
+
+Future<void> init() async {
+  //! Features - Auth
+  // Provider
+  sl.registerFactory(() => PokedexCubit(
+        sl(),
+      ));
+
+  // use cases
+  sl.registerLazySingleton(() => GetPaginatedPokemonList(sl()));
+
+  // Repository
+  sl.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
+        remoteDataSource: sl(),
+        networkInfo: sl(),
+      ));
+
+  // Data sources
+  sl.registerLazySingleton<PokemonRemoteDataSource>(
+      () => PokemonRemoteDataSourceImpl(
+            client: sl(),
+          ));
+
+  //! Core
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+
+  //! External
+  sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton(() => DataConnectionChecker());
+}
