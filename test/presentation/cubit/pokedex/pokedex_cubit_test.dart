@@ -23,11 +23,6 @@ void main() {
     pokedexCubit = PokedexCubit(mockGetPaginatedPokemonList);
   });
 
-  /// Mock de los parametros que necesitamos enviar para obtener la
-  /// lista de pokemon
-  final int tLimit = 40;
-  final int tOffset = 0;
-
   /// Mock de la respuesta tras obtener la lista de pokemon
   final tPokemonPaginatedResponseModel = pokemonPaginatedResponseModelFromJson(
       fixture('pokemon_paginated_response.json'));
@@ -38,26 +33,35 @@ void main() {
       .map((pokemonData) => pokedexEntryFromResult(pokemonData))
       .toList();
 
-  group('GetPaginatedPokemonList', () {
-    test('El estado inicial deberia ser PokedexInitial', () {
-      expect(pokedexCubit.state, equals(PokedexInitial()));
+  test('El estado inicial deberia ser PokedexInitial', () {
+    expect(pokedexCubit.state, equals(PokedexInitial()));
+  });
+
+  group('getFirstPokedexPage', () {
+    setUp(() {
+      when(mockGetPaginatedPokemonList(
+              limit: anyNamed('limit'), offset: anyNamed('offset')))
+          .thenAnswer(
+              (realInvocation) async => Right(tPokemonPaginatedResponse));
+    });
+
+    test('Deberia obtener la primer pagina de entradas de la Pokedex',
+        () async {
+      await pokedexCubit.getFirstPokedexPage();
+      verify(mockGetPaginatedPokemonList(
+          limit: anyNamed('limit'), offset: anyNamed('offset')));
     });
 
     test(
         'Debe emitir [Loading, Loaded] cuando la data se obtiene correctamente',
         () {
-      when(mockGetPaginatedPokemonList(
-              limit: anyNamed('limit'), offset: anyNamed('offset')))
-          .thenAnswer(
-              (realInvocation) async => Right(tPokemonPaginatedResponse));
-
       final expected = [
         PokedexLoading(),
         PokedexLoaded(pokedexEntries: pokedexEntries),
       ];
 
       expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
-      pokedexCubit.getFirstPokedexPage(tLimit, tOffset);
+      pokedexCubit.getFirstPokedexPage();
     });
 
     test(
@@ -75,7 +79,55 @@ void main() {
         ];
         // act
         expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
-        pokedexCubit.getFirstPokedexPage(tLimit, tOffset);
+        pokedexCubit.getFirstPokedexPage();
+      },
+    );
+  });
+
+  group('getNextPokedexPage', () {
+    /// Mock de los parametros que necesitamos enviar para obtener la
+    /// lista de pokemon
+    final int tLimit = 40;
+    final int tOffset = 40;
+
+    setUp(() {
+      when(mockGetPaginatedPokemonList(
+              limit: anyNamed('limit'), offset: anyNamed('offset')))
+          .thenAnswer(
+              (realInvocation) async => Right(tPokemonPaginatedResponse));
+    });
+    test('Deberia obtener la siguiente page del Pokedex', () async {
+      await pokedexCubit.getNextPokedexPage(tLimit, tOffset);
+      verify(mockGetPaginatedPokemonList(
+          limit: anyNamed('limit'), offset: anyNamed('offset')));
+    });
+
+    test(
+        'Deberia emitir [Loaded] cuando la siguiente pagina se obtiene correctamente',
+        () {
+      final expected = [
+        PokedexLoaded(pokedexEntries: pokedexEntries),
+      ];
+
+      expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
+      pokedexCubit.getNextPokedexPage(tLimit, tOffset);
+    });
+
+    test(
+      'Deberia emitir [Loading, Error] cuando falla al obtener datos',
+      () async {
+        // arrange
+        when(mockGetPaginatedPokemonList(
+                limit: anyNamed('limit'), offset: anyNamed('offset')))
+            .thenAnswer((realInvocation) async => Left(ServerFailure()));
+        // assert later
+        final expected = [
+          PokedexError(
+              message: 'Ha ocurrido un error, por favor intenta nuevamente.'),
+        ];
+        // act
+        expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
+        pokedexCubit.getNextPokedexPage(tLimit, tOffset);
       },
     );
   });

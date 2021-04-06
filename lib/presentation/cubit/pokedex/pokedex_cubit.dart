@@ -16,10 +16,10 @@ class PokedexCubit extends Cubit<PokedexState> {
       : assert(getPaginatedPokemonList != null),
         super(PokedexInitial());
 
-  getFirstPokedexPage(int limit, int offset) async {
+  getFirstPokedexPage() async {
     emit(PokedexLoading());
     final failureOrPokemonList =
-        await getPaginatedPokemonList(limit: limit, offset: offset);
+        await getPaginatedPokemonList(limit: 40, offset: 0);
     emit(_eitherLoadedOrErrorState(failureOrPokemonList));
   }
 

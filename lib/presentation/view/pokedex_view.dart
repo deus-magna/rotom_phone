@@ -18,7 +18,7 @@ class PokedexView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       final pokedexCubit = context.read<PokedexCubit>();
-                      pokedexCubit.getFirstPokedexPage(40, 0);
+                      pokedexCubit.getFirstPokedexPage();
                     },
                     child: Text('Init Pokedex'),
                   ),
