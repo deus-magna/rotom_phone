@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokedex_entry.dart';
+import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.dart';
 
@@ -39,7 +39,7 @@ class PokedexCubit extends Cubit<PokedexState> {
     }
   }
 
-  List<PokedexEntry> getPokedexEntries(
+  List<PokedexEntryModel> getPokedexEntries(
       PokemonPaginatedResponse pokemonPaginatedResponse) {
     return pokemonPaginatedResponse.results
         .map((pokemonData) => pokedexEntryFromResult(pokemonData))

@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 
-PokedexEntry pokedexEntryFromResult(Result pokemonData) =>
-    PokedexEntry.fromResult(pokemonData);
+PokedexEntryModel pokedexEntryFromResult(Result pokemonData) =>
+    PokedexEntryModel.fromResult(pokemonData);
 
-class PokedexEntry extends Equatable {
-  PokedexEntry({
+class PokedexEntryModel extends Equatable {
+  PokedexEntryModel({
     this.name,
     this.url,
     this.id,
@@ -17,12 +17,12 @@ class PokedexEntry extends Equatable {
   final int id;
   final String officialArtwork;
 
-  factory PokedexEntry.fromResult(Result pokemonData) {
+  factory PokedexEntryModel.fromResult(Result pokemonData) {
     final urlParts = pokemonData.url.split('/');
     final id = urlParts[urlParts.length - 2];
     final officialArtwork =
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
-    return PokedexEntry(
+    return PokedexEntryModel(
       name: pokemonData.name,
       url: pokemonData.url,
       id: int.parse(id),
