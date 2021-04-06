@@ -31,12 +31,10 @@ class PokedexView extends StatelessWidget {
                 ),
               );
             } else if (state is PokedexLoaded) {
-              final pokemonList = state.pokemonPaginatedResponse.results;
+              final pokedexEntries = state.pokedexEntries;
               return ListView.builder(
-                itemCount: pokemonList.length,
+                itemCount: pokedexEntries.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final urlParts = pokemonList[index].url.split('/');
-                  final id = urlParts[urlParts.length - 2];
                   return Container(
                       margin: EdgeInsets.symmetric(
                         horizontal: 16,
@@ -51,7 +49,7 @@ class PokedexView extends StatelessWidget {
                             right: 5,
                             bottom: -5,
                             child: Text(
-                              '#$id',
+                              pokedexEntries[index].getPokemonId(),
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.3),
                                   fontSize: 36,
@@ -62,13 +60,15 @@ class PokedexView extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Image(
+                                child: FadeInImage(
+                                    placeholder: AssetImage(
+                                        'assets/images/white_pokeball.png'),
                                     height: 75,
                                     image: NetworkImage(
-                                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png')),
+                                        pokedexEntries[index].officialArtwork)),
                               ),
                               Text(
-                                pokemonList[index].name.capitalize(),
+                                pokedexEntries[index].name.capitalize(),
                                 style: TextStyle(
                                     color: Colors.white.withOpacity(0.8),
                                     fontSize: 24,

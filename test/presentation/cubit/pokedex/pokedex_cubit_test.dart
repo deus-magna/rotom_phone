@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
+import 'package:rotom_phone/domain/entities/pokemon/pokedex_entry.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
@@ -15,6 +16,7 @@ class MockGetPaginatedPokemonList extends Mock
 void main() {
   PokedexCubit pokedexCubit;
   MockGetPaginatedPokemonList mockGetPaginatedPokemonList;
+  List<PokedexEntry> pokedexEntries = [];
 
   setUp(() {
     mockGetPaginatedPokemonList = MockGetPaginatedPokemonList();
@@ -31,6 +33,10 @@ void main() {
       fixture('pokemon_paginated_response.json'));
   final PokemonPaginatedResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;
+  // Mock de la lista de entradas en la pokedex
+  pokedexEntries = tPokemonPaginatedResponse.results
+      .map((pokemonData) => pokedexEntryFromResult(pokemonData))
+      .toList();
 
   group('GetPaginatedPokemonList', () {
     test('El estado inicial deberia ser PokedexInitial', () {
@@ -47,7 +53,7 @@ void main() {
 
       final expected = [
         PokedexLoading(),
-        PokedexLoaded(pokemonPaginatedResponse: tPokemonPaginatedResponse),
+        PokedexLoaded(pokedexEntries: pokedexEntries),
       ];
 
       expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));

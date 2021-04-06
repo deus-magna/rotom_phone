@@ -12,12 +12,12 @@ class PokedexInitial extends PokedexState {}
 class PokedexLoading extends PokedexState {}
 
 class PokedexLoaded extends PokedexState {
-  final PokemonPaginatedResponse pokemonPaginatedResponse;
+  final List<PokedexEntry> pokedexEntries;
 
-  PokedexLoaded({@required this.pokemonPaginatedResponse});
+  PokedexLoaded({@required this.pokedexEntries});
 
   @override
-  List<Object> get props => [pokemonPaginatedResponse];
+  List<Object> get props => [pokedexEntries];
 }
 
 class PokedexError extends PokedexState {
