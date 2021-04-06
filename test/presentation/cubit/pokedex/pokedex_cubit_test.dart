@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.dart';
@@ -31,22 +32,45 @@ void main() {
   final PokemonPaginatedResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;
 
-  test('El estado inicial debe ser PokedexInitial', () {
-    expect(pokedexCubit.state, equals(PokedexInitial()));
-  });
+  group('GetPaginatedPokemonList', () {
+    test('El estado inicial deberia ser PokedexInitial', () {
+      expect(pokedexCubit.state, equals(PokedexInitial()));
+    });
 
-  test('Debe emitir loading y luego loaded', () {
-    when(mockGetPaginatedPokemonList(
-            limit: anyNamed('limit'), offset: anyNamed('offset')))
-        .thenAnswer((realInvocation) async => Right(tPokemonPaginatedResponse));
+    test(
+        'Debe emitir [Loading, Loaded] cuando la data se obtiene correctamente',
+        () {
+      when(mockGetPaginatedPokemonList(
+              limit: anyNamed('limit'), offset: anyNamed('offset')))
+          .thenAnswer(
+              (realInvocation) async => Right(tPokemonPaginatedResponse));
 
-    final expected = [
-      //Empty(),
-      PokedexLoading(),
-      PokedexLoaded(pokemonPaginatedResponse: tPokemonPaginatedResponse),
-    ];
+      final expected = [
+        PokedexLoading(),
+        PokedexLoaded(pokemonPaginatedResponse: tPokemonPaginatedResponse),
+      ];
 
-    expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
-    pokedexCubit.getPokemonList(tLimit, tOffset);
+      expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
+      pokedexCubit.getPokemonList(tLimit, tOffset);
+    });
+
+    test(
+      'Deberia emitir [Loading, Error] cuando falla al obtener datos',
+      () async {
+        // arrange
+        when(mockGetPaginatedPokemonList(
+                limit: anyNamed('limit'), offset: anyNamed('offset')))
+            .thenAnswer((realInvocation) async => Left(ServerFailure()));
+        // assert later
+        final expected = [
+          PokedexLoading(),
+          PokedexError(
+              message: 'Ha ocurrido un error, por favor intenta nuevamente.'),
+        ];
+        // act
+        expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
+        pokedexCubit.getPokemonList(tLimit, tOffset);
+      },
+    );
   });
 }

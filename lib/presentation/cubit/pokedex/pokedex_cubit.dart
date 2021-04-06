@@ -31,7 +31,7 @@ class PokedexCubit extends Cubit<PokedexState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return 'Server error';
+        return 'Ha ocurrido un error, por favor intenta nuevamente.';
       default:
         return 'Unexpected error';
     }
