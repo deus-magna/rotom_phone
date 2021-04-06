@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_list.dart';
 import '../../injection_container.dart';
-import '../../core/extensions/string_extension.dart';
 
 class PokedexView extends StatelessWidget {
   @override
@@ -19,7 +18,7 @@ class PokedexView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       final pokedexCubit = context.read<PokedexCubit>();
-                      pokedexCubit.getPokemonList(40, 0);
+                      pokedexCubit.getFirstPokedexPage(40, 0);
                     },
                     child: Text('Init Pokedex'),
                   ),
@@ -35,9 +34,9 @@ class PokedexView extends StatelessWidget {
               final pokedexEntries = state.pokedexEntries;
               return PokedexList(
                 pokedexEntries: pokedexEntries,
-                nextPage: () {
+                nextPage: (offset) {
                   final pokedexCubit = context.read<PokedexCubit>();
-                  pokedexCubit.getPokemonList(40, 40);
+                  pokedexCubit.getNextPokedexPage(40, offset);
                 },
               );
             } else {

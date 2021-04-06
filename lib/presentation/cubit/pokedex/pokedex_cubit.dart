@@ -11,11 +11,12 @@ part 'pokedex_state.dart';
 
 class PokedexCubit extends Cubit<PokedexState> {
   final GetPaginatedPokemonList getPaginatedPokemonList;
+
   PokedexCubit(this.getPaginatedPokemonList)
       : assert(getPaginatedPokemonList != null),
         super(PokedexInitial());
 
-  getPokemonList(int limit, int offset) async {
+  getFirstPokedexPage(int limit, int offset) async {
     emit(PokedexLoading());
     final failureOrPokemonList =
         await getPaginatedPokemonList(limit: limit, offset: offset);
@@ -37,6 +38,12 @@ class PokedexCubit extends Cubit<PokedexState> {
       default:
         return 'Unexpected error';
     }
+  }
+
+  getNextPokedexPage(int limit, int offset) async {
+    final failureOrPokemonList =
+        await getPaginatedPokemonList(limit: limit, offset: offset);
+    emit(_eitherLoadedOrErrorState(failureOrPokemonList));
   }
 
   List<PokedexEntryModel> getPokedexEntries(

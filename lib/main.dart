@@ -12,6 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rotom Phone',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: PokedexView(),
     );
   }

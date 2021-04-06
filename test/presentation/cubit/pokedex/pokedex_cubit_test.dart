@@ -57,7 +57,7 @@ void main() {
       ];
 
       expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
-      pokedexCubit.getPokemonList(tLimit, tOffset);
+      pokedexCubit.getFirstPokedexPage(tLimit, tOffset);
     });
 
     test(
@@ -75,7 +75,7 @@ void main() {
         ];
         // act
         expectLater(pokedexCubit.asBroadcastStream(), emitsInOrder(expected));
-        pokedexCubit.getPokemonList(tLimit, tOffset);
+        pokedexCubit.getFirstPokedexPage(tLimit, tOffset);
       },
     );
   });
