@@ -23,7 +23,7 @@ void main() {
         name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/');
     final result = pokedexEntryFromResult(tResult);
     final id = result.getPokemonId();
-    expect(id, '001');
+    expect(id, '#001');
   });
 
   test('Deberia regresar un String con 0+Id si el id del pokemon es < 100', () {
@@ -31,7 +31,7 @@ void main() {
         name: 'pidgeot', url: 'https://pokeapi.co/api/v2/pokemon/18/');
     final result = pokedexEntryFromResult(tResult);
     final id = result.getPokemonId();
-    expect(id, '018');
+    expect(id, '#018');
   });
 
   test('Deberia regresar un String con Id si el id del pokemon es = 100', () {
@@ -39,7 +39,7 @@ void main() {
         name: 'voltorb', url: 'https://pokeapi.co/api/v2/pokemon/100/');
     final result = pokedexEntryFromResult(tResult);
     final id = result.getPokemonId();
-    expect(id, '100');
+    expect(id, '#100');
   });
 
   test('Deberia regresar un String con Id si el id del pokemon es > 100', () {
@@ -47,6 +47,6 @@ void main() {
         name: 'mewtwo', url: 'https://pokeapi.co/api/v2/pokemon/150/');
     final result = pokedexEntryFromResult(tResult);
     final id = result.getPokemonId();
-    expect(id, '150');
+    expect(id, '#150');
   });
 }
