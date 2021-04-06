@@ -32,10 +32,10 @@ class PokedexEntryModel extends Equatable {
 
   String getPokemonId() {
     return (this.id < 10)
-        ? '00${this.id}'
+        ? '#00${this.id}'
         : (this.id < 100)
-            ? '0${this.id}'
-            : '${this.id}';
+            ? '#0${this.id}'
+            : '#${this.id}';
   }
 
   @override

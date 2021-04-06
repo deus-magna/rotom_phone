@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
 import '../../core/extensions/string_extension.dart';
 
@@ -53,7 +54,7 @@ class _PokedexListState extends State<PokedexList> {
             vertical: 10,
           ),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: Colors.red[400]),
+              borderRadius: BorderRadius.circular(15), color: primary),
           child: Stack(
             children: [
               _PokemonId(id: _localPokedexEntries[index].getPokemonId()),
