@@ -37,6 +37,26 @@ void main() {
     );
   });
 
+  void runTestsOnline(Function body) {
+    group('device is online', () {
+      setUp(() {
+        when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
+      });
+
+      body();
+    });
+  }
+
+  void runTestsOffline(Function body) {
+    group('device is offline', () {
+      setUp(() {
+        when(mockNetworkInfo.hasConnection).thenAnswer((_) async => false);
+      });
+
+      body();
+    });
+  }
+
   group('getPokemonPaginatedList', () {
     final int tOffset = 0;
     final int tLimit = 40;
@@ -47,6 +67,8 @@ void main() {
         tPokemonPaginatedResponseModel;
     test('Should check if the device is online', () async {
       // arrange
+      when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+          .thenThrow(CacheException());
       when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
       // act
       pokemonRepositoryImpl.getPaginatedPokemonList(
@@ -55,78 +77,121 @@ void main() {
       verify(mockNetworkInfo.hasConnection);
     });
 
-    group('Dispositivo tiene Internet', () {
-      setUp(() {
-        when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
+    runTestsOnline(() {
+      group('Device has cached data', () {
+        setUp(() {
+          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+              .thenAnswer((_) async => tPokemonPaginatedResponse);
+        });
+
+        test('Should return last locally data when cached data is present',
+            () async {
+          // act
+          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset);
+          // assert
+          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
+          verifyZeroInteractions(mockRemoteDataSource);
+          verifyZeroInteractions(mockNetworkInfo);
+          expect(result, equals(Right(tPokemonPaginatedResponse)));
+        });
       });
 
-      test(
-          'Deberia regresar los datos remotos cuando la llamada al remoteDatasource es exitosa',
-          () async {
-        // arrange
-        when(mockRemoteDataSource.getPaginatedPokemonList(
-                limit: tLimit, offset: tOffset))
-            .thenAnswer((_) async => tPokemonPaginatedResponseModel);
-        // act
-        final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset);
-        // assert
-        verify(mockRemoteDataSource.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset));
-        expect(result, equals(Right(tPokemonPaginatedResponse)));
-      });
+      group('Device doesn`t have cache data', () {
+        setUp(() {
+          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+              .thenThrow(CacheException());
+        });
 
-      test(
-          'Should cache the data locally when call the remote data source is seccesful',
-          () async {
-        // arrange
-        when(mockRemoteDataSource.getPaginatedPokemonList(
-                limit: tLimit, offset: tOffset))
-            .thenAnswer((_) async => tPokemonPaginatedResponseModel);
-        // act
-        await pokemonRepositoryImpl.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset);
-        // assert
-        verify(mockRemoteDataSource.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset));
-        verify(mockLocalDataSource.cachePokemonPage(
-            tOffset, tPokemonPaginatedResponseModel));
-      });
+        test(
+            'Should return remote data when call the remote data source is seccesful',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getPaginatedPokemonList(
+                  limit: tLimit, offset: tOffset))
+              .thenAnswer((_) async => tPokemonPaginatedResponseModel);
+          // act
+          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset);
+          // assert
+          verify(mockRemoteDataSource.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset));
+          expect(result, equals(Right(tPokemonPaginatedResponse)));
+        });
 
-      test(
-          'Should return Server failure when call the remote data source is unseccessful',
-          () async {
-        // arrange
-        when(mockRemoteDataSource.getPaginatedPokemonList(
-                limit: tLimit, offset: tOffset))
-            .thenThrow(ServerException());
-        // act
-        final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset);
-        // assert
-        verify(mockRemoteDataSource.getPaginatedPokemonList(
-            limit: tLimit, offset: tOffset));
+        test(
+            'Should cache the data locally when call the remote data source is seccesful',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getPaginatedPokemonList(
+                  limit: tLimit, offset: tOffset))
+              .thenAnswer((_) async => tPokemonPaginatedResponseModel);
+          // act
+          await pokemonRepositoryImpl.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset);
+          // assert
+          verify(mockRemoteDataSource.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset));
+          verify(mockLocalDataSource.cachePokemonPage(
+              tOffset, tPokemonPaginatedResponseModel));
+        });
 
-        expect(result, equals(Left(ServerFailure())));
+        test('''Should return Server failure when there is no cached data 
+            present and call the remote data source is unseccessful''',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getPaginatedPokemonList(
+                  limit: tLimit, offset: tOffset))
+              .thenThrow(ServerException());
+          // act
+          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset);
+          // assert
+          verify(mockRemoteDataSource.getPaginatedPokemonList(
+              limit: tLimit, offset: tOffset));
+          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
+
+          expect(result, equals(Left(ServerFailure())));
+        });
       });
     });
 
-    group('Dispositivo no tiene Internet', () {
-      setUp(() {
-        when(mockNetworkInfo.hasConnection).thenAnswer((_) async => false);
-      });
-      test(
-        'Deberia regresar un Server Failure cuando no hay Internet ',
-        () async {
+    runTestsOffline(() {
+      group('Device has cached data', () {
+        setUp(() {
+          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+              .thenAnswer((_) async => tPokemonPaginatedResponse);
+        });
+
+        test('Should return last locally data when cached data is present',
+            () async {
           // act
           final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-              offset: tOffset, limit: tLimit);
+              limit: tLimit, offset: tOffset);
           // assert
-
+          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
           verifyZeroInteractions(mockRemoteDataSource);
-          expect(result, equals(Left(ServerFailure())));
-        },
-      );
+          verifyZeroInteractions(mockNetworkInfo);
+          expect(result, equals(Right(tPokemonPaginatedResponse)));
+        });
+      });
+      group('There is no cached data present', () {
+        setUp(() {
+          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+              .thenThrow(CacheException());
+        });
+        test(
+          'Should return Server failure when device is offline',
+          () async {
+            // act
+            final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
+                offset: tOffset, limit: tLimit);
+            // assert
+            verifyZeroInteractions(mockRemoteDataSource);
+            expect(result, equals(Left(ServerFailure())));
+          },
+        );
+      });
     });
   });
 }
