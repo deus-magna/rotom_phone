@@ -32,6 +32,8 @@ dependencies:
   hive: ^1.4.4+1
   # Hive optimizado para flutter
   hive_flutter: ^0.3.1
+  # Para cachear las imagenes
+  cached_network_image: ^2.5.0
 
 
 dev_dependencies:

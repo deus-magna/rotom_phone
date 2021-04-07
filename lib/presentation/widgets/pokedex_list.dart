@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
@@ -89,7 +90,7 @@ class _OfficialArtwork extends StatelessWidget {
       child: FadeInImage(
           placeholder: AssetImage('assets/images/white_pokeball.png'),
           height: 75,
-          image: NetworkImage(artwork)),
+          image: CachedNetworkImageProvider(artwork)),
     );
   }
 }
