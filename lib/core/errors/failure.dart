@@ -14,3 +14,5 @@ abstract class Failure extends Equatable {
 
 // Failures generales de la app
 class ServerFailure extends Failure {}
+
+class CacheFailure extends Failure {}

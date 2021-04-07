@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 
 abstract class PokemonLocalDataSource {
@@ -19,12 +20,12 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
 
   @override
   Future<PokemonPaginatedResponseModel> getCachedPokemonPage(int offset) {
-    // final jsonString = sharedPreferences.getString(CACHED_NUMBER_TRIVIA);
-    // if (jsonString != null) {
-    //   return Future.value(NumberTriviaModel.fromJson(json.decode(jsonString)));
-    // } else {
-    //   throw CacheException();
-    // }
+    final jsonString = pokedexEntriesBox.get(offset);
+    if (jsonString != null) {
+      return Future.value(pokemonPaginatedResponseModelFromJson(jsonString));
+    } else {
+      throw CacheException();
+    }
   }
 
   @override

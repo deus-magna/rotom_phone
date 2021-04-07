@@ -22,17 +22,23 @@ class PokemonRepositoryImpl implements PokemonRepository {
   @override
   Future<Either<Failure, PokemonPaginatedResponse>> getPaginatedPokemonList(
       {int limit, int offset}) async {
-    if (await networkInfo.hasConnection) {
-      try {
-        final paginatedPokemonList = await remoteDataSource
-            .getPaginatedPokemonList(limit: limit, offset: offset);
-        localDataSource.cachePokemonPage(offset, paginatedPokemonList);
-        return Right(paginatedPokemonList);
-      } on ServerException {
+    try {
+      final localPokedexPage =
+          await localDataSource.getCachedPokemonPage(offset);
+      return Right(localPokedexPage);
+    } on CacheException {
+      if (await networkInfo.hasConnection) {
+        try {
+          final paginatedPokemonList = await remoteDataSource
+              .getPaginatedPokemonList(limit: limit, offset: offset);
+          localDataSource.cachePokemonPage(offset, paginatedPokemonList);
+          return Right(paginatedPokemonList);
+        } on ServerException {
+          return Left(ServerFailure());
+        }
+      } else {
         return Left(ServerFailure());
       }
-    } else {
-      return Left(ServerFailure());
     }
   }
 }
