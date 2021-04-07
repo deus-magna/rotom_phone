@@ -6,6 +6,10 @@ PokemonPaginatedResponseModel pokemonPaginatedResponseModelFromJson(
         String str) =>
     PokemonPaginatedResponseModel.fromJson(json.decode(str));
 
+String pokemonPaginatedResponseModelToJson(
+        PokemonPaginatedResponseModel data) =>
+    json.encode(data.toJson());
+
 class PokemonPaginatedResponseModel extends PokemonPaginatedResponse {
   PokemonPaginatedResponseModel({
     this.count,
@@ -29,6 +33,15 @@ class PokemonPaginatedResponseModel extends PokemonPaginatedResponse {
             : List<ResultModel>.from(
                 json["results"].map((x) => ResultModel.fromJson(x))),
       );
+
+  Map<String, dynamic> toJson() => {
+        "count": count == null ? null : count,
+        "next": next == null ? null : next,
+        "previous": previous == null ? null : previous,
+        "results": results == null
+            ? null
+            : List<dynamic>.from(results.map((x) => x.toJson())),
+      };
 }
 
 class ResultModel extends Result {
@@ -44,4 +57,9 @@ class ResultModel extends Result {
         name: json["name"] == null ? null : json["name"],
         url: json["url"] == null ? null : json["url"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "name": name == null ? null : name,
+        "url": url == null ? null : url,
+      };
 }

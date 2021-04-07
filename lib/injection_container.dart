@@ -26,6 +26,7 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
+        localDataSource: sl(),
         remoteDataSource: sl(),
         networkInfo: sl(),
       ));
@@ -36,7 +37,7 @@ Future<void> init() async {
             client: sl(),
           ));
   sl.registerLazySingleton<PokemonLocalDataSource>(
-      () => PokemonLocalDataSourceImpl());
+      () => PokemonLocalDataSourceImpl(sl()));
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -44,6 +45,7 @@ Future<void> init() async {
   //! External
   await Hive.initFlutter();
   final pokedexEntriesBox = await Hive.openBox('pokedex');
+  sl.registerLazySingleton(() => pokedexEntriesBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }
