@@ -28,6 +28,10 @@ dependencies:
   # Dependencia para usar state management con BloC y Cubit
   bloc: ^6.1.3
   flutter_bloc: ^6.1.3
+  # Local noSQL DB con Hive
+  hive: ^1.4.4+1
+  # Hive optimizado para flutter
+  hive_flutter: ^0.3.1
 
 
 dev_dependencies:
