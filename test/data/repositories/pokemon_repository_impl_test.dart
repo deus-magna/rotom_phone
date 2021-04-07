@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
+import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 import 'package:rotom_phone/data/repositories/pokemon_repository_impl.dart';
@@ -13,20 +14,25 @@ import '../../fixtures/fixture_reader.dart';
 
 class MockRemoteDataSource extends Mock implements PokemonRemoteDataSource {}
 
+class MockLocalDataSource extends Mock implements PokemonLocalDataSource {}
+
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 void main() {
   PokemonRepositoryImpl pokemonRepositoryImpl;
   MockRemoteDataSource mockRemoteDataSource;
+  MockLocalDataSource mockLocalDataSource;
 
   MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
+    mockLocalDataSource = MockLocalDataSource();
 
     mockNetworkInfo = MockNetworkInfo();
     pokemonRepositoryImpl = PokemonRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
+      localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
     );
   });
@@ -71,7 +77,24 @@ void main() {
       });
 
       test(
-          'Deberia regresar un failure cuando la llamada al remote datasource no es exitosa',
+          'Should cache the data locally when call the remote data source is seccesful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getPaginatedPokemonList(
+                limit: tLimit, offset: tOffset))
+            .thenAnswer((_) async => tPokemonPaginatedResponseModel);
+        // act
+        await pokemonRepositoryImpl.getPaginatedPokemonList(
+            limit: tLimit, offset: tOffset);
+        // assert
+        verify(mockRemoteDataSource.getPaginatedPokemonList(
+            limit: tLimit, offset: tOffset));
+        verify(mockLocalDataSource.cachePokemonPage(
+            tOffset, tPokemonPaginatedResponseModel));
+      });
+
+      test(
+          'Should return Server failure when call the remote data source is unseccessful',
           () async {
         // arrange
         when(mockRemoteDataSource.getPaginatedPokemonList(
