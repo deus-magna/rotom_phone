@@ -3,9 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
-import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
-import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
+import 'package:rotom_phone/domain/usercases/pokedex/get_pokedex_page.dart';
 
 part 'pokedex_state.dart';
 

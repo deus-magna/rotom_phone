@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
-import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
 
 void main() {
   /// Mock de la entrada del pokedex

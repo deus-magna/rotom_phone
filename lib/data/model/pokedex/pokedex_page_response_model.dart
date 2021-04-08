@@ -2,16 +2,14 @@ import 'dart:convert';
 
 import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 
-PokemonPaginatedResponseModel pokemonPaginatedResponseModelFromJson(
-        String str) =>
-    PokemonPaginatedResponseModel.fromJson(json.decode(str));
+PokedexPageResponseModel pokedexPageResponseModelFromJson(String str) =>
+    PokedexPageResponseModel.fromJson(json.decode(str));
 
-String pokemonPaginatedResponseModelToJson(
-        PokemonPaginatedResponseModel data) =>
+String pokedexPageResponseModelToJson(PokedexPageResponseModel data) =>
     json.encode(data.toJson());
 
-class PokemonPaginatedResponseModel extends PokedexPageResponse {
-  PokemonPaginatedResponseModel({
+class PokedexPageResponseModel extends PokedexPageResponse {
+  PokedexPageResponseModel({
     this.count,
     this.next,
     this.previous,
@@ -23,8 +21,8 @@ class PokemonPaginatedResponseModel extends PokedexPageResponse {
   final String previous;
   final List<ResultModel> results;
 
-  factory PokemonPaginatedResponseModel.fromJson(Map<String, dynamic> json) =>
-      PokemonPaginatedResponseModel(
+  factory PokedexPageResponseModel.fromJson(Map<String, dynamic> json) =>
+      PokedexPageResponseModel(
         count: json["count"] == null ? null : json["count"],
         next: json["next"] == null ? null : json["next"],
         previous: json["previous"] == null ? null : json["previous"],

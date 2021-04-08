@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
-import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
-import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
-import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
+import 'package:rotom_phone/domain/usercases/pokedex/get_pokedex_page.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -23,7 +23,7 @@ void main() {
   });
 
   /// Mock de la respuesta tras obtener la lista de pokemon
-  final tPokemonPaginatedResponseModel = pokemonPaginatedResponseModelFromJson(
+  final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
       fixture('pokemon_paginated_response.json'));
   final PokedexPageResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;

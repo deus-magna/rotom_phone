@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
-import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_list.dart';
 import '../../injection_container.dart';

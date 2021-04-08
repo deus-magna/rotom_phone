@@ -2,26 +2,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
-import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
 class MockBox extends Mock implements Box {}
 
 void main() {
-  PokemonLocalDataSource localDataSource;
+  PokedexLocalDataSource localDataSource;
   MockBox mockBox;
 
   setUp(() {
     mockBox = MockBox();
-    localDataSource = PokemonLocalDataSourceImpl(mockBox);
+    localDataSource = PokedexLocalDataSourceImpl(mockBox);
   });
 
   group('cachePokedexPage', () {
-    final tPokemonPaginatedResponseModel =
-        pokemonPaginatedResponseModelFromJson(
-            fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
+        fixture('pokemon_paginated_response.json'));
     final int tOffset = 40;
     test(
       'Should call Hive to cache the data',
@@ -31,16 +30,15 @@ void main() {
             tOffset, tPokemonPaginatedResponseModel);
         // assert
         final expectedJsonString =
-            pokemonPaginatedResponseModelToJson(tPokemonPaginatedResponseModel);
+            pokedexPageResponseModelToJson(tPokemonPaginatedResponseModel);
         verify(mockBox.put(tOffset, expectedJsonString));
       },
     );
   });
 
   group('getCachedPokemonPage', () {
-    final tPokemonPaginatedResponseModel =
-        pokemonPaginatedResponseModelFromJson(
-            fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
+        fixture('pokemon_paginated_response.json'));
     final int tOffset = 40;
     test(
       'Should return PokedexPage from Hive when there is one in the cache',

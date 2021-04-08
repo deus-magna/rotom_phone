@@ -2,21 +2,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
-import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
-  PokemonRemoteDataSource pokemonRemoteDataSource;
+  PokedexRemoteDataSource pokemonRemoteDataSource;
   MockHttpClient mockHttpClient;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
     pokemonRemoteDataSource =
-        PokemonRemoteDataSourceImpl(client: mockHttpClient);
+        PokedexRemoteDataSourceImpl(client: mockHttpClient);
   });
 
   void setUpMockHttpClientSuccess200() {
@@ -32,9 +32,8 @@ void main() {
   group('get paginated pokemon list', () {
     final int offset = 0;
     final int limit = 40;
-    final tPokemonPaginatedResponseModel =
-        pokemonPaginatedResponseModelFromJson(
-            fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
+        fixture('pokemon_paginated_response.json'));
 
     test(
         'Deberia hacer un request tipo GET al URL de pokemon API con un offset y un limit',

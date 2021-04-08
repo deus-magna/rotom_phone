@@ -4,22 +4,22 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
-import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
-import 'package:rotom_phone/data/repositories/pokemon_repository_impl.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
+import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
-class MockRemoteDataSource extends Mock implements PokemonRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements PokedexRemoteDataSource {}
 
-class MockLocalDataSource extends Mock implements PokemonLocalDataSource {}
+class MockLocalDataSource extends Mock implements PokedexLocalDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 void main() {
-  PokemonRepositoryImpl pokemonRepositoryImpl;
+  PokedexRepositoryImpl pokemonRepositoryImpl;
   MockRemoteDataSource mockRemoteDataSource;
   MockLocalDataSource mockLocalDataSource;
 
@@ -30,7 +30,7 @@ void main() {
     mockLocalDataSource = MockLocalDataSource();
 
     mockNetworkInfo = MockNetworkInfo();
-    pokemonRepositoryImpl = PokemonRepositoryImpl(
+    pokemonRepositoryImpl = PokedexRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
@@ -60,9 +60,8 @@ void main() {
   group('getPokemonPaginatedList', () {
     final int tOffset = 0;
     final int tLimit = 40;
-    final tPokemonPaginatedResponseModel =
-        pokemonPaginatedResponseModelFromJson(
-            fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
+        fixture('pokemon_paginated_response.json'));
     final PokedexPageResponse tPokemonPaginatedResponse =
         tPokemonPaginatedResponseModel;
     test('Should check if the device is online', () async {

@@ -3,17 +3,17 @@ import 'package:flutter/foundation.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
-import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
+import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
-class PokemonRepositoryImpl implements PokedexRepository {
-  final PokemonRemoteDataSource remoteDataSource;
-  final PokemonLocalDataSource localDataSource;
+class PokedexRepositoryImpl implements PokedexRepository {
+  final PokedexRemoteDataSource remoteDataSource;
+  final PokedexLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  PokemonRepositoryImpl({
+  PokedexRepositoryImpl({
     @required this.localDataSource,
     @required this.remoteDataSource,
     @required this.networkInfo,
