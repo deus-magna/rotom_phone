@@ -10,8 +10,7 @@ import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockGetPaginatedPokemonList extends Mock
-    implements GetPaginatedPokemonList {}
+class MockGetPaginatedPokemonList extends Mock implements GetPokedexPage {}
 
 void main() {
   PokedexCubit pokedexCubit;

@@ -4,11 +4,10 @@ import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
 
-class GetPaginatedPokemonList {
+class GetPokedexPage {
   final PokemonRepository pokemonRepository;
 
-  GetPaginatedPokemonList(this.pokemonRepository)
-      : assert(pokemonRepository != null);
+  GetPokedexPage(this.pokemonRepository) : assert(pokemonRepository != null);
 
   Future<Either<Failure, PokemonPaginatedResponse>> call({
     @required int limit,

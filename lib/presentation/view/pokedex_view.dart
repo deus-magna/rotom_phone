@@ -87,18 +87,28 @@ class PokedexView extends StatelessWidget {
           ),
         ),
         Container(
-          color: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          color: Colors.transparent,
           width: double.infinity,
           height: size.height * 0.3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Pokédex',
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 15),
               TextField(
-                decoration: InputDecoration(hintText: 'Search any Pokemon'),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.5),
+                  hintText: 'Search any Pokemon',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
               ),
             ],
           ),

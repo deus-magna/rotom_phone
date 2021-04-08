@@ -22,7 +22,7 @@ Future<void> init() async {
       ));
 
   // use cases
-  sl.registerLazySingleton(() => GetPaginatedPokemonList(sl()));
+  sl.registerLazySingleton(() => GetPokedexPage(sl()));
 
   // Repository
   sl.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(

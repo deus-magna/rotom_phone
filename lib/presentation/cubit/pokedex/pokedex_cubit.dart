@@ -10,7 +10,7 @@ import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.
 part 'pokedex_state.dart';
 
 class PokedexCubit extends Cubit<PokedexState> {
-  final GetPaginatedPokemonList getPaginatedPokemonList;
+  final GetPokedexPage getPaginatedPokemonList;
 
   PokedexCubit(this.getPaginatedPokemonList)
       : assert(getPaginatedPokemonList != null),

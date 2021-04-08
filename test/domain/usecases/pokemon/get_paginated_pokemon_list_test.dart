@@ -11,12 +11,12 @@ import '../../../fixtures/fixture_reader.dart';
 class MockPokemonRepository extends Mock implements PokemonRepository {}
 
 void main() {
-  GetPaginatedPokemonList usecase;
+  GetPokedexPage usecase;
   MockPokemonRepository mockPokemonRepository;
 
   setUp(() {
     mockPokemonRepository = MockPokemonRepository();
-    usecase = GetPaginatedPokemonList(mockPokemonRepository);
+    usecase = GetPokedexPage(mockPokemonRepository);
   });
 
   /// Mock de los parametros que necesitamos enviar para obtener la
