@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 
 PokedexEntryModel pokedexEntryFromResult(Result pokemonData) =>
     PokedexEntryModel.fromResult(pokemonData);

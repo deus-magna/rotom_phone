@@ -8,7 +8,7 @@ import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dar
 import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 import 'package:rotom_phone/data/repositories/pokemon_repository_impl.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
@@ -63,7 +63,7 @@ void main() {
     final tPokemonPaginatedResponseModel =
         pokemonPaginatedResponseModelFromJson(
             fixture('pokemon_paginated_response.json'));
-    final PokemonPaginatedResponse tPokemonPaginatedResponse =
+    final PokedexPageResponse tPokemonPaginatedResponse =
         tPokemonPaginatedResponseModel;
     test('Should check if the device is online', () async {
       // arrange

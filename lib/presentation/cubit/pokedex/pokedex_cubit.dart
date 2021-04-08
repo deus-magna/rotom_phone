@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
 
 part 'pokedex_state.dart';
@@ -24,7 +24,7 @@ class PokedexCubit extends Cubit<PokedexState> {
   }
 
   PokedexState _eitherLoadedOrErrorState(
-      Either<Failure, PokemonPaginatedResponse> failureOrPokemonList) {
+      Either<Failure, PokedexPageResponse> failureOrPokemonList) {
     return failureOrPokemonList.fold(
         (failure) => PokedexError(message: _mapFailureToMessage(failure)),
         (pokemonPaginatedResponse) => PokedexLoaded(
@@ -47,7 +47,7 @@ class PokedexCubit extends Cubit<PokedexState> {
   }
 
   List<PokedexEntryModel> getPokedexEntries(
-      PokemonPaginatedResponse pokemonPaginatedResponse) {
+      PokedexPageResponse pokemonPaginatedResponse) {
     return pokemonPaginatedResponse.results
         .map((pokemonData) => pokedexEntryFromResult(pokemonData))
         .toList();

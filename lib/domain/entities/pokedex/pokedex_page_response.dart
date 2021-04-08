@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class PokemonPaginatedResponse extends Equatable {
-  PokemonPaginatedResponse({
+class PokedexPageResponse extends Equatable {
+  PokedexPageResponse({
     this.count,
     this.next,
     this.previous,

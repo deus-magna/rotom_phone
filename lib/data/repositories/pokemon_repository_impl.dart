@@ -5,10 +5,10 @@ import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokemon/pokemon_remote_datasource.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
-import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
+import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
-class PokemonRepositoryImpl implements PokemonRepository {
+class PokemonRepositoryImpl implements PokedexRepository {
   final PokemonRemoteDataSource remoteDataSource;
   final PokemonLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
@@ -20,7 +20,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   });
 
   @override
-  Future<Either<Failure, PokemonPaginatedResponse>> getPaginatedPokemonList(
+  Future<Either<Failure, PokedexPageResponse>> getPaginatedPokemonList(
       {int limit, int offset}) async {
     try {
       final localPokedexPage =

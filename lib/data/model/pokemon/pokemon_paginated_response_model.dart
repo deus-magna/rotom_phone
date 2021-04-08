@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 
 PokemonPaginatedResponseModel pokemonPaginatedResponseModelFromJson(
         String str) =>
@@ -10,7 +10,7 @@ String pokemonPaginatedResponseModelToJson(
         PokemonPaginatedResponseModel data) =>
     json.encode(data.toJson());
 
-class PokemonPaginatedResponseModel extends PokemonPaginatedResponse {
+class PokemonPaginatedResponseModel extends PokedexPageResponse {
   PokemonPaginatedResponseModel({
     this.count,
     this.next,

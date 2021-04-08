@@ -2,7 +2,7 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:rotom_phone/data/datasource/pokemon/pokemon_local_datasource.dart';
-import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
+import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:hive/hive.dart';
@@ -25,7 +25,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetPokedexPage(sl()));
 
   // Repository
-  sl.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
+  sl.registerLazySingleton<PokedexRepository>(() => PokemonRepositoryImpl(
         localDataSource: sl(),
         remoteDataSource: sl(),
         networkInfo: sl(),

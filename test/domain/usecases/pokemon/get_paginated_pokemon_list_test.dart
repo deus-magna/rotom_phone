@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
-import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
+import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockPokemonRepository extends Mock implements PokemonRepository {}
+class MockPokemonRepository extends Mock implements PokedexRepository {}
 
 void main() {
   GetPokedexPage usecase;
@@ -27,7 +27,7 @@ void main() {
   /// Mock de la respuesta tras obtener la lista de pokemon
   final tPokemonPaginatedResponseModel = pokemonPaginatedResponseModelFromJson(
       fixture('pokemon_paginated_response.json'));
-  final PokemonPaginatedResponse tPokemonPaginatedResponse =
+  final PokedexPageResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;
 
   test(

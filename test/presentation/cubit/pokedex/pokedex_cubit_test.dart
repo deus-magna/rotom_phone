@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 import 'package:rotom_phone/data/model/pokemon/pokedex_entry_model.dart';
-import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
 import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 
@@ -25,7 +25,7 @@ void main() {
   /// Mock de la respuesta tras obtener la lista de pokemon
   final tPokemonPaginatedResponseModel = pokemonPaginatedResponseModelFromJson(
       fixture('pokemon_paginated_response.json'));
-  final PokemonPaginatedResponse tPokemonPaginatedResponse =
+  final PokedexPageResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;
   // Mock de la lista de entradas en la pokedex
   pokedexEntries = tPokemonPaginatedResponse.results
