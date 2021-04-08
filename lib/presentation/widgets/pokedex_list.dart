@@ -55,9 +55,11 @@ class _PokedexListState extends State<PokedexList> {
             vertical: 10,
           ),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: primary),
+              borderRadius: BorderRadius.circular(100), color: primary),
           child: Stack(
             children: [
+              _PokemonEntryActions(),
+              _BackgroundPokeball(),
               _PokemonId(id: _localPokedexEntries[index].getPokemonId()),
               Row(
                 children: [
@@ -75,6 +77,39 @@ class _PokedexListState extends State<PokedexList> {
   }
 }
 
+class _PokemonEntryActions extends StatelessWidget {
+  const _PokemonEntryActions({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      right: 20,
+      child: IconButton(
+          icon: Icon(Icons.favorite_border_rounded),
+          onPressed: () => print('add to favorite')),
+    );
+  }
+}
+
+class _BackgroundPokeball extends StatelessWidget {
+  const _BackgroundPokeball({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: 0.15,
+      child: Image.asset(
+        'assets/images/pokeball_filled.png',
+        height: 90,
+      ),
+    );
+  }
+}
+
 class _OfficialArtwork extends StatelessWidget {
   const _OfficialArtwork({
     Key key,
@@ -86,10 +121,10 @@ class _OfficialArtwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
       child: FadeInImage(
           placeholder: AssetImage('assets/images/white_pokeball.png'),
-          height: 75,
+          height: 60,
           image: CachedNetworkImageProvider(artwork)),
     );
   }
@@ -108,9 +143,7 @@ class _PokemonName extends StatelessWidget {
     return Text(
       name.capitalize(),
       style: TextStyle(
-          color: Colors.white.withOpacity(0.8),
-          fontSize: 24,
-          fontWeight: FontWeight.bold),
+          color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -126,13 +159,13 @@ class _PokemonId extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      right: 5,
-      bottom: -5,
+      right: 20,
+      bottom: -10,
       child: Text(
         id,
         style: TextStyle(
             color: Colors.white.withOpacity(0.3),
-            fontSize: 36,
+            fontSize: 50,
             fontWeight: FontWeight.bold),
       ),
     );
