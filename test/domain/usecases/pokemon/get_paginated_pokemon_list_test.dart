@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/data/model/pokemon/pokemon_paginated_response_model.dart';
 import 'package:rotom_phone/domain/entities/pokemon/pokemon_paginated_response.dart';
 import 'package:rotom_phone/domain/repositories/pokemon_repository.dart';
-import 'package:rotom_phone/domain/usercases/pokemon/get_paginated_pokemon_list.dart';
+import 'package:rotom_phone/domain/usercases/pokemon/get_pokedex_page.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
