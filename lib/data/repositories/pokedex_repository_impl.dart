@@ -31,7 +31,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final regionalPokedex =
               await remoteDataSource.getRegionalPokedex(region: region);
-          localDataSource.cacheRegionalPokedex(region, regionalPokedex);
+          localDataSource.cacheRegionalPokedex(regionalPokedex);
           return Right(regionalPokedex);
         } on ServerException {
           return Left(ServerFailure());

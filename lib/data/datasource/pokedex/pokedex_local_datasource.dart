@@ -1,7 +1,7 @@
-import 'package:hive/hive.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
+import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 
 abstract class PokedexLocalDataSource {
   /// Gets the cached [PokedexModel] wich was gotten the last time
@@ -10,8 +10,9 @@ abstract class PokedexLocalDataSource {
   /// Throws [CacheDataException] if no cached data is present
   Future<PokedexModel> getCachedRegionalPokedex(int offset);
 
-  /// Store the pokemon page as a String into a Box using Hive
-  Future<void> cacheRegionalPokedex(int key, PokedexModel pokedexModel);
+  /// Store the pokedex as a String into a Box using Hive, use [PokedexModel.id]
+  /// as the key for the Hive Box
+  Future<void> cacheRegionalPokedex(PokedexModel pokedexModel);
 
   Future<PokemonDetailModel> getPokemonDetail(int entryNumber);
 
@@ -19,8 +20,8 @@ abstract class PokedexLocalDataSource {
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
-  final Box regionalPokedexBox;
-  final Box pokemonDetailBox;
+  final PokedexBox regionalPokedexBox;
+  final PokemonDetailBox pokemonDetailBox;
 
   PokedexLocalDataSourceImpl(
     this.regionalPokedexBox,
@@ -28,8 +29,8 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   );
 
   @override
-  Future<PokedexModel> getCachedRegionalPokedex(int offset) {
-    final jsonString = regionalPokedexBox.get(offset);
+  Future<PokedexModel> getCachedRegionalPokedex(int region) {
+    final jsonString = regionalPokedexBox.get(region);
     if (jsonString != null) {
       return Future.value(pokedexModelFromJson(jsonString));
     } else {
@@ -38,8 +39,8 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   }
 
   @override
-  Future<void> cacheRegionalPokedex(int key, PokedexModel pokedexModel) {
-    regionalPokedexBox.put(key, pokedexModelToJson(pokedexModel));
+  Future<void> cacheRegionalPokedex(PokedexModel pokedexModel) {
+    regionalPokedexBox.put(pokedexModel.id, pokedexModelToJson(pokedexModel));
     return Future.value(true);
   }
 

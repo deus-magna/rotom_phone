@@ -123,8 +123,7 @@ void main() {
           await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
           verify(mockRemoteDataSource.getRegionalPokedex(region: tRegion));
-          verify(
-              mockLocalDataSource.cacheRegionalPokedex(tRegion, tPokedexModel));
+          verify(mockLocalDataSource.cacheRegionalPokedex(tPokedexModel));
         });
 
         test('''Should return Server failure when there is no cached data 

@@ -1,5 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
+import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 import 'package:rotom_phone/domain/usercases/pokedex/get_pokemon_detail.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
@@ -41,20 +42,22 @@ Future<void> initPokedex() async {
             client: sl(),
           ));
   sl.registerLazySingleton<PokedexLocalDataSource>(
-      () => PokedexLocalDataSourceImpl(
-            sl(),
-            sl(),
-          ));
+    () => PokedexLocalDataSourceImpl(
+      sl<PokedexBox>(),
+      sl<PokemonDetailBox>(),
+    ),
+  );
 
   //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //! External
   await Hive.initFlutter();
-  final regionalPokedexBox = await Hive.openBox('pokedex');
-  // final pokemonDetailBox = await Hive.openBox('pokemonDetail');
+  final regionalPokedexBox = PokedexBox(await Hive.openBox('pokedex'));
+  final pokemonDetailBox =
+      PokemonDetailBox(await Hive.openBox('pokemonDetail'));
   sl.registerLazySingleton(() => regionalPokedexBox);
-  // sl.registerLazySingleton(() => pokemonDetailBox);
+  sl.registerLazySingleton(() => pokemonDetailBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }
