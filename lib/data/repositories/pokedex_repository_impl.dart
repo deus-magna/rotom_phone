@@ -6,6 +6,7 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
@@ -22,9 +23,9 @@ class PokedexRepositoryImpl implements PokedexRepository {
   @override
   Future<Either<Failure, Pokedex>> getRegionalPokedex({int region}) async {
     try {
-      final localPokedexPage =
+      final localRegionalPokedex =
           await localDataSource.getCachedRegionalPokedex(region);
-      return Right(localPokedexPage);
+      return Right(localRegionalPokedex);
     } on CacheException {
       if (await networkInfo.hasConnection) {
         try {
@@ -38,6 +39,22 @@ class PokedexRepositoryImpl implements PokedexRepository {
       } else {
         return Left(ServerFailure());
       }
+    }
+  }
+
+  @override
+  Future<Either<Failure, PokemonDetail>> getPokemonDetail(
+      {int entryNumber}) async {
+    if (await networkInfo.hasConnection) {
+      try {
+        final pokemonDetail =
+            await remoteDataSource.getPokemonDetail(entryNumber: entryNumber);
+        return Right(pokemonDetail);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
     }
   }
 }

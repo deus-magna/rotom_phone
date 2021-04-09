@@ -15,7 +15,7 @@ void main() {
 
   setUp(() {
     mockBox = MockBox();
-    localDataSource = PokedexLocalDataSourceImpl(mockBox);
+    localDataSource = PokedexLocalDataSourceImpl(mockBox, mockBox);
   });
   final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
   final int tRegion = 1;

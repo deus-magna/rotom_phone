@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rotom_phone/presentation/view/pokedex_view.dart';
+import 'core/router/routing.dart';
 import 'injector/injection_container.dart' as di;
 
 void main() async {
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: PokedexView(),
+      initialRoute: '/pokedex',
+      routes: getApplicationRoutes(),
     );
   }
 }

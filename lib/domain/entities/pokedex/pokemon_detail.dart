@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import '../name.dart';
 import '../resource_path.dart';
 
-class PokemonSpecies extends Equatable {
-  PokemonSpecies({
+class PokemonDetail extends Equatable {
+  PokemonDetail({
     this.baseHappiness,
     this.captureRate,
     this.color,

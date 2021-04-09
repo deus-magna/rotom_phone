@@ -35,6 +35,12 @@ class PokedexView extends StatelessWidget {
             } else if (state is PokedexLoaded) {
               final pokedexEntries = state.pokedexEntries;
               return _buildPokedexBody(context, pokedexEntries);
+            } else if (state is PokedexError) {
+              return Container(
+                child: Center(
+                  child: Text(state.message),
+                ),
+              );
             } else {
               return Container(
                 child: Center(

@@ -56,20 +56,24 @@ class _PokedexListState extends State<PokedexList> {
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100), color: primary),
-          child: Stack(
-            children: [
-              _PokemonEntryActions(),
-              _BackgroundPokeball(),
-              _PokemonId(id: _localPokedexEntries[index].getPokemonId()),
-              Row(
-                children: [
-                  _OfficialArtwork(
-                    artwork: _localPokedexEntries[index].officialArtwork,
-                  ),
-                  _PokemonName(name: _localPokedexEntries[index].name),
-                ],
-              ),
-            ],
+          child: GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/pokemon_detail',
+                arguments: _localPokedexEntries[index].id),
+            child: Stack(
+              children: [
+                _PokemonEntryActions(),
+                _BackgroundPokeball(),
+                _PokemonId(id: _localPokedexEntries[index].getPokemonId()),
+                Row(
+                  children: [
+                    _OfficialArtwork(
+                      artwork: _localPokedexEntries[index].officialArtwork,
+                    ),
+                    _PokemonName(name: _localPokedexEntries[index].name),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

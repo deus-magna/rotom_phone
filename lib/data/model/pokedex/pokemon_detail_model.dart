@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:rotom_phone/domain/entities/name.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_species.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
 
+import '../name_model.dart';
 import '../resource_path_model.dart';
 
-PokemonSpeciesModel pokemonSpeciesModelFromJson(String str) =>
-    PokemonSpeciesModel.fromJson(json.decode(str));
+PokemonDetailModel pokemonDetailModelFromJson(String str) =>
+    PokemonDetailModel.fromJson(json.decode(str));
 
-String pokemonSpeciesModelToJson(PokemonSpeciesModel data) =>
+String pokemonDetailModelToJson(PokemonDetailModel data) =>
     json.encode(data.toJson());
 
-class PokemonSpeciesModel extends PokemonSpecies {
-  PokemonSpeciesModel({
+class PokemonDetailModel extends PokemonDetail {
+  PokemonDetailModel({
     this.baseHappiness,
     this.captureRate,
     this.color,
@@ -96,8 +96,8 @@ class PokemonSpeciesModel extends PokemonSpecies {
   final ResourcePathModel shape;
   final List<VarietyModel> varieties;
 
-  factory PokemonSpeciesModel.fromJson(Map<String, dynamic> json) =>
-      PokemonSpeciesModel(
+  factory PokemonDetailModel.fromJson(Map<String, dynamic> json) =>
+      PokemonDetailModel(
         baseHappiness:
             json["base_happiness"] == null ? null : json["base_happiness"],
         captureRate: json["capture_rate"] == null ? null : json["capture_rate"],
@@ -288,31 +288,6 @@ class GenusModel extends Genus {
   Map<String, dynamic> toJson() => {
         "genus": genus == null ? null : genus,
         "language": language == null ? null : language.toJson(),
-      };
-}
-
-class NameModel extends Name {
-  NameModel({
-    this.language,
-    this.name,
-  }) : super(
-          name: name,
-          language: language,
-        );
-
-  final ResourcePathModel language;
-  final String name;
-
-  factory NameModel.fromJson(Map<String, dynamic> json) => NameModel(
-        language: json["language"] == null
-            ? null
-            : ResourcePathModel.fromJson(json["language"]),
-        name: json["name"] == null ? null : json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "language": language == null ? null : language.toJson(),
-        "name": name == null ? null : name,
       };
 }
 
