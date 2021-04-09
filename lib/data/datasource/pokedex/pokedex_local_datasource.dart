@@ -9,6 +9,7 @@ abstract class PokedexLocalDataSource {
   /// Throws [CacheDataException] if no cached data is present
   Future<PokedexPageResponseModel> getCachedPokemonPage(int offset);
 
+  /// Store the pokemon page as a String into a Box using Hive
   Future<void> cachePokemonPage(
       int key, PokedexPageResponseModel pokemonPaginatedResponseModel);
 }

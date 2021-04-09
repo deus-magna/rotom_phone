@@ -4,7 +4,7 @@ import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_list.dart';
-import '../../injection_container.dart';
+import '../../injector/injection_container.dart';
 
 class PokedexView extends StatelessWidget {
   @override

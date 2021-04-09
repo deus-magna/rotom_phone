@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/presentation/view/pokedex_view.dart';
-import 'injection_container.dart' as di;
+import 'injector/injection_container.dart' as di;
 
 void main() async {
   await di.init();
