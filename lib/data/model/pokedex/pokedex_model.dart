@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:rotom_phone/data/model/resource_path_model.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
+import 'package:rotom_phone/domain/entities/resource_path.dart';
+
+import '../name_model.dart';
 
 PokedexModel pokedexModelFromJson(String str) =>
     PokedexModel.fromJson(json.decode(str));
@@ -86,61 +90,19 @@ class DescriptionModel extends Description {
   }) : super(description: description, language: language);
 
   final String description;
-  final LanguageModel language;
+  final ResourcePathModel language;
 
   factory DescriptionModel.fromJson(Map<String, dynamic> json) =>
       DescriptionModel(
         description: json["description"] == null ? null : json["description"],
         language: json["language"] == null
             ? null
-            : LanguageModel.fromJson(json["language"]),
+            : ResourcePathModel.fromJson(json["language"]),
       );
 
   Map<String, dynamic> toJson() => {
         "description": description == null ? null : description,
         "language": language == null ? null : language.toJson(),
-      };
-}
-
-class LanguageModel extends Language {
-  LanguageModel({
-    this.name,
-    this.url,
-  }) : super(name: name, url: url);
-
-  final String name;
-  final String url;
-
-  factory LanguageModel.fromJson(Map<String, dynamic> json) => LanguageModel(
-        name: json["name"] == null ? null : json["name"],
-        url: json["url"] == null ? null : json["url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name == null ? null : name,
-        "url": url == null ? null : url,
-      };
-}
-
-class NameModel extends Name {
-  NameModel({
-    this.language,
-    this.name,
-  }) : super(language: language, name: name);
-
-  final LanguageModel language;
-  final String name;
-
-  factory NameModel.fromJson(Map<String, dynamic> json) => NameModel(
-        language: json["language"] == null
-            ? null
-            : LanguageModel.fromJson(json["language"]),
-        name: json["name"] == null ? null : json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "language": language == null ? null : language.toJson(),
-        "name": name == null ? null : name,
       };
 }
 
@@ -168,7 +130,7 @@ class PokemonEntryModel extends PokemonEntry {
       };
 }
 
-class PokemonSpeciesModel extends PokemonSpecies {
+class PokemonSpeciesModel extends ResourcePath {
   PokemonSpeciesModel({
     this.name,
     this.url,

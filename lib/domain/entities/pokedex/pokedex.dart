@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+import '../name.dart';
+import '../resource_path.dart';
+
 class Pokedex extends Equatable {
   Pokedex({
     this.descriptions,
@@ -41,36 +44,10 @@ class Description extends Equatable {
   });
 
   final String description;
-  final Language language;
+  final ResourcePath language;
 
   @override
   List<Object> get props => [description, language];
-}
-
-class Language extends Equatable {
-  Language({
-    this.name,
-    this.url,
-  });
-
-  final String name;
-  final String url;
-
-  @override
-  List<Object> get props => [name, url];
-}
-
-class Name extends Equatable {
-  Name({
-    this.language,
-    this.name,
-  });
-
-  final Language language;
-  final String name;
-
-  @override
-  List<Object> get props => [language, name];
 }
 
 class PokemonEntry extends Equatable {
@@ -80,21 +57,8 @@ class PokemonEntry extends Equatable {
   });
 
   final int entryNumber;
-  final PokemonSpecies pokemonSpecies;
+  final ResourcePath pokemonSpecies;
 
   @override
   List<Object> get props => [entryNumber, pokemonSpecies];
-}
-
-class PokemonSpecies extends Equatable {
-  PokemonSpecies({
-    this.name,
-    this.url,
-  });
-
-  final String name;
-  final String url;
-
-  @override
-  List<Object> get props => [name, url];
 }
