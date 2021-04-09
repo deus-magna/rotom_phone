@@ -20,8 +20,8 @@ void main() {
   });
 
   void setUpMockHttpClientSuccess200() {
-    when(mockHttpClient.get(any)).thenAnswer((_) async =>
-        http.Response(fixture('pokemon_paginated_response.json'), 200));
+    when(mockHttpClient.get(any)).thenAnswer(
+        (_) async => http.Response(fixture('pokedex_page_response.json'), 200));
   }
 
   void setUpMockHttpClientSuccess404() {
@@ -32,8 +32,8 @@ void main() {
   group('get paginated pokemon list', () {
     final int offset = 0;
     final int limit = 40;
-    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
-        fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel =
+        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
 
     test(
         'Deberia hacer un request tipo GET al URL de pokemon API con un offset y un limit',

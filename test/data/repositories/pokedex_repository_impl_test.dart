@@ -60,8 +60,8 @@ void main() {
   group('getPokemonPaginatedList', () {
     final int tOffset = 0;
     final int tLimit = 40;
-    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
-        fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel =
+        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
     final PokedexPageResponse tPokemonPaginatedResponse =
         tPokemonPaginatedResponseModel;
     test('Should check if the device is online', () async {

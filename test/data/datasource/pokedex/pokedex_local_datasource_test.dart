@@ -19,8 +19,8 @@ void main() {
   });
 
   group('cachePokedexPage', () {
-    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
-        fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel =
+        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
     final int tOffset = 40;
     test(
       'Should call Hive to cache the data',
@@ -37,15 +37,15 @@ void main() {
   });
 
   group('getCachedPokemonPage', () {
-    final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
-        fixture('pokemon_paginated_response.json'));
+    final tPokemonPaginatedResponseModel =
+        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
     final int tOffset = 40;
     test(
       'Should return PokedexPage from Hive when there is one in the cache',
       () async {
         // arrange
         when(mockBox.get(any))
-            .thenReturn(fixture('pokemon_paginated_response.json'));
+            .thenReturn(fixture('pokedex_page_response.json'));
         // act
         final result = await localDataSource.getCachedPokemonPage(tOffset);
         // assert

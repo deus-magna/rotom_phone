@@ -25,8 +25,8 @@ void main() {
   final int tOffset = 0;
 
   /// Mock de la respuesta tras obtener la lista de pokemon
-  final tPokemonPaginatedResponseModel = pokedexPageResponseModelFromJson(
-      fixture('pokemon_paginated_response.json'));
+  final tPokemonPaginatedResponseModel =
+      pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
   final PokedexPageResponse tPokemonPaginatedResponse =
       tPokemonPaginatedResponseModel;
 
