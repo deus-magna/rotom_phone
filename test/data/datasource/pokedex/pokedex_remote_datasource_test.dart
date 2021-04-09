@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
-import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
@@ -20,8 +20,8 @@ void main() {
   });
 
   void setUpMockHttpClientSuccess200() {
-    when(mockHttpClient.get(any)).thenAnswer(
-        (_) async => http.Response(fixture('pokedex_page_response.json'), 200));
+    when(mockHttpClient.get(any))
+        .thenAnswer((_) async => http.Response(fixture('pokedex.json'), 200));
   }
 
   void setUpMockHttpClientSuccess404() {
@@ -30,10 +30,9 @@ void main() {
   }
 
   group('get paginated pokemon list', () {
-    final int offset = 0;
-    final int limit = 40;
-    final tPokemonPaginatedResponseModel =
-        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
+    final int tRegion = 0;
+
+    final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
 
     test(
         'Deberia hacer un request tipo GET al URL de pokemon API con un offset y un limit',
@@ -41,12 +40,11 @@ void main() {
       // arrange
       setUpMockHttpClientSuccess200();
       // act
-      pokemonRemoteDataSource.getPaginatedPokemonList(
-          offset: offset, limit: limit);
+      pokemonRemoteDataSource.getRegionalPokedex(region: tRegion);
       // assert
       verify(
         mockHttpClient.get(
-          'https://pokeapi.co/api/v2/pokemon?limit=$limit&offset=$offset',
+          'https://pokeapi.co/api/v2/pokedex/$tRegion',
         ),
       );
     });
@@ -58,10 +56,10 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess200();
         // act
-        final result = await pokemonRemoteDataSource.getPaginatedPokemonList(
-            offset: offset, limit: limit);
+        final result =
+            await pokemonRemoteDataSource.getRegionalPokedex(region: tRegion);
         // assert
-        expect(result, equals(tPokemonPaginatedResponseModel));
+        expect(result, equals(tPokedexModel));
       },
     );
 
@@ -72,10 +70,9 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess404();
         // act
-        final call = pokemonRemoteDataSource.getPaginatedPokemonList;
+        final call = pokemonRemoteDataSource.getRegionalPokedex;
         // assert
-        expect(() => call(offset: offset, limit: limit),
-            throwsA(isA<ServerException>()));
+        expect(() => call(region: tRegion), throwsA(isA<ServerException>()));
       },
     );
   });

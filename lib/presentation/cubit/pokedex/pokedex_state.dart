@@ -12,7 +12,7 @@ class PokedexInitial extends PokedexState {}
 class PokedexLoading extends PokedexState {}
 
 class PokedexLoaded extends PokedexState {
-  final List<PokedexEntryModel> pokedexEntries;
+  final List<LocalPokedexEntryModel> pokedexEntries;
 
   PokedexLoaded({@required this.pokedexEntries});
 

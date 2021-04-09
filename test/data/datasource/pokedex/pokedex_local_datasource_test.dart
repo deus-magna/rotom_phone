@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
-import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
@@ -17,40 +17,32 @@ void main() {
     mockBox = MockBox();
     localDataSource = PokedexLocalDataSourceImpl(mockBox);
   });
-
+  final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
+  final int tRegion = 1;
   group('cachePokedexPage', () {
-    final tPokemonPaginatedResponseModel =
-        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
-    final int tOffset = 40;
     test(
       'Should call Hive to cache the data',
       () async {
         // act
-        localDataSource.cachePokemonPage(
-            tOffset, tPokemonPaginatedResponseModel);
+        localDataSource.cacheRegionalPokedex(tRegion, tPokedexModel);
         // assert
-        final expectedJsonString =
-            pokedexPageResponseModelToJson(tPokemonPaginatedResponseModel);
-        verify(mockBox.put(tOffset, expectedJsonString));
+        final expectedJsonString = pokedexModelToJson(tPokedexModel);
+        verify(mockBox.put(tRegion, expectedJsonString));
       },
     );
   });
 
   group('getCachedPokemonPage', () {
-    final tPokemonPaginatedResponseModel =
-        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
-    final int tOffset = 40;
     test(
       'Should return PokedexPage from Hive when there is one in the cache',
       () async {
         // arrange
-        when(mockBox.get(any))
-            .thenReturn(fixture('pokedex_page_response.json'));
+        when(mockBox.get(any)).thenReturn(fixture('pokedex.json'));
         // act
-        final result = await localDataSource.getCachedPokemonPage(tOffset);
+        final result = await localDataSource.getCachedRegionalPokedex(tRegion);
         // assert
-        verify(mockBox.get(tOffset));
-        expect(result, equals(tPokemonPaginatedResponseModel));
+        verify(mockBox.get(tRegion));
+        expect(result, equals(tPokedexModel));
       },
     );
 
@@ -60,9 +52,9 @@ void main() {
         // arrange
         when(mockBox.get(any)).thenReturn(null);
         // act
-        final call = localDataSource.getCachedPokemonPage;
+        final call = localDataSource.getCachedRegionalPokedex;
         // assert
-        expect(() => call(tOffset), throwsA(isA<CacheException>()));
+        expect(() => call(tRegion), throwsA(isA<CacheException>()));
       },
     );
   });

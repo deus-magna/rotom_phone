@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
-import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/local_pokedex_entry_model.dart';
 import '../../core/extensions/string_extension.dart';
 
 class PokedexList extends StatefulWidget {
-  final List<PokedexEntryModel> pokedexEntries;
+  final List<LocalPokedexEntryModel> pokedexEntries;
   final Function(int) nextPage;
 
   const PokedexList({
@@ -20,7 +20,7 @@ class PokedexList extends StatefulWidget {
 
 class _PokedexListState extends State<PokedexList> {
   ScrollController _scrollController = ScrollController();
-  List<PokedexEntryModel> _localPokedexEntries = [];
+  List<LocalPokedexEntryModel> _localPokedexEntries = [];
   int offset = 0;
 
   @override

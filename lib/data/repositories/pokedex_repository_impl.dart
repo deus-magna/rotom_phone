@@ -5,7 +5,7 @@ import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
@@ -20,19 +20,18 @@ class PokedexRepositoryImpl implements PokedexRepository {
   });
 
   @override
-  Future<Either<Failure, PokedexPageResponse>> getPaginatedPokemonList(
-      {int limit, int offset}) async {
+  Future<Either<Failure, Pokedex>> getRegionalPokedex({int region}) async {
     try {
       final localPokedexPage =
-          await localDataSource.getCachedPokemonPage(offset);
+          await localDataSource.getCachedRegionalPokedex(region);
       return Right(localPokedexPage);
     } on CacheException {
       if (await networkInfo.hasConnection) {
         try {
-          final paginatedPokemonList = await remoteDataSource
-              .getPaginatedPokemonList(limit: limit, offset: offset);
-          localDataSource.cachePokemonPage(offset, paginatedPokemonList);
-          return Right(paginatedPokemonList);
+          final regionalPokedex =
+              await remoteDataSource.getRegionalPokedex(region: region);
+          localDataSource.cacheRegionalPokedex(region, regionalPokedex);
+          return Right(regionalPokedex);
         } on ServerException {
           return Left(ServerFailure());
         }

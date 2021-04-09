@@ -9,7 +9,7 @@ import '../core/network/network_info.dart';
 import '../data/datasource/pokedex/pokedex_local_datasource.dart';
 import '../data/datasource/pokedex/pokedex_remote_datasource.dart';
 import '../data/repositories/pokedex_repository_impl.dart';
-import '../domain/usercases/pokedex/get_pokedex_page.dart';
+import '../domain/usercases/pokedex/get_regional_pokedex.dart';
 import 'injection_container.dart';
 
 Future<void> initPokedex() async {
@@ -20,7 +20,7 @@ Future<void> initPokedex() async {
       ));
 
   // use cases
-  sl.registerLazySingleton(() => GetPokedexPage(sl()));
+  sl.registerLazySingleton(() => GetRegionalPokedex(sl()));
 
   // Repository
   sl.registerLazySingleton<PokedexRepository>(() => PokedexRepositoryImpl(

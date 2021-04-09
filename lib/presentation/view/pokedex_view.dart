@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
-import 'package:rotom_phone/data/model/pokedex/pokedex_entry_model.dart';
+import 'package:rotom_phone/data/model/pokedex/local_pokedex_entry_model.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_list.dart';
 import '../../injector/injection_container.dart';
@@ -20,7 +20,7 @@ class PokedexView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       final pokedexCubit = context.read<PokedexCubit>();
-                      pokedexCubit.getFirstPokedexPage();
+                      pokedexCubit.getRegionalPokedex(1);
                     },
                     child: Text('Init Pokedex'),
                   ),
@@ -49,7 +49,7 @@ class PokedexView extends StatelessWidget {
   }
 
   Widget _buildPokedexBody(
-      BuildContext context, List<PokedexEntryModel> pokedexEntries) {
+      BuildContext context, List<LocalPokedexEntryModel> pokedexEntries) {
     return Column(
       children: [
         _pokemonHeader(context),
@@ -57,8 +57,7 @@ class PokedexView extends StatelessWidget {
           child: PokedexList(
             pokedexEntries: pokedexEntries,
             nextPage: (offset) {
-              final pokedexCubit = context.read<PokedexCubit>();
-              pokedexCubit.getNextPokedexPage(40, offset);
+              print('Nada que hacer aca');
             },
           ),
         ),

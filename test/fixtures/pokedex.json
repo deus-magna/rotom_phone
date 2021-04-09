@@ -1,0 +1,206 @@
+{
+    "descriptions": [{
+            "description": "Pokédex National complet",
+            "language": {
+                "name": "fr",
+                "url": "https://pokeapi.co/api/v2/language/5/"
+            }
+        },
+        {
+            "description": "Komplette Nationale Dex",
+            "language": {
+                "name": "de",
+                "url": "https://pokeapi.co/api/v2/language/6/"
+            }
+        },
+        {
+            "description": "Pokédex Nacional completa",
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            }
+        },
+        {
+            "description": "Entire National dex",
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            }
+        }
+    ],
+    "id": 1,
+    "is_main_series": true,
+    "name": "national",
+    "names": [{
+            "language": {
+                "name": "fr",
+                "url": "https://pokeapi.co/api/v2/language/5/"
+            },
+            "name": "National"
+        },
+        {
+            "language": {
+                "name": "de",
+                "url": "https://pokeapi.co/api/v2/language/6/"
+            },
+            "name": "National"
+        },
+        {
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            },
+            "name": "Nacional"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            },
+            "name": "National"
+        }
+    ],
+    "pokemon_entries": [{
+            "entry_number": 1,
+            "pokemon_species": {
+                "name": "bulbasaur",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/1/"
+            }
+        },
+        {
+            "entry_number": 2,
+            "pokemon_species": {
+                "name": "ivysaur",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/2/"
+            }
+        },
+        {
+            "entry_number": 3,
+            "pokemon_species": {
+                "name": "venusaur",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/3/"
+            }
+        },
+        {
+            "entry_number": 4,
+            "pokemon_species": {
+                "name": "charmander",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/4/"
+            }
+        },
+        {
+            "entry_number": 5,
+            "pokemon_species": {
+                "name": "charmeleon",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/5/"
+            }
+        },
+        {
+            "entry_number": 6,
+            "pokemon_species": {
+                "name": "charizard",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/6/"
+            }
+        },
+        {
+            "entry_number": 7,
+            "pokemon_species": {
+                "name": "squirtle",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/7/"
+            }
+        },
+        {
+            "entry_number": 8,
+            "pokemon_species": {
+                "name": "wartortle",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/8/"
+            }
+        },
+        {
+            "entry_number": 9,
+            "pokemon_species": {
+                "name": "blastoise",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/9/"
+            }
+        },
+        {
+            "entry_number": 10,
+            "pokemon_species": {
+                "name": "caterpie",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/10/"
+            }
+        },
+        {
+            "entry_number": 11,
+            "pokemon_species": {
+                "name": "metapod",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/11/"
+            }
+        },
+        {
+            "entry_number": 12,
+            "pokemon_species": {
+                "name": "butterfree",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/12/"
+            }
+        },
+        {
+            "entry_number": 13,
+            "pokemon_species": {
+                "name": "weedle",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/13/"
+            }
+        },
+        {
+            "entry_number": 14,
+            "pokemon_species": {
+                "name": "kakuna",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/14/"
+            }
+        },
+        {
+            "entry_number": 15,
+            "pokemon_species": {
+                "name": "beedrill",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/15/"
+            }
+        },
+        {
+            "entry_number": 16,
+            "pokemon_species": {
+                "name": "pidgey",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/16/"
+            }
+        },
+        {
+            "entry_number": 17,
+            "pokemon_species": {
+                "name": "pidgeotto",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/17/"
+            }
+        },
+        {
+            "entry_number": 18,
+            "pokemon_species": {
+                "name": "pidgeot",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/18/"
+            }
+        },
+        {
+            "entry_number": 19,
+            "pokemon_species": {
+                "name": "rattata",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/19/"
+            }
+        },
+        {
+            "entry_number": 20,
+            "pokemon_species": {
+                "name": "raticate",
+                "url": "https://pokeapi.co/api/v2/pokemon-species/20/"
+            }
+        }
+    ],
+    "region": null,
+    "version_groups": []
+}

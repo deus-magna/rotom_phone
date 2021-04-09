@@ -6,9 +6,9 @@ import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
-import 'package:rotom_phone/data/model/pokedex/pokedex_page_response_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokedex_page_response.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
@@ -58,20 +58,17 @@ void main() {
   }
 
   group('getPokemonPaginatedList', () {
-    final int tOffset = 0;
-    final int tLimit = 40;
-    final tPokemonPaginatedResponseModel =
-        pokedexPageResponseModelFromJson(fixture('pokedex_page_response.json'));
-    final PokedexPageResponse tPokemonPaginatedResponse =
-        tPokemonPaginatedResponseModel;
+    final int tRegion = 1;
+
+    final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
+    final Pokedex tPokedex = tPokedexModel;
     test('Should check if the device is online', () async {
       // arrange
-      when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+      when(mockLocalDataSource.getCachedRegionalPokedex(tRegion))
           .thenThrow(CacheException());
       when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
       // act
-      pokemonRepositoryImpl.getPaginatedPokemonList(
-          offset: tOffset, limit: tLimit);
+      pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
       // assert
       verify(mockNetworkInfo.hasConnection);
     });
@@ -79,26 +76,26 @@ void main() {
     runTestsOnline(() {
       group('Device has cached data', () {
         setUp(() {
-          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
-              .thenAnswer((_) async => tPokemonPaginatedResponse);
+          when(mockLocalDataSource.getCachedRegionalPokedex(tRegion))
+              .thenAnswer((_) async => tPokedex);
         });
 
         test('Should return last locally data when cached data is present',
             () async {
           // act
-          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset);
+          final result =
+              await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
-          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
+          verify(mockLocalDataSource.getCachedRegionalPokedex(tRegion));
           verifyZeroInteractions(mockRemoteDataSource);
           verifyZeroInteractions(mockNetworkInfo);
-          expect(result, equals(Right(tPokemonPaginatedResponse)));
+          expect(result, equals(Right(tPokedex)));
         });
       });
 
       group('Device doesn`t have cache data', () {
         setUp(() {
-          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+          when(mockLocalDataSource.getCachedRegionalPokedex(tRegion))
               .thenThrow(CacheException());
         });
 
@@ -106,49 +103,42 @@ void main() {
             'Should return remote data when call the remote data source is seccesful',
             () async {
           // arrange
-          when(mockRemoteDataSource.getPaginatedPokemonList(
-                  limit: tLimit, offset: tOffset))
-              .thenAnswer((_) async => tPokemonPaginatedResponseModel);
+          when(mockRemoteDataSource.getRegionalPokedex(region: tRegion))
+              .thenAnswer((_) async => tPokedexModel);
           // act
-          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset);
+          final result =
+              await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
-          verify(mockRemoteDataSource.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset));
-          expect(result, equals(Right(tPokemonPaginatedResponse)));
+          verify(mockRemoteDataSource.getRegionalPokedex(region: tRegion));
+          expect(result, equals(Right(tPokedex)));
         });
 
         test(
             'Should cache the data locally when call the remote data source is seccesful',
             () async {
           // arrange
-          when(mockRemoteDataSource.getPaginatedPokemonList(
-                  limit: tLimit, offset: tOffset))
-              .thenAnswer((_) async => tPokemonPaginatedResponseModel);
+          when(mockRemoteDataSource.getRegionalPokedex(region: tRegion))
+              .thenAnswer((_) async => tPokedexModel);
           // act
-          await pokemonRepositoryImpl.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset);
+          await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
-          verify(mockRemoteDataSource.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset));
-          verify(mockLocalDataSource.cachePokemonPage(
-              tOffset, tPokemonPaginatedResponseModel));
+          verify(mockRemoteDataSource.getRegionalPokedex(region: tRegion));
+          verify(
+              mockLocalDataSource.cacheRegionalPokedex(tRegion, tPokedexModel));
         });
 
         test('''Should return Server failure when there is no cached data 
             present and call the remote data source is unseccessful''',
             () async {
           // arrange
-          when(mockRemoteDataSource.getPaginatedPokemonList(
-                  limit: tLimit, offset: tOffset))
+          when(mockRemoteDataSource.getRegionalPokedex(region: tRegion))
               .thenThrow(ServerException());
           // act
-          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset);
+          final result =
+              await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
-          verify(mockRemoteDataSource.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset));
-          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
+          verify(mockRemoteDataSource.getRegionalPokedex(region: tRegion));
+          verify(mockLocalDataSource.getCachedRegionalPokedex(tRegion));
 
           expect(result, equals(Left(ServerFailure())));
         });
@@ -158,33 +148,33 @@ void main() {
     runTestsOffline(() {
       group('Device has cached data', () {
         setUp(() {
-          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
-              .thenAnswer((_) async => tPokemonPaginatedResponse);
+          when(mockLocalDataSource.getCachedRegionalPokedex(tRegion))
+              .thenAnswer((_) async => tPokedex);
         });
 
         test('Should return last locally data when cached data is present',
             () async {
           // act
-          final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-              limit: tLimit, offset: tOffset);
+          final result =
+              await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
           // assert
-          verify(mockLocalDataSource.getCachedPokemonPage(tOffset));
+          verify(mockLocalDataSource.getCachedRegionalPokedex(tRegion));
           verifyZeroInteractions(mockRemoteDataSource);
           verifyZeroInteractions(mockNetworkInfo);
-          expect(result, equals(Right(tPokemonPaginatedResponse)));
+          expect(result, equals(Right(tPokedex)));
         });
       });
       group('There is no cached data present', () {
         setUp(() {
-          when(mockLocalDataSource.getCachedPokemonPage(tOffset))
+          when(mockLocalDataSource.getCachedRegionalPokedex(tRegion))
               .thenThrow(CacheException());
         });
         test(
           'Should return Server failure when device is offline',
           () async {
             // act
-            final result = await pokemonRepositoryImpl.getPaginatedPokemonList(
-                offset: tOffset, limit: tLimit);
+            final result =
+                await pokemonRepositoryImpl.getRegionalPokedex(region: tRegion);
             // assert
             verifyZeroInteractions(mockRemoteDataSource);
             expect(result, equals(Left(ServerFailure())));
