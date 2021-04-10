@@ -34,6 +34,14 @@ class PokemonDetail extends Equatable {
     this.varieties,
   });
 
+  String getPokemonId() {
+    return (this.id < 10)
+        ? '#00${this.id}'
+        : (this.id < 100)
+            ? '#0${this.id}'
+            : '#${this.id}';
+  }
+
   final int baseHappiness;
   final int captureRate;
   final ResourcePath color;
