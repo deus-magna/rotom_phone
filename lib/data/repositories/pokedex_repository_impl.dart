@@ -45,16 +45,23 @@ class PokedexRepositoryImpl implements PokedexRepository {
   @override
   Future<Either<Failure, PokemonDetail>> getPokemonDetail(
       {int entryNumber}) async {
-    if (await networkInfo.hasConnection) {
-      try {
-        final pokemonDetail =
-            await remoteDataSource.getPokemonDetail(entryNumber: entryNumber);
-        return Right(pokemonDetail);
-      } on ServerException {
+    try {
+      final localPokemonDetail =
+          await localDataSource.getCachedPokemonDetail(entryNumber);
+      return Right(localPokemonDetail);
+    } on CacheException {
+      if (await networkInfo.hasConnection) {
+        try {
+          final pokemonDetail =
+              await remoteDataSource.getPokemonDetail(entryNumber: entryNumber);
+          localDataSource.cachePokemonDetail(pokemonDetail);
+          return Right(pokemonDetail);
+        } on ServerException {
+          return Left(ServerFailure());
+        }
+      } else {
         return Left(ServerFailure());
       }
-    } else {
-      return Left(ServerFailure());
     }
   }
 }

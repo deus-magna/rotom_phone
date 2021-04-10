@@ -7,8 +7,10 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
 import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
@@ -57,7 +59,103 @@ void main() {
     });
   }
 
-  group('getPokemonPaginatedList', () {
+  group('getPokemonDetail', () {
+    final int tEntryNumber = 1;
+    final tPokemonDetailModel =
+        pokemonDetailModelFromJson(fixture('pokemon_detail.json'));
+    final PokemonDetail tPokemonDetail = tPokemonDetailModel;
+
+    test('Should check if the device is online', () {
+      // arrange
+      when(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber))
+          .thenThrow(CacheException());
+      when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
+      // act
+      pokemonRepositoryImpl.getPokemonDetail(entryNumber: tEntryNumber);
+      // assert
+      verify(mockNetworkInfo.hasConnection);
+    });
+
+    runTestsOnline(() {
+      group('Device has PokemonDetail cached data', () {
+        setUp(() {
+          when(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber))
+              .thenAnswer((_) async => tPokemonDetail);
+        });
+
+        test('Should return last locally data when cached data is present',
+            () async {
+          // act
+          final result = await pokemonRepositoryImpl.getPokemonDetail(
+              entryNumber: tEntryNumber);
+          // assert
+          verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
+          verifyZeroInteractions(mockRemoteDataSource);
+          verifyZeroInteractions(mockNetworkInfo);
+          expect(result, equals(Right(tPokemonDetail)));
+        });
+
+        group('Device doesn`t have PokemonDetail cached data', () {
+          setUp(() {
+            when(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber))
+                .thenThrow(CacheException());
+          });
+
+          test(
+              'Should return remote data when call the remote data source is seccesful',
+              () async {
+            // arrange
+            when(mockRemoteDataSource.getPokemonDetail(
+                    entryNumber: anyNamed('entryNumber')))
+                .thenAnswer((_) async => tPokemonDetail);
+            // act
+            final result = await pokemonRepositoryImpl.getPokemonDetail(
+                entryNumber: tEntryNumber);
+            // assert
+            verify(mockRemoteDataSource.getPokemonDetail(
+                entryNumber: tEntryNumber));
+            expect(result, equals(Right(tPokemonDetail)));
+          });
+
+          test(
+              'Should cache the data locally when call the remote data source is seccesful',
+              () async {
+            // arrange
+            when(mockRemoteDataSource.getPokemonDetail(
+                    entryNumber: anyNamed('entryNumber')))
+                .thenAnswer((_) async => tPokemonDetail);
+            // act
+            await pokemonRepositoryImpl.getPokemonDetail(
+                entryNumber: tEntryNumber);
+            // assert
+            verify(mockRemoteDataSource.getPokemonDetail(
+                entryNumber: tEntryNumber));
+            verify(mockLocalDataSource.cachePokemonDetail(tPokemonDetailModel));
+          });
+
+          test('''Should return Server failure when there is no cached data 
+            present and call the remote data source is unseccessful''',
+              () async {
+            // arrange
+            when(mockRemoteDataSource.getPokemonDetail(
+                    entryNumber: anyNamed('entryNumber')))
+                .thenThrow(ServerException());
+            // act
+            final result = await pokemonRepositoryImpl.getPokemonDetail(
+                entryNumber: tEntryNumber);
+            // assert
+            verify(mockRemoteDataSource.getPokemonDetail(
+                entryNumber: tEntryNumber));
+            verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
+
+            expect(result, equals(Left(ServerFailure())));
+          });
+        });
+      });
+    });
+  });
+
+  group('getRegionalPokedex', () {
     final int tRegion = 1;
 
     final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
