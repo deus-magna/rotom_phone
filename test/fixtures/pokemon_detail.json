@@ -1,0 +1,192 @@
+{
+    "base_happiness": 70,
+    "capture_rate": 45,
+    "color": {
+        "name": "green",
+        "url": "https://pokeapi.co/api/v2/pokemon-color/5/"
+    },
+    "egg_groups": [
+        { "name": "monster", "url": "https://pokeapi.co/api/v2/egg-group/1/" },
+        { "name": "plant", "url": "https://pokeapi.co/api/v2/egg-group/7/" }
+    ],
+    "evolution_chain": { "url": "https://pokeapi.co/api/v2/evolution-chain/1/" },
+    "evolves_from_species": null,
+    "flavor_text_entries": [{
+            "flavor_text": "For some time after its birth, it\ngrows by gaining nourishment from\nthe seed on its back.",
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            },
+            "version": {
+                "name": "white",
+                "url": "https://pokeapi.co/api/v2/version/18/"
+            }
+        },
+        {
+            "flavor_text": "For some time after its birth, it\ngrows by gaining nourishment from\nthe seed on its back.",
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            },
+            "version": {
+                "name": "black-2",
+                "url": "https://pokeapi.co/api/v2/version/21/"
+            }
+        },
+        {
+            "flavor_text": "For some time after its birth, it\ngrows by gaining nourishment from\nthe seed on its back.",
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            },
+            "version": {
+                "name": "white-2",
+                "url": "https://pokeapi.co/api/v2/version/22/"
+            }
+        },
+        {
+            "flavor_text": "A Bulbasaur es fácil verle echándose una siesta al sol.\nLa semilla que tiene en el lomo va creciendo cada vez más\na medida que absorbe los rayos del sol.",
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            },
+            "version": {
+                "name": "alpha-sapphire",
+                "url": "https://pokeapi.co/api/v2/version/26/"
+            }
+        },
+        {
+            "flavor_text": "Este Pokémon nace con una semilla en el lomo,\nque brota con el paso del tiempo.",
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            },
+            "version": {
+                "name": "sword",
+                "url": "https://pokeapi.co/api/v2/version/33/"
+            }
+        }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": false,
+    "gender_rate": 1,
+    "genera": [{
+            "genus": "Pokémon Semilla",
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            }
+        },
+        {
+            "genus": "Seed Pokémon",
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            }
+        }
+    ],
+    "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+    },
+    "growth_rate": {
+        "name": "medium-slow",
+        "url": "https://pokeapi.co/api/v2/growth-rate/4/"
+    },
+    "habitat": {
+        "name": "grassland",
+        "url": "https://pokeapi.co/api/v2/pokemon-habitat/3/"
+    },
+    "has_gender_differences": false,
+    "hatch_counter": 20,
+    "id": 1,
+    "is_baby": false,
+    "is_legendary": false,
+    "is_mythical": false,
+    "name": "bulbasaur",
+    "names": [{
+            "language": {
+                "name": "es",
+                "url": "https://pokeapi.co/api/v2/language/7/"
+            },
+            "name": "Bulbasaur"
+        },
+        {
+            "language": {
+                "name": "en",
+                "url": "https://pokeapi.co/api/v2/language/9/"
+            },
+            "name": "Bulbasaur"
+        }
+    ],
+    "order": 1,
+    "pal_park_encounters": [{
+        "area": {
+            "name": "field",
+            "url": "https://pokeapi.co/api/v2/pal-park-area/2/"
+        },
+        "base_score": 50,
+        "rate": 30
+    }],
+    "pokedex_numbers": [{
+            "entry_number": 1,
+            "pokedex": {
+                "name": "national",
+                "url": "https://pokeapi.co/api/v2/pokedex/1/"
+            }
+        },
+        {
+            "entry_number": 1,
+            "pokedex": {
+                "name": "kanto",
+                "url": "https://pokeapi.co/api/v2/pokedex/2/"
+            }
+        },
+        {
+            "entry_number": 226,
+            "pokedex": {
+                "name": "original-johto",
+                "url": "https://pokeapi.co/api/v2/pokedex/3/"
+            }
+        },
+        {
+            "entry_number": 231,
+            "pokedex": {
+                "name": "updated-johto",
+                "url": "https://pokeapi.co/api/v2/pokedex/7/"
+            }
+        },
+        {
+            "entry_number": 80,
+            "pokedex": {
+                "name": "kalos-central",
+                "url": "https://pokeapi.co/api/v2/pokedex/12/"
+            }
+        },
+        {
+            "entry_number": 68,
+            "pokedex": {
+                "name": "isle-of-armor",
+                "url": "https://pokeapi.co/api/v2/pokedex/28/"
+            }
+        },
+        {
+            "entry_number": 1,
+            "pokedex": {
+                "name": "updated-kanto",
+                "url": "https://pokeapi.co/api/v2/pokedex/26/"
+            }
+        }
+    ],
+    "shape": {
+        "name": "quadruped",
+        "url": "https://pokeapi.co/api/v2/pokemon-shape/8/"
+    },
+    "varieties": [{
+        "is_default": true,
+        "pokemon": {
+            "name": "bulbasaur",
+            "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        }
+    }]
+}

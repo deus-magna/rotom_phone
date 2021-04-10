@@ -14,9 +14,9 @@ abstract class PokedexLocalDataSource {
   /// as the key for the Hive Box
   Future<void> cacheRegionalPokedex(PokedexModel pokedexModel);
 
-  Future<PokemonDetailModel> getPokemonDetail(int entryNumber);
+  Future<PokemonDetailModel> getCachedPokemonDetail(int entryNumber);
 
-  Future<void> cachePokemonDetail(PokemonDetailModel pokemonSpeciesModel);
+  Future<void> cachePokemonDetail(PokemonDetailModel pokemonDetailModel);
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
@@ -39,20 +39,26 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   }
 
   @override
-  Future<void> cacheRegionalPokedex(PokedexModel pokedexModel) {
-    regionalPokedexBox.put(pokedexModel.id, pokedexModelToJson(pokedexModel));
+  Future<void> cacheRegionalPokedex(PokedexModel pokedexModel) async {
+    await regionalPokedexBox.put(
+        pokedexModel.id, pokedexModelToJson(pokedexModel));
     return Future.value(true);
   }
 
   @override
-  Future<void> cachePokemonDetail(PokemonDetailModel pokemonSpeciesModel) {
-    // TODO: implement cachePokemonDetail
-    throw UnimplementedError();
+  Future<void> cachePokemonDetail(PokemonDetailModel pokemonDetailModel) async {
+    await pokemonDetailBox.put(
+        pokemonDetailModel.id, pokemonDetailModelToJson(pokemonDetailModel));
+    return Future.value(true);
   }
 
   @override
-  Future<PokemonDetailModel> getPokemonDetail(int entryNumber) {
-    // TODO: implement getPokemonDetail
-    throw UnimplementedError();
+  Future<PokemonDetailModel> getCachedPokemonDetail(int entryNumber) {
+    final jsonString = pokemonDetailBox.get(entryNumber);
+    if (jsonString != null) {
+      return Future.value(pokemonDetailModelFromJson(jsonString));
+    } else {
+      throw CacheException();
+    }
   }
 }
