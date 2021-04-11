@@ -27,7 +27,7 @@ Future<void> initPokedex() async {
 
   // use cases
   sl.registerLazySingleton(() => GetRegionalPokedex(sl()));
-  sl.registerLazySingleton(() => GetPokemonDetail(sl()));
+  sl.registerLazySingleton(() => GetPokemonDetails(sl()));
 
   // Repository
   sl.registerLazySingleton<PokedexRepository>(() => PokedexRepositoryImpl(
@@ -45,6 +45,7 @@ Future<void> initPokedex() async {
     () => PokedexLocalDataSourceImpl(
       sl<PokedexBox>(),
       sl<PokemonSpecieBox>(),
+      sl<PokemonInfoBox>(),
     ),
   );
 
@@ -56,7 +57,7 @@ Future<void> initPokedex() async {
   final regionalPokedexBox = PokedexBox(await Hive.openBox('pokedex'));
   final pokemonSpecieBox =
       PokemonSpecieBox(await Hive.openBox('pokemon_specie'));
-  final pokemonInfoBox = PokemonSpecieBox(await Hive.openBox('pokemon_info'));
+  final pokemonInfoBox = PokemonInfoBox(await Hive.openBox('pokemon_info'));
   sl.registerLazySingleton(() => regionalPokedexBox);
   sl.registerLazySingleton(() => pokemonSpecieBox);
   sl.registerLazySingleton(() => pokemonInfoBox);

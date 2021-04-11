@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 
@@ -13,31 +15,48 @@ class MockBox extends Mock implements Box {}
 
 class MockPokedexBox extends Mock implements PokedexBox {}
 
-class MockPokemonDetailBox extends Mock implements PokemonDetailBox {}
+class MockPokemonSpecieBox extends Mock implements PokemonSpecieBox {}
+
+class MockPokemonInfoBox extends Mock implements PokemonInfoBox {}
 
 void main() {
   PokedexLocalDataSource localDataSource;
   MockPokedexBox mockPokedexBox;
-  PokemonDetailBox mockPokemonDetailBox;
+  MockPokemonSpecieBox mockPokemonSpecieBox;
+  MockPokemonInfoBox mockPokemonInfoBox;
 
   setUp(() async {
-    mockPokemonDetailBox = MockPokemonDetailBox();
+    mockPokemonSpecieBox = MockPokemonSpecieBox();
     mockPokedexBox = MockPokedexBox();
-    mockPokemonDetailBox = MockPokemonDetailBox();
-    localDataSource =
-        PokedexLocalDataSourceImpl(mockPokedexBox, mockPokemonDetailBox);
+    mockPokemonSpecieBox = MockPokemonSpecieBox();
+    mockPokemonInfoBox = MockPokemonInfoBox();
+    localDataSource = PokedexLocalDataSourceImpl(
+        mockPokedexBox, mockPokemonSpecieBox, mockPokemonInfoBox);
   });
 
   group('PokemonDetail', () {
     final int tEntryNumber = 1;
-    final tPokemonDetailModel =
+    final tPokemonSpecieModel =
         pokemonSpecieModelFromJson(fixture('pokemon_specie.json'));
+    final tPokemonInfoModel =
+        pokemonInfoModelFromJson(fixture('pokemon_info.json'));
+    final tPokemonModel = PokemonModel(tPokemonInfoModel, tPokemonSpecieModel);
     group('cachePokemonDetail', () {
-      test('Should call PokemonDetalBox to cache the data', () {
-        localDataSource.cachePokemonDetail(tPokemonDetailModel);
+      test('Should call PokemonSpecieBox to cache the data', () async {
+        await localDataSource.cachePokemonDetail(tPokemonModel);
+
         final expectedJsonString =
-            pokemonSpecieModelToJson(tPokemonDetailModel);
-        verify(mockPokemonDetailBox.put(tEntryNumber, expectedJsonString));
+            pokemonSpecieModelToJson(tPokemonSpecieModel);
+
+        verify(mockPokemonSpecieBox.put(tEntryNumber, expectedJsonString));
+      });
+
+      test('Should call PokemonInfoBox to cache the data', () async {
+        await localDataSource.cachePokemonDetail(tPokemonModel);
+
+        final expectedJsonString = pokemonInfoModelToJson(tPokemonInfoModel);
+
+        verify(mockPokemonInfoBox.put(tEntryNumber, expectedJsonString));
       });
     });
     group('getCachedPokemonDetail', () {
@@ -45,14 +64,17 @@ void main() {
         'Should return PokemonDetail from Hive when there is one in the cache',
         () async {
           // arrange
-          when(mockPokemonDetailBox.get(any))
+          when(mockPokemonSpecieBox.get(any))
               .thenReturn(fixture('pokemon_specie.json'));
+          when(mockPokemonInfoBox.get(any))
+              .thenReturn(fixture('pokemon_info.json'));
           // act
           final result =
               await localDataSource.getCachedPokemonDetail(tEntryNumber);
           // assert
-          verify(mockPokemonDetailBox.get(tEntryNumber));
-          expect(result, equals(tPokemonDetailModel));
+          verify(mockPokemonSpecieBox.get(tEntryNumber));
+          verify(mockPokemonInfoBox.get(tEntryNumber));
+          expect(result, equals(tPokemonModel));
         },
       );
 
@@ -60,7 +82,8 @@ void main() {
         'Should throw a CacheException when there is not a cached value',
         () async {
           // arrange
-          when(mockPokedexBox.get(any)).thenReturn(null);
+          when(mockPokemonSpecieBox.get(any)).thenReturn(null);
+          when(mockPokemonInfoBox.get(any)).thenReturn(null);
           // act
           final call = localDataSource.getCachedPokemonDetail;
           // assert

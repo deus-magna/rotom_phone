@@ -3,13 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rotom_phone/core/errors/failure.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/usercases/pokedex/get_pokemon_detail.dart';
 
 part 'pokemon_detail_state.dart';
 
 class PokemonDetailCubit extends Cubit<PokemonDetailState> {
-  final GetPokemonDetail getPokemonDetail;
+  final GetPokemonDetails getPokemonDetail;
 
   PokemonDetailCubit(this.getPokemonDetail)
       : assert(getPokemonDetail != null),
@@ -19,7 +19,7 @@ class PokemonDetailCubit extends Cubit<PokemonDetailState> {
     getPokemonDetail(entryNumber: entryNumber);
   }
 
-  getPokemonDetal(int entryNumber) async {
+  getPokemonDetals(int entryNumber) async {
     emit(PokemonDetailLoading());
     final failureOrPokemonList =
         await getPokemonDetail(entryNumber: entryNumber);
@@ -27,7 +27,7 @@ class PokemonDetailCubit extends Cubit<PokemonDetailState> {
   }
 
   PokemonDetailState _eitherLoadedOrErrorState(
-      Either<Failure, PokemonSpecie> failureOrPokemonList) {
+      Either<Failure, Pokemon> failureOrPokemonList) {
     return failureOrPokemonList.fold(
         (failure) => PokemonDetailError(message: _mapFailureToMessage(failure)),
         (pokemon) => PokemonDetailLoaded(pokemonDetail: pokemon));

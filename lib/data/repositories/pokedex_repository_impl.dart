@@ -6,7 +6,7 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
@@ -43,8 +43,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
   }
 
   @override
-  Future<Either<Failure, PokemonSpecie>> getPokemonDetail(
-      {int entryNumber}) async {
+  Future<Either<Failure, Pokemon>> getPokemonDetails({int entryNumber}) async {
     try {
       final localPokemonDetail =
           await localDataSource.getCachedPokemonDetail(entryNumber);
@@ -54,8 +53,8 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final pokemonDetail = await remoteDataSource.getPokemonDetails(
               entryNumber: entryNumber);
-          localDataSource.cachePokemonDetail(pokemonDetail.pokemonSpecie);
-          return Right(pokemonDetail.pokemonSpecie);
+          localDataSource.cachePokemonDetail(pokemonDetail);
+          return Right(pokemonDetail);
         } on ServerException {
           return Left(ServerFailure());
         }

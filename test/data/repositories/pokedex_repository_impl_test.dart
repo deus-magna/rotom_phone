@@ -8,6 +8,7 @@ import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dar
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
@@ -70,6 +71,8 @@ void main() {
         pokemonInfoModelFromJson(fixture('pokemon_info.json'));
     final PokemonSpecie tPokemonSpecie = tPokemonSpecieModel;
     final PokemonInfo tPokemonInfo = tPokemonInfoModel;
+    final PokemonModel tPokemonModel =
+        PokemonModel(tPokemonInfo, tPokemonSpecie);
     final Pokemon tPokemon =
         Pokemon(pokemonSpecie: tPokemonSpecie, pokemonInfo: tPokemonInfo);
 
@@ -79,7 +82,7 @@ void main() {
           .thenThrow(CacheException());
       when(mockNetworkInfo.hasConnection).thenAnswer((_) async => true);
       // act
-      pokemonRepositoryImpl.getPokemonDetail(entryNumber: tEntryNumber);
+      pokemonRepositoryImpl.getPokemonDetails(entryNumber: tEntryNumber);
       // assert
       verify(mockNetworkInfo.hasConnection);
     });
@@ -88,13 +91,13 @@ void main() {
       group('Device has PokemonDetail cached data', () {
         setUp(() {
           when(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber))
-              .thenAnswer((_) async => tPokemonSpecie);
+              .thenAnswer((_) async => tPokemonModel);
         });
 
         test('Should return last locally data when cached data is present',
             () async {
           // act
-          final result = await pokemonRepositoryImpl.getPokemonDetail(
+          final result = await pokemonRepositoryImpl.getPokemonDetails(
               entryNumber: tEntryNumber);
           // assert
           verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
@@ -117,7 +120,7 @@ void main() {
                     entryNumber: anyNamed('entryNumber')))
                 .thenAnswer((_) async => tPokemon);
             // act
-            final result = await pokemonRepositoryImpl.getPokemonDetail(
+            final result = await pokemonRepositoryImpl.getPokemonDetails(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(
@@ -131,14 +134,14 @@ void main() {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
-                .thenAnswer((_) async => tPokemon);
+                .thenAnswer((_) async => tPokemonModel);
             // act
-            await pokemonRepositoryImpl.getPokemonDetail(
+            await pokemonRepositoryImpl.getPokemonDetails(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
-            verify(mockLocalDataSource.cachePokemonDetail(tPokemonSpecieModel));
+            verify(mockLocalDataSource.cachePokemonDetail(tPokemonModel));
           });
 
           test('''Should return Server failure when there is no cached data 
@@ -149,7 +152,7 @@ void main() {
                     entryNumber: anyNamed('entryNumber')))
                 .thenThrow(ServerException());
             // act
-            final result = await pokemonRepositoryImpl.getPokemonDetail(
+            final result = await pokemonRepositoryImpl.getPokemonDetails(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(

@@ -9,13 +9,13 @@ class MockBox extends Mock implements Box<String> {}
 
 void main() {
   PokedexBox pokedexBox;
-  PokemonDetailBox pokemonDetailBox;
+  PokemonSpecieBox pokemonDetailBox;
   MockBox mockBox;
 
   setUp(() {
     mockBox = MockBox();
     pokedexBox = PokedexBox(mockBox);
-    pokemonDetailBox = PokemonDetailBox(mockBox);
+    pokemonDetailBox = PokemonSpecieBox(mockBox);
   });
 
   group('PokedexBox', () {

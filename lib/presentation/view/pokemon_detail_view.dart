@@ -26,7 +26,7 @@ class PokemonDetailView extends StatelessWidget {
           builder: (context, state) {
             if (state is PokemonDetailInitial) {
               final pokemonDetailCubit = context.read<PokemonDetailCubit>();
-              pokemonDetailCubit.getPokemonDetal(entryNumber);
+              pokemonDetailCubit.getPokemonDetals(entryNumber);
               return Container(
                 child: Center(
                   child: CircularProgressIndicator(),
@@ -39,7 +39,8 @@ class PokemonDetailView extends StatelessWidget {
                 ),
               );
             } else if (state is PokemonDetailLoaded) {
-              return PokemonDetalHeader(pokemon: state.pokemonDetail);
+              return PokemonDetalHeader(
+                  pokemon: state.pokemonDetail.pokemonSpecie);
             } else if (state is PokemonDetailError) {
               return Container(
                 child: Center(
