@@ -62,7 +62,7 @@ void main() {
   group('getPokemonDetail', () {
     final int tEntryNumber = 1;
     final tPokemonDetailModel =
-        pokemonDetailModelFromJson(fixture('pokemon_detail.json'));
+        pokemonSpecieModelFromJson(fixture('pokemon_detail.json'));
     final PokemonSpecie tPokemonDetail = tPokemonDetailModel;
 
     test('Should check if the device is online', () {
@@ -105,14 +105,14 @@ void main() {
               'Should return remote data when call the remote data source is seccesful',
               () async {
             // arrange
-            when(mockRemoteDataSource.getPokemonDetail(
+            when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
                 .thenAnswer((_) async => tPokemonDetail);
             // act
             final result = await pokemonRepositoryImpl.getPokemonDetail(
                 entryNumber: tEntryNumber);
             // assert
-            verify(mockRemoteDataSource.getPokemonDetail(
+            verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
             expect(result, equals(Right(tPokemonDetail)));
           });
@@ -121,14 +121,14 @@ void main() {
               'Should cache the data locally when call the remote data source is seccesful',
               () async {
             // arrange
-            when(mockRemoteDataSource.getPokemonDetail(
+            when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
                 .thenAnswer((_) async => tPokemonDetail);
             // act
             await pokemonRepositoryImpl.getPokemonDetail(
                 entryNumber: tEntryNumber);
             // assert
-            verify(mockRemoteDataSource.getPokemonDetail(
+            verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
             verify(mockLocalDataSource.cachePokemonDetail(tPokemonDetailModel));
           });
@@ -137,14 +137,14 @@ void main() {
             present and call the remote data source is unseccessful''',
               () async {
             // arrange
-            when(mockRemoteDataSource.getPokemonDetail(
+            when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
                 .thenThrow(ServerException());
             // act
             final result = await pokemonRepositoryImpl.getPokemonDetail(
                 entryNumber: tEntryNumber);
             // assert
-            verify(mockRemoteDataSource.getPokemonDetail(
+            verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
             verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
 

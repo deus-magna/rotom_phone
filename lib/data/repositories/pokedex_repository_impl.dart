@@ -52,8 +52,8 @@ class PokedexRepositoryImpl implements PokedexRepository {
     } on CacheException {
       if (await networkInfo.hasConnection) {
         try {
-          final pokemonDetail =
-              await remoteDataSource.getPokemonDetail(entryNumber: entryNumber);
+          final pokemonDetail = await remoteDataSource.getPokemonDetails(
+              entryNumber: entryNumber);
           localDataSource.cachePokemonDetail(pokemonDetail);
           return Right(pokemonDetail);
         } on ServerException {

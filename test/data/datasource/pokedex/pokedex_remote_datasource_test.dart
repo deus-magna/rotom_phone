@@ -33,13 +33,13 @@ void main() {
   group('get Pokemon detail', () {
     final int tEntryNumber = 1;
     final String tPokemonDetailResponse = fixture('pokemon_detail.json');
-    final tPokemonDetail = pokemonDetailModelFromJson(tPokemonDetailResponse);
+    final tPokemonDetail = pokemonSpecieModelFromJson(tPokemonDetailResponse);
 
     test('Should make a GET request to pokemon_detail endpoint', () {
       // arrange
       setUpMockHttpClientSuccess200(tPokemonDetailResponse);
       // act
-      pokemonRemoteDataSource.getPokemonDetail(entryNumber: tEntryNumber);
+      pokemonRemoteDataSource.getPokemonDetails(entryNumber: tEntryNumber);
       // assert
       verify(
         mockHttpClient.get(
@@ -53,7 +53,7 @@ void main() {
       // arrange
       setUpMockHttpClientSuccess200(tPokemonDetailResponse);
       // act
-      final result = await pokemonRemoteDataSource.getPokemonDetail(
+      final result = await pokemonRemoteDataSource.getPokemonDetails(
           entryNumber: tEntryNumber);
       // assert
       expect(result, equals(tPokemonDetail));
@@ -66,7 +66,7 @@ void main() {
         // arrange
         setUpMockHttpClientSuccess404();
         // act
-        final call = pokemonRemoteDataSource.getPokemonDetail;
+        final call = pokemonRemoteDataSource.getPokemonDetails;
         // assert
         expect(() => call(entryNumber: tEntryNumber),
             throwsA(isA<ServerException>()));

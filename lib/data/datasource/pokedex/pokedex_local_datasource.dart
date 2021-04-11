@@ -48,7 +48,7 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   @override
   Future<void> cachePokemonDetail(PokemonSpecieModel pokemonDetailModel) async {
     await pokemonDetailBox.put(
-        pokemonDetailModel.id, pokemonDetailModelToJson(pokemonDetailModel));
+        pokemonDetailModel.id, pokemonSpecieModelToJson(pokemonDetailModel));
     return Future.value(true);
   }
 
@@ -56,7 +56,7 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   Future<PokemonSpecieModel> getCachedPokemonDetail(int entryNumber) {
     final jsonString = pokemonDetailBox.get(entryNumber);
     if (jsonString != null) {
-      return Future.value(pokemonDetailModelFromJson(jsonString));
+      return Future.value(pokemonSpecieModelFromJson(jsonString));
     } else {
       throw CacheException();
     }

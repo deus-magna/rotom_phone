@@ -5,10 +5,10 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import '../name_model.dart';
 import '../resource_path_model.dart';
 
-PokemonSpecieModel pokemonDetailModelFromJson(String str) =>
+PokemonSpecieModel pokemonSpecieModelFromJson(String str) =>
     PokemonSpecieModel.fromJson(json.decode(str));
 
-String pokemonDetailModelToJson(PokemonSpecieModel data) =>
+String pokemonSpecieModelToJson(PokemonSpecieModel data) =>
     json.encode(data.toJson());
 
 class PokemonSpecieModel extends PokemonSpecie {

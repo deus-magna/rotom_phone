@@ -31,12 +31,12 @@ void main() {
   group('PokemonDetail', () {
     final int tEntryNumber = 1;
     final tPokemonDetailModel =
-        pokemonDetailModelFromJson(fixture('pokemon_detail.json'));
+        pokemonSpecieModelFromJson(fixture('pokemon_detail.json'));
     group('cachePokemonDetail', () {
       test('Should call PokemonDetalBox to cache the data', () {
         localDataSource.cachePokemonDetail(tPokemonDetailModel);
         final expectedJsonString =
-            pokemonDetailModelToJson(tPokemonDetailModel);
+            pokemonSpecieModelToJson(tPokemonDetailModel);
         verify(mockPokemonDetailBox.put(tEntryNumber, expectedJsonString));
       });
     });
