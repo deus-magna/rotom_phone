@@ -73,8 +73,7 @@ void main() {
     final PokemonInfo tPokemonInfo = tPokemonInfoModel;
     final PokemonModel tPokemonModel =
         PokemonModel(tPokemonInfo, tPokemonSpecie);
-    final Pokemon tPokemon =
-        Pokemon(pokemonSpecie: tPokemonSpecie, pokemonInfo: tPokemonInfo);
+    final Pokemon tPokemon = tPokemonModel;
 
     test('Should check if the device is online', () {
       // arrange
@@ -103,7 +102,7 @@ void main() {
           verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
           verifyZeroInteractions(mockRemoteDataSource);
           verifyZeroInteractions(mockNetworkInfo);
-          expect(result, equals(Right(tPokemonSpecie)));
+          expect(result, equals(Right(tPokemon)));
         });
 
         group('Device doesn`t have PokemonDetail cached data', () {
@@ -118,14 +117,14 @@ void main() {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
-                .thenAnswer((_) async => tPokemon);
+                .thenAnswer((_) async => tPokemonModel);
             // act
             final result = await pokemonRepositoryImpl.getPokemonDetails(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
-            expect(result, equals(Right(tPokemonSpecie)));
+            expect(result, equals(Right(tPokemon)));
           });
 
           test(

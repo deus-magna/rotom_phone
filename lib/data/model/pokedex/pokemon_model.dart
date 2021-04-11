@@ -7,5 +7,8 @@ class PokemonModel extends Pokemon {
   final PokemonSpecieModel pokemonSpecie;
 
   PokemonModel(this.pokemonInfo, this.pokemonSpecie)
-      : super(pokemonInfo: pokemonInfo, pokemonSpecie: pokemonSpecie);
+      : super(
+          pokemonInfo: pokemonInfo,
+          pokemonSpecie: pokemonSpecie,
+        );
 }
