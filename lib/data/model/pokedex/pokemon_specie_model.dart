@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 
 import '../name_model.dart';
 import '../resource_path_model.dart';
 
-PokemonDetailModel pokemonDetailModelFromJson(String str) =>
-    PokemonDetailModel.fromJson(json.decode(str));
+PokemonSpecieModel pokemonDetailModelFromJson(String str) =>
+    PokemonSpecieModel.fromJson(json.decode(str));
 
-String pokemonDetailModelToJson(PokemonDetailModel data) =>
+String pokemonDetailModelToJson(PokemonSpecieModel data) =>
     json.encode(data.toJson());
 
-class PokemonDetailModel extends PokemonDetail {
-  PokemonDetailModel({
+class PokemonSpecieModel extends PokemonSpecie {
+  PokemonSpecieModel({
     this.baseHappiness,
     this.captureRate,
     this.color,
@@ -96,8 +96,8 @@ class PokemonDetailModel extends PokemonDetail {
   final ResourcePathModel shape;
   final List<VarietyModel> varieties;
 
-  factory PokemonDetailModel.fromJson(Map<String, dynamic> json) =>
-      PokemonDetailModel(
+  factory PokemonSpecieModel.fromJson(Map<String, dynamic> json) =>
+      PokemonSpecieModel(
         baseHappiness:
             json["base_happiness"] == null ? null : json["base_happiness"],
         captureRate: json["capture_rate"] == null ? null : json["capture_rate"],

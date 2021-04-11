@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/injector/injection_container.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
 import '../../core/extensions/string_extension.dart';
@@ -61,7 +61,7 @@ class PokemonDetailView extends StatelessWidget {
 }
 
 class PokemonDetalHeader extends StatelessWidget {
-  final PokemonDetail pokemon;
+  final PokemonSpecie pokemon;
 
   const PokemonDetalHeader({
     Key key,

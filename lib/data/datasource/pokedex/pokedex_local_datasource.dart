@@ -1,6 +1,6 @@
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
-import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 
 abstract class PokedexLocalDataSource {
@@ -14,9 +14,9 @@ abstract class PokedexLocalDataSource {
   /// as the key for the Hive Box
   Future<void> cacheRegionalPokedex(PokedexModel pokedexModel);
 
-  Future<PokemonDetailModel> getCachedPokemonDetail(int entryNumber);
+  Future<PokemonSpecieModel> getCachedPokemonDetail(int entryNumber);
 
-  Future<void> cachePokemonDetail(PokemonDetailModel pokemonDetailModel);
+  Future<void> cachePokemonDetail(PokemonSpecieModel pokemonDetailModel);
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
@@ -46,14 +46,14 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   }
 
   @override
-  Future<void> cachePokemonDetail(PokemonDetailModel pokemonDetailModel) async {
+  Future<void> cachePokemonDetail(PokemonSpecieModel pokemonDetailModel) async {
     await pokemonDetailBox.put(
         pokemonDetailModel.id, pokemonDetailModelToJson(pokemonDetailModel));
     return Future.value(true);
   }
 
   @override
-  Future<PokemonDetailModel> getCachedPokemonDetail(int entryNumber) {
+  Future<PokemonSpecieModel> getCachedPokemonDetail(int entryNumber) {
     final jsonString = pokemonDetailBox.get(entryNumber);
     if (jsonString != null) {
       return Future.value(pokemonDetailModelFromJson(jsonString));

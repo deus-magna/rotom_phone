@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
-import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 
 abstract class PokedexRemoteDataSource {
   Future<PokedexModel> getRegionalPokedex({int region});
-  Future<PokemonDetailModel> getPokemonDetail({int entryNumber});
+  Future<PokemonSpecieModel> getPokemonDetail({int entryNumber});
 }
 
 class PokedexRemoteDataSourceImpl implements PokedexRemoteDataSource {
@@ -25,7 +25,7 @@ class PokedexRemoteDataSourceImpl implements PokedexRemoteDataSource {
   }
 
   @override
-  Future<PokemonDetailModel> getPokemonDetail({int entryNumber}) async {
+  Future<PokemonSpecieModel> getPokemonDetail({int entryNumber}) async {
     final response = await getFromServer(
         'https://pokeapi.co/api/v2/pokemon-species/$entryNumber/');
     return pokemonDetailModelFromJson(response.body);

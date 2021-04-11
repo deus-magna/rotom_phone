@@ -6,7 +6,7 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
@@ -43,7 +43,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
   }
 
   @override
-  Future<Either<Failure, PokemonDetail>> getPokemonDetail(
+  Future<Either<Failure, PokemonSpecie>> getPokemonDetail(
       {int entryNumber}) async {
     try {
       final localPokemonDetail =

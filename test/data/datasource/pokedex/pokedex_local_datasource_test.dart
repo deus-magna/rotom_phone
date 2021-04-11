@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
-import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 
 import '../../../fixtures/fixture_reader.dart';

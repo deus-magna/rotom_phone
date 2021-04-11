@@ -7,10 +7,10 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
-import 'package:rotom_phone/data/model/pokedex/pokemon_detail_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_detail.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
@@ -63,7 +63,7 @@ void main() {
     final int tEntryNumber = 1;
     final tPokemonDetailModel =
         pokemonDetailModelFromJson(fixture('pokemon_detail.json'));
-    final PokemonDetail tPokemonDetail = tPokemonDetailModel;
+    final PokemonSpecie tPokemonDetail = tPokemonDetailModel;
 
     test('Should check if the device is online', () {
       // arrange

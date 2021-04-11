@@ -12,7 +12,7 @@ class PokemonDetailInitial extends PokemonDetailState {}
 class PokemonDetailLoading extends PokemonDetailState {}
 
 class PokemonDetailLoaded extends PokemonDetailState {
-  final PokemonDetail pokemonDetail;
+  final PokemonSpecie pokemonDetail;
 
   PokemonDetailLoaded({@required this.pokemonDetail});
 
