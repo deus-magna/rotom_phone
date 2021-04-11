@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -32,12 +34,20 @@ void main() {
 
   group('get Pokemon detail', () {
     final int tEntryNumber = 1;
-    final String tPokemonDetailResponse = fixture('pokemon_detail.json');
-    final tPokemonDetail = pokemonSpecieModelFromJson(tPokemonDetailResponse);
+    final String tPokemonSpecieResponse = fixture('pokemon_specie.json');
+    final String tPokemonInfoResponse = fixture('pokemon_info.json');
+    final tPokemonSpecieModel =
+        pokemonSpecieModelFromJson(tPokemonSpecieResponse);
 
-    test('Should make a GET request to pokemon_detail endpoint', () {
+    final tPokemonInfoModel =
+        pokemonInfoModelFromJson(fixture('pokemon_info.json'));
+
+    final PokemonModel tPokemonModel =
+        PokemonModel(tPokemonInfoModel, tPokemonSpecieModel);
+
+    test('Should make a GET request to pokemon_specie endpoint', () {
       // arrange
-      setUpMockHttpClientSuccess200(tPokemonDetailResponse);
+      setUpMockHttpClientSuccess200(tPokemonSpecieResponse);
       // act
       pokemonRemoteDataSource.getPokemonDetails(entryNumber: tEntryNumber);
       // assert
@@ -48,15 +58,20 @@ void main() {
       );
     });
 
-    test('Should return a PokemonDetailModel when response code is 200',
-        () async {
+    test('Should return a PokemonModel when response code is 200', () async {
       // arrange
-      setUpMockHttpClientSuccess200(tPokemonDetailResponse);
+      when(mockHttpClient
+              .get('https://pokeapi.co/api/v2/pokemon-species/$tEntryNumber/'))
+          .thenAnswer((_) async => http.Response(tPokemonSpecieResponse, 200));
+
+      when(mockHttpClient
+              .get('https://pokeapi.co/api/v2/pokemon/$tEntryNumber/'))
+          .thenAnswer((_) async => http.Response(tPokemonInfoResponse, 200));
       // act
       final result = await pokemonRemoteDataSource.getPokemonDetails(
           entryNumber: tEntryNumber);
       // assert
-      expect(result, equals(tPokemonDetail));
+      expect(result, equals(tPokemonModel));
     });
 
     test(
@@ -76,7 +91,7 @@ void main() {
 
   group('get regional pokedex', () {
     final int tRegion = 1;
-    final String tPokedexResponse = fixture('pokemon_detail.json');
+    final String tPokedexResponse = fixture('pokemon_specie.json');
     final tPokedexModel = pokedexModelFromJson(tPokedexResponse);
 
     test(

@@ -31,7 +31,7 @@ void main() {
   group('PokemonDetail', () {
     final int tEntryNumber = 1;
     final tPokemonDetailModel =
-        pokemonSpecieModelFromJson(fixture('pokemon_detail.json'));
+        pokemonSpecieModelFromJson(fixture('pokemon_specie.json'));
     group('cachePokemonDetail', () {
       test('Should call PokemonDetalBox to cache the data', () {
         localDataSource.cachePokemonDetail(tPokemonDetailModel);
@@ -46,7 +46,7 @@ void main() {
         () async {
           // arrange
           when(mockPokemonDetailBox.get(any))
-              .thenReturn(fixture('pokemon_detail.json'));
+              .thenReturn(fixture('pokemon_specie.json'));
           // act
           final result =
               await localDataSource.getCachedPokemonDetail(tEntryNumber);

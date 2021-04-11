@@ -54,8 +54,8 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final pokemonDetail = await remoteDataSource.getPokemonDetails(
               entryNumber: entryNumber);
-          localDataSource.cachePokemonDetail(pokemonDetail);
-          return Right(pokemonDetail);
+          localDataSource.cachePokemonDetail(pokemonDetail.pokemonSpecie);
+          return Right(pokemonDetail.pokemonSpecie);
         } on ServerException {
           return Left(ServerFailure());
         }

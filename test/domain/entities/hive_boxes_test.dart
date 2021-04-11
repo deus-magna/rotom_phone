@@ -44,20 +44,20 @@ void main() {
       final int key = 1;
       // arrange
       when(pokemonDetailBox.get(any))
-          .thenReturn(fixture('pokemon_detail.json'));
+          .thenReturn(fixture('pokemon_specie.json'));
       // act
       final result = pokemonDetailBox.get(key);
       // assert
       verify(pokemonDetailBox.get(key));
-      expect(result, fixture('pokemon_detail.json'));
+      expect(result, fixture('pokemon_specie.json'));
     });
 
     test('Should call MockBox.put', () async {
       final int key = 1;
       // act
-      await pokemonDetailBox.put(key, fixture('pokemon_detail.json'));
+      await pokemonDetailBox.put(key, fixture('pokemon_specie.json'));
       // assert
-      verify(pokemonDetailBox.put(key, fixture('pokemon_detail.json')));
+      verify(pokemonDetailBox.put(key, fixture('pokemon_specie.json')));
     });
   });
 }

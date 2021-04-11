@@ -7,9 +7,12 @@ import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/data/repositories/pokedex_repository_impl.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_info.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 
 import '../../fixtures/fixture_reader.dart';
@@ -61,9 +64,14 @@ void main() {
 
   group('getPokemonDetail', () {
     final int tEntryNumber = 1;
-    final tPokemonDetailModel =
-        pokemonSpecieModelFromJson(fixture('pokemon_detail.json'));
-    final PokemonSpecie tPokemonDetail = tPokemonDetailModel;
+    final tPokemonSpecieModel =
+        pokemonSpecieModelFromJson(fixture('pokemon_specie.json'));
+    final tPokemonInfoModel =
+        pokemonInfoModelFromJson(fixture('pokemon_info.json'));
+    final PokemonSpecie tPokemonSpecie = tPokemonSpecieModel;
+    final PokemonInfo tPokemonInfo = tPokemonInfoModel;
+    final Pokemon tPokemon =
+        Pokemon(pokemonSpecie: tPokemonSpecie, pokemonInfo: tPokemonInfo);
 
     test('Should check if the device is online', () {
       // arrange
@@ -80,7 +88,7 @@ void main() {
       group('Device has PokemonDetail cached data', () {
         setUp(() {
           when(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber))
-              .thenAnswer((_) async => tPokemonDetail);
+              .thenAnswer((_) async => tPokemonSpecie);
         });
 
         test('Should return last locally data when cached data is present',
@@ -92,7 +100,7 @@ void main() {
           verify(mockLocalDataSource.getCachedPokemonDetail(tEntryNumber));
           verifyZeroInteractions(mockRemoteDataSource);
           verifyZeroInteractions(mockNetworkInfo);
-          expect(result, equals(Right(tPokemonDetail)));
+          expect(result, equals(Right(tPokemonSpecie)));
         });
 
         group('Device doesn`t have PokemonDetail cached data', () {
@@ -107,14 +115,14 @@ void main() {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
-                .thenAnswer((_) async => tPokemonDetail);
+                .thenAnswer((_) async => tPokemon);
             // act
             final result = await pokemonRepositoryImpl.getPokemonDetail(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
-            expect(result, equals(Right(tPokemonDetail)));
+            expect(result, equals(Right(tPokemonSpecie)));
           });
 
           test(
@@ -123,14 +131,14 @@ void main() {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
-                .thenAnswer((_) async => tPokemonDetail);
+                .thenAnswer((_) async => tPokemon);
             // act
             await pokemonRepositoryImpl.getPokemonDetail(
                 entryNumber: tEntryNumber);
             // assert
             verify(mockRemoteDataSource.getPokemonDetails(
                 entryNumber: tEntryNumber));
-            verify(mockLocalDataSource.cachePokemonDetail(tPokemonDetailModel));
+            verify(mockLocalDataSource.cachePokemonDetail(tPokemonSpecieModel));
           });
 
           test('''Should return Server failure when there is no cached data 

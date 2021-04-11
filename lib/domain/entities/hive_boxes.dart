@@ -17,9 +17,21 @@ class PokedexBox implements HiveBox {
       box.get(key, defaultValue: defaultValue);
 }
 
-class PokemonDetailBox implements HiveBox {
+class PokemonSpecieBox implements HiveBox {
   final Box<String> box;
-  PokemonDetailBox(this.box);
+  PokemonSpecieBox(this.box);
+
+  @override
+  Future<void> put(dynamic key, String data) => box.put(key, data);
+
+  @override
+  String get(key, {String defaultValue}) =>
+      box.get(key, defaultValue: defaultValue);
+}
+
+class PokemonInfoBox implements HiveBox {
+  final Box<String> box;
+  PokemonInfoBox(this.box);
 
   @override
   Future<void> put(dynamic key, String data) => box.put(key, data);
