@@ -1,5 +1,7 @@
 import 'package:rotom_phone/core/errors/exceptions.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
+import 'package:rotom_phone/data/model/pokedex/pokemon_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 
@@ -14,18 +16,20 @@ abstract class PokedexLocalDataSource {
   /// as the key for the Hive Box
   Future<void> cacheRegionalPokedex(PokedexModel pokedexModel);
 
-  Future<PokemonSpecieModel> getCachedPokemonDetail(int entryNumber);
+  Future<PokemonModel> getCachedPokemonDetail(int entryNumber);
 
-  Future<void> cachePokemonDetail(PokemonSpecieModel pokemonDetailModel);
+  Future<void> cachePokemonDetail(PokemonModel pokemonModel);
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   final PokedexBox regionalPokedexBox;
-  final PokemonDetailBox pokemonDetailBox;
+  final PokemonSpecieBox pokemonSpecieBox;
+  final PokemonInfoBox pokemonInfoBox;
 
   PokedexLocalDataSourceImpl(
     this.regionalPokedexBox,
-    this.pokemonDetailBox,
+    this.pokemonSpecieBox,
+    this.pokemonInfoBox,
   );
 
   @override
@@ -46,17 +50,22 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   }
 
   @override
-  Future<void> cachePokemonDetail(PokemonSpecieModel pokemonDetailModel) async {
-    await pokemonDetailBox.put(
-        pokemonDetailModel.id, pokemonSpecieModelToJson(pokemonDetailModel));
+  Future<void> cachePokemonDetail(PokemonModel pokemonModel) async {
+    await pokemonSpecieBox.put(pokemonModel.pokemonSpecie.id,
+        pokemonSpecieModelToJson(pokemonModel.pokemonSpecie));
+    await pokemonInfoBox.put(pokemonModel.pokemonInfo.id,
+        pokemonInfoModelToJson(pokemonModel.pokemonInfo));
     return Future.value(true);
   }
 
   @override
-  Future<PokemonSpecieModel> getCachedPokemonDetail(int entryNumber) {
-    final jsonString = pokemonDetailBox.get(entryNumber);
-    if (jsonString != null) {
-      return Future.value(pokemonSpecieModelFromJson(jsonString));
+  Future<PokemonModel> getCachedPokemonDetail(int entryNumber) {
+    final specieString = pokemonSpecieBox.get(entryNumber);
+    final infoString = pokemonInfoBox.get(entryNumber);
+    if (specieString != null && infoString != null) {
+      final pokemonModel = PokemonModel(pokemonInfoModelFromJson(infoString),
+          pokemonSpecieModelFromJson(specieString));
+      return Future.value(pokemonModel);
     } else {
       throw CacheException();
     }

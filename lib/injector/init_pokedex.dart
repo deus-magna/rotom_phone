@@ -44,7 +44,7 @@ Future<void> initPokedex() async {
   sl.registerLazySingleton<PokedexLocalDataSource>(
     () => PokedexLocalDataSourceImpl(
       sl<PokedexBox>(),
-      sl<PokemonDetailBox>(),
+      sl<PokemonSpecieBox>(),
     ),
   );
 
@@ -54,10 +54,12 @@ Future<void> initPokedex() async {
   //! External
   await Hive.initFlutter();
   final regionalPokedexBox = PokedexBox(await Hive.openBox('pokedex'));
-  final pokemonDetailBox =
-      PokemonDetailBox(await Hive.openBox('pokemonDetail'));
+  final pokemonSpecieBox =
+      PokemonSpecieBox(await Hive.openBox('pokemon_specie'));
+  final pokemonInfoBox = PokemonSpecieBox(await Hive.openBox('pokemon_info'));
   sl.registerLazySingleton(() => regionalPokedexBox);
-  sl.registerLazySingleton(() => pokemonDetailBox);
+  sl.registerLazySingleton(() => pokemonSpecieBox);
+  sl.registerLazySingleton(() => pokemonInfoBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }
