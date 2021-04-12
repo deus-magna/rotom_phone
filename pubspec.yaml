@@ -34,6 +34,8 @@ dependencies:
   hive_flutter: ^0.3.1
   # Para cachear las imagenes
   cached_network_image: ^2.5.0
+   # imagenes SVG
+  flutter_svg: ^0.19.2
 
 
 dev_dependencies:
@@ -52,6 +54,7 @@ flutter:
     - assets/images/pokeball_filled.png
     - assets/images/rotom_phone_icon.png
     - assets/images/pokeball_header.png
+    - assets/images/types/poison.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

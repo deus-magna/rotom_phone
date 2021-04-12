@@ -161,8 +161,10 @@ class _PokemonHeadInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typeIndicator =
-        types.map((type) => TypeIndicator(name: type.name)).toList();
+    final typeIndicator = types
+        .map((type) => TypeButton(type.name.enumFromString(Type.values))
+            .build(context: context, onPressed: () => print('${type.url}')))
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +175,9 @@ class _PokemonHeadInfo extends StatelessWidget {
           style: TextStyle(
               color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        ...typeIndicator
+        Row(
+          children: typeIndicator,
+        )
       ],
     );
   }
