@@ -67,6 +67,7 @@ class _PokedexListState extends State<PokedexList> {
                 Row(
                   children: [
                     _OfficialArtwork(
+                      tag: _localPokedexEntries[index].id,
                       artwork: _localPokedexEntries[index].officialArtwork,
                     ),
                     _PokemonName(name: _localPokedexEntries[index].name),
@@ -118,18 +119,23 @@ class _OfficialArtwork extends StatelessWidget {
   const _OfficialArtwork({
     Key key,
     @required this.artwork,
+    @required this.tag,
   }) : super(key: key);
 
   final String artwork;
+  final int tag;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-      child: FadeInImage(
-          placeholder: AssetImage('assets/images/white_pokeball.png'),
-          height: 60,
-          image: CachedNetworkImageProvider(artwork)),
+      child: Hero(
+        tag: tag,
+        child: FadeInImage(
+            placeholder: AssetImage('assets/images/white_pokeball.png'),
+            height: 60,
+            image: CachedNetworkImageProvider(artwork)),
+      ),
     );
   }
 }

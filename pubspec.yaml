@@ -55,6 +55,25 @@ flutter:
     - assets/images/rotom_phone_icon.png
     - assets/images/pokeball_header.png
     - assets/images/types/poison.svg
+    - assets/images/types/water.svg
+    - assets/images/types/grass.svg
+    - assets/images/types/bug.svg
+    - assets/images/types/dark.svg
+    - assets/images/types/dragon.svg
+    - assets/images/types/electric.svg
+    - assets/images/types/fairy.svg
+    - assets/images/types/fighting.svg
+    - assets/images/types/fire.svg
+    - assets/images/types/flying.svg
+    - assets/images/types/ghost.svg
+    - assets/images/types/ice.svg
+    - assets/images/types/ground.svg
+    - assets/images/types/normal.svg
+    - assets/images/types/steel.svg
+    - assets/images/types/psychic.svg
+    - assets/images/types/rock.svg
+
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

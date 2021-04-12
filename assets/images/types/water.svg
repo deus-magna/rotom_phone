@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <filter id="Rectangle" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#559edf" flood-opacity="0.702"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Types_Water" data-name="Types/Water" transform="translate(15 15)">
+    <g id="Group">
+      <g transform="matrix(1, 0, 0, 1, -15, -15)" filter="url(#Rectangle)">
+        <rect id="Rectangle-2" data-name="Rectangle" width="30" height="30" rx="15" transform="translate(15 15)" fill="none"/>
+      </g>
+      <path id="Oval_5" data-name="Oval 5" d="M5,15a5,5,0,0,1-5-4.982L4.549.518a.5.5,0,0,1,.9,0L10,10.019A5,5,0,0,1,5,15ZM2.064,10.038a4,4,0,0,0,.1,1.474,2.517,2.517,0,0,0,2,1.891,4.212,4.212,0,0,0,.9.1,4.1,4.1,0,0,0,3.078-1.474l-.01,0a7.435,7.435,0,0,1-2.39.442,4.223,4.223,0,0,1-1.311-.192A4.284,4.284,0,0,1,2.064,10.038Z" transform="translate(10 8)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
