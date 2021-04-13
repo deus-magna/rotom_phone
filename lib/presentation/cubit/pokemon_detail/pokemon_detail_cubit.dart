@@ -8,6 +8,12 @@ import 'package:rotom_phone/domain/usercases/pokedex/get_pokemon_detail.dart';
 
 part 'pokemon_detail_state.dart';
 
+class PokemonMenuCubit extends Cubit<int> {
+  PokemonMenuCubit() : super(0);
+
+  onItemChanged(int index) => emit(index);
+}
+
 class PokemonDetailCubit extends Cubit<PokemonDetailState> {
   final GetPokemonDetails getPokemonDetail;
 

@@ -4,10 +4,12 @@ import 'package:rotom_phone/core/framework/colors.dart';
 
 class PokemonMenu extends StatefulWidget {
   final int initialIndex;
+  final Function(int) onItemChanged;
 
   const PokemonMenu({
     Key key,
     this.initialIndex = 0,
+    this.onItemChanged,
   }) : super(key: key);
 
   @override
@@ -31,68 +33,79 @@ class _PokemonMenuState extends State<PokemonMenu> {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 25),
+      child: Stack(
+        children: [
+          PokemonMenuBackground(),
+          _buildPokemonMenuItems(MediaQuery.of(context).size),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPokemonMenuItems(Size size) {
+    return Container(
+      width: size.width * 0.63,
+      height: size.height * 0.058,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+            _items.length,
+            (index) => index == _currentIndex
+                ? _buildSelectedButton(index)
+                : _buildButton(index)),
+      ),
+    );
+  }
+
+  Widget _buildButton(int index) => GestureDetector(
+        onTap: () => _changeIndex(index),
+        child: SvgPicture.asset(
+          _items[index],
+        ),
+      );
+
+  Widget _buildSelectedButton(int index) => SvgPicture.asset(
+        _items[index],
+        height: 30,
+        color: Colors.black,
+      );
+
+  _changeIndex(int index) {
+    setState(() => _currentIndex = index);
+    widget.onItemChanged(index);
+  }
+}
+
+class PokemonMenuBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-          child: ClipPath(
-            clipper: PokemonMenuClipper(),
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-              color: secondary,
-              child: _buildSelectedButton(_currentIndex),
-            ),
+        ClipPath(
+          clipper: BackMenuClipper(),
+          child: Container(
+            width: size.width * 0.84,
+            height: size.height * 0.058,
+            color: secondary,
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 110),
-          child: ClipPath(
-            clipper: MyCustomClipper(),
-            child: Container(
-              color: primary,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                    _items.length,
-                    (index) => index == _currentIndex
-                        ? _buildSelectedButton(index)
-                        : _buildButton(index)),
-              ),
-            ),
+        ClipPath(
+          clipper: FrontMenuClipper(),
+          child: Container(
+            width: size.width * 0.63,
+            height: size.height * 0.058,
+            color: primary,
           ),
         ),
       ],
     );
   }
-
-  Widget _buildButton(int index) {
-    return GestureDetector(
-      onTap: () => _changeIndex(index),
-      child: SvgPicture.asset(
-        _items[index],
-      ),
-    );
-  }
-
-  Widget _buildSelectedButton(int index) {
-    return SvgPicture.asset(
-      _items[index],
-      height: 30,
-      color: Colors.black,
-    );
-  }
-
-  _changeIndex(int index) {
-    print('Change Index');
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 }
 
-class MyCustomClipper extends CustomClipper<Path> {
+class FrontMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
@@ -162,7 +175,7 @@ class MyCustomClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }
 
-class PokemonMenuClipper extends CustomClipper<Path> {
+class BackMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();

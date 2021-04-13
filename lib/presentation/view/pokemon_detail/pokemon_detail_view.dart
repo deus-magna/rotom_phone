@@ -27,8 +27,13 @@ class PokemonDetailView extends StatelessWidget {
         backgroundColor: primary,
         elevation: 0,
       ),
-      body: BlocProvider(
-        create: (_) => sl<PokemonDetailCubit>()..init(entryNumber),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => sl<PokemonDetailCubit>()..init(entryNumber),
+          ),
+          BlocProvider(create: (_) => PokemonMenuCubit()),
+        ],
         child: BlocBuilder<PokemonDetailCubit, PokemonDetailState>(
           builder: (context, state) {
             if (state is PokemonDetailInitial) {
@@ -46,10 +51,11 @@ class PokemonDetailView extends StatelessWidget {
                 ),
               );
             } else if (state is PokemonDetailLoaded) {
+              final pokemonDetail = state.pokemonDetail;
               return Column(
                 children: [
                   PokedexHeader(
-                    child: PokemonDetailHeader(pokemon: state.pokemonDetail),
+                    child: PokemonDetailHeader(pokemon: pokemonDetail),
                     height: size.height * 0.25,
                     backgroundWidget: Positioned(
                       top: -40,
@@ -60,10 +66,40 @@ class PokemonDetailView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  PokemonMenu(),
-                  PokedexEntry(
-                    entries:
-                        state.pokemonDetail.pokemonSpecie.flavorTextEntries,
+                  PokemonMenu(onItemChanged: (index) {
+                    context.read<PokemonMenuCubit>().onItemChanged(index);
+                  }),
+                  BlocBuilder<PokemonMenuCubit, int>(
+                    builder: (context, state) {
+                      print('INDEX: $state');
+                      return IndexedStack(
+                        index: state,
+                        children: [
+                          Container(
+                            height: 200,
+                            child: PokedexEntry(
+                              entries:
+                                  pokemonDetail.pokemonSpecie.flavorTextEntries,
+                            ),
+                          ),
+                          Container(
+                            color: Colors.green,
+                            height: 200,
+                            width: 100,
+                          ),
+                          Container(
+                            color: Colors.yellow,
+                            height: 200,
+                            width: 100,
+                          ),
+                          Container(
+                            color: Colors.orange,
+                            height: 200,
+                            width: 100,
+                          )
+                        ],
+                      );
+                    },
                   ),
                 ],
               );
@@ -222,23 +258,21 @@ class PokedexEntry extends StatelessWidget {
     final entriesString =
         entries.where((entry) => entry.language.name == 'en').toList();
 
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(20),
-        child: PageView.builder(
-          itemCount: entriesString.length,
-          itemBuilder: (context, index) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(entriesString[index]?.version?.name ?? 'unknown'),
-              SizedBox(height: 10),
-              Text(
-                entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
-                    'unknown',
-                maxLines: 4,
-              ),
-            ],
-          ),
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: PageView.builder(
+        itemCount: entriesString.length,
+        itemBuilder: (context, index) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(entriesString[index]?.version?.name ?? 'unknown'),
+            SizedBox(height: 10),
+            Text(
+              entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
+                  'unknown',
+              maxLines: 4,
+            ),
+          ],
         ),
       ),
     );
