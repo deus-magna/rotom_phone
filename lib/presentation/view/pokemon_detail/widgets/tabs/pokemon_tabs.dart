@@ -4,12 +4,13 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/pokemon_menu/pokemon_menu.dart';
+import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/base_info_tab.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/evolutions_tab.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/moves_tab.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/stats_tab.dart';
 
-class PokemonDetailTabs extends StatelessWidget {
-  const PokemonDetailTabs({
+class PokemonTabs extends StatelessWidget {
+  const PokemonTabs({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
@@ -29,12 +30,7 @@ class PokemonDetailTabs extends StatelessWidget {
             return IndexedStack(
               index: state,
               children: [
-                Container(
-                  height: 200,
-                  child: PokedexEntry(
-                    entries: pokemon.pokemonSpecie.flavorTextEntries,
-                  ),
-                ),
+                BaseInfoTab(pokemon: pokemon),
                 StatsTab(),
                 MovesTab(),
                 EvolutionsTab(),
@@ -43,36 +39,6 @@ class PokemonDetailTabs extends StatelessWidget {
           },
         ),
       ],
-    );
-  }
-}
-
-class PokedexEntry extends StatelessWidget {
-  final List<FlavorTextEntry> entries;
-
-  const PokedexEntry({Key key, @required this.entries}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    final entriesString =
-        entries.where((entry) => entry.language.name == 'en').toList();
-
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: PageView.builder(
-        itemCount: entriesString.length,
-        itemBuilder: (context, index) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(entriesString[index]?.version?.name ?? 'unknown'),
-            SizedBox(height: 10),
-            Text(
-              entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
-                  'unknown',
-              maxLines: 4,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -132,15 +132,22 @@ class _StadiumType extends StatelessWidget {
       shape: StadiumBorder(),
     );
     final Widget svg = SvgPicture.asset('assets/images/types/$name.svg');
-    return ElevatedButton(
-      style: raisedButtonStyle,
-      onPressed: onPressed,
-      child: Row(
-        children: [
-          svg,
-          SizedBox(width: 5),
-          Text(name),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: ElevatedButton(
+        style: raisedButtonStyle,
+        onPressed: onPressed,
+        child: Row(
+          children: [
+            svg,
+            SizedBox(width: 5),
+            Text(
+              name.toUpperCase(),
+              style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(width: 5),
+          ],
+        ),
       ),
     );
   }
