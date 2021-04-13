@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
 import 'package:rotom_phone/injector/injection_container.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
-import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/pokemon_menu.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_header.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
 import '../../../core/extensions/string_extension.dart';
+import 'widgets/tabs/pokemon_detail_tabs.dart';
 
 class PokemonDetailView extends StatelessWidget {
   @override
@@ -66,41 +65,7 @@ class PokemonDetailView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  PokemonMenu(onItemChanged: (index) {
-                    context.read<PokemonMenuCubit>().onItemChanged(index);
-                  }),
-                  BlocBuilder<PokemonMenuCubit, int>(
-                    builder: (context, state) {
-                      print('INDEX: $state');
-                      return IndexedStack(
-                        index: state,
-                        children: [
-                          Container(
-                            height: 200,
-                            child: PokedexEntry(
-                              entries:
-                                  pokemonDetail.pokemonSpecie.flavorTextEntries,
-                            ),
-                          ),
-                          Container(
-                            color: Colors.green,
-                            height: 200,
-                            width: 100,
-                          ),
-                          Container(
-                            color: Colors.yellow,
-                            height: 200,
-                            width: 100,
-                          ),
-                          Container(
-                            color: Colors.orange,
-                            height: 200,
-                            width: 100,
-                          )
-                        ],
-                      );
-                    },
-                  ),
+                  PokemonDetailTabs(pokemon: pokemonDetail),
                 ],
               );
             } else if (state is PokemonDetailError) {
@@ -245,36 +210,6 @@ class _PokemonHeadInfo extends StatelessWidget {
         SizedBox(height: 10),
         Row(children: pokemonTypes)
       ],
-    );
-  }
-}
-
-class PokedexEntry extends StatelessWidget {
-  final List<FlavorTextEntry> entries;
-
-  const PokedexEntry({Key key, @required this.entries}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    final entriesString =
-        entries.where((entry) => entry.language.name == 'en').toList();
-
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: PageView.builder(
-        itemCount: entriesString.length,
-        itemBuilder: (context, index) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(entriesString[index]?.version?.name ?? 'unknown'),
-            SizedBox(height: 10),
-            Text(
-              entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
-                  'unknown',
-              maxLines: 4,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
