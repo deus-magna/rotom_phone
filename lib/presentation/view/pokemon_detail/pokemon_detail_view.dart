@@ -7,9 +7,10 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
 import 'package:rotom_phone/injector/injection_container.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
+import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/pokemon_menu.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_header.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
-import '../../core/extensions/string_extension.dart';
+import '../../../core/extensions/string_extension.dart';
 
 class PokemonDetailView extends StatelessWidget {
   @override
@@ -59,6 +60,7 @@ class PokemonDetailView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  PokemonMenu(),
                   PokedexEntry(
                     entries:
                         state.pokemonDetail.pokemonSpecie.flavorTextEntries,
