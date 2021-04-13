@@ -72,6 +72,8 @@ flutter:
     - assets/images/types/steel.svg
     - assets/images/types/psychic.svg
     - assets/images/types/rock.svg
+    - assets/images/about_menu.svg
+    - assets/images/stats_menu.svg
 
     
 
