@@ -42,6 +42,12 @@ class PokemonInfo extends Equatable {
   final List<Type> types;
   final int weight;
 
+  List<ResourcePath> get getTypes =>
+      types.map((element) => element.type).toList();
+
+  double get getWeight => weight / 10;
+  double get getHeight => height / 10;
+
   @override
   List<Object> get props => [
         abilities,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
-import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
+import 'package:rotom_phone/presentation/widgets/pokemon_types_row.dart';
 import '../../../../../core/extensions/string_extension.dart';
 
 class PokemonHeaderInfo extends StatelessWidget {
@@ -19,13 +19,6 @@ class PokemonHeaderInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonTypes = types
-        .map((type) => PokemonTypeButton(
-              type: type,
-              onPressed: () => print(type.url),
-            ))
-        .toList();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -49,7 +42,7 @@ class PokemonHeaderInfo extends StatelessWidget {
               color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-        Row(children: pokemonTypes)
+        PokemonTypesRow(types: types),
       ],
     );
   }

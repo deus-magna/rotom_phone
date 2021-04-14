@@ -16,8 +16,7 @@ class PokemonHeader extends StatelessWidget {
 
     final String artwork =
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.pokemonSpecie.id}.png";
-    final types =
-        pokemon.pokemonInfo.types.map((element) => element.type).toList();
+    final types = pokemon.pokemonInfo.getTypes;
     final genus = pokemon.pokemonSpecie.genera
         .where((genera) => genera.language.name == 'en')
         .toList()

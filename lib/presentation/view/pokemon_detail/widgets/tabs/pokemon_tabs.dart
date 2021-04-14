@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/pokemon_menu/pokemon_menu.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/base_info_tab.dart';

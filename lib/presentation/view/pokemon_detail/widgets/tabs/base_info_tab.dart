@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
-import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
+import 'package:rotom_phone/presentation/widgets/pokemon_types_row.dart';
+
+import '../pokedex_entry.dart';
 
 class BaseInfoTab extends StatelessWidget {
   final Pokemon pokemon;
@@ -12,79 +14,88 @@ class BaseInfoTab extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final types =
-        pokemon.pokemonInfo.types.map((element) => element.type).toList();
-    final pokemonTypes = types
-        .map((type) => PokemonTypeButton(
-              type: type,
-              onPressed: () => print(type.url),
-              form: ButtonForm.Stadium,
-            ))
-        .toList();
     return Container(
       child: Column(
         children: [
           PokedexEntry(entries: pokemon.pokemonSpecie.flavorTextEntries),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: pokemonTypes),
+          PokemonTypesRow(
+            types: pokemon.pokemonInfo.getTypes,
+            buttonsForm: ButtonForm.Stadium,
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          AboutRow(
+              id: pokemon.pokemonSpecie.getPokemonId(),
+              weight: pokemon.pokemonInfo.getWeight,
+              height: pokemon.pokemonInfo.getHeight)
         ],
       ),
     );
   }
 }
 
-class PokedexEntry extends StatefulWidget {
-  final List<FlavorTextEntry> entries;
+class AboutRow extends StatelessWidget {
+  final String id;
+  final double weight;
+  final double height;
 
-  const PokedexEntry({
+  const AboutRow({
     Key key,
-    @required this.entries,
+    @required this.id,
+    @required this.weight,
+    @required this.height,
   }) : super(key: key);
 
   @override
-  _PokedexEntryState createState() => _PokedexEntryState();
-}
-
-class _PokedexEntryState extends State<PokedexEntry> {
-  String version = '';
-  @override
   Widget build(BuildContext context) {
-    final entriesString =
-        widget.entries.where((entry) => entry.language.name == 'en').toList();
-
     return Container(
       margin: EdgeInsets.all(20),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(version),
+          AboutView(
+            id: id.substring(1),
+            label: 'National N',
           ),
-          Container(
-            height: 70,
-            child: PageView.builder(
-              itemCount: entriesString.length,
-              itemBuilder: (context, index) {
-                version = entriesString[index]?.version?.name ?? 'unknown';
-                return Center(
-                  child: Text(
-                    entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
-                        'unknown',
-                    maxLines: 4,
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            ),
+          AboutView(
+            id: '$height M',
+            label: 'Height',
           ),
+          AboutView(
+            id: '$weight KG',
+            label: 'Weight',
+          )
         ],
       ),
+    );
+  }
+}
+
+class AboutView extends StatelessWidget {
+  const AboutView({
+    Key key,
+    @required this.id,
+    @required this.label,
+  }) : super(key: key);
+
+  final String id;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          id,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF8C8B90)),
+        ),
+      ],
     );
   }
 }
