@@ -17,16 +17,16 @@ class BaseInfoTab extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          PokedexEntry(entries: pokemon.pokemonSpecie.flavorTextEntries),
+          PokedexEntry(entries: pokemon.specie.flavorTextEntries),
           PokemonTypesRow(
-            types: pokemon.pokemonInfo.getTypes,
+            types: pokemon.info.getTypes,
             buttonsForm: ButtonForm.Stadium,
             mainAxisAlignment: MainAxisAlignment.center,
           ),
           AboutRow(
-              id: pokemon.pokemonSpecie.getPokemonId(),
-              weight: pokemon.pokemonInfo.getWeight,
-              height: pokemon.pokemonInfo.getHeight)
+              id: pokemon.specie.getPokemonId(),
+              weight: pokemon.info.getWeight,
+              height: pokemon.info.getHeight)
         ],
       ),
     );

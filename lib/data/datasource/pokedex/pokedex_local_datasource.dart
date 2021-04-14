@@ -51,11 +51,11 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
 
   @override
   Future<void> cachePokemonDetail(PokemonModel pokemonModel) async {
-    await pokemonSpecieBox.put(pokemonModel.pokemonSpecie.id,
-        pokemonSpecieModelToJson(pokemonModel.pokemonSpecie));
+    await pokemonSpecieBox.put(
+        pokemonModel.specie.id, pokemonSpecieModelToJson(pokemonModel.specie));
 
-    await pokemonInfoBox.put(pokemonModel.pokemonInfo.id,
-        pokemonInfoModelToJson(pokemonModel.pokemonInfo));
+    await pokemonInfoBox.put(
+        pokemonModel.info.id, pokemonInfoModelToJson(pokemonModel.info));
     return Future.value(true);
   }
 

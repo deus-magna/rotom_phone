@@ -3,12 +3,12 @@ import 'package:rotom_phone/data/model/pokedex/pokemon_specie_model.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 
 class PokemonModel extends Pokemon {
-  final PokemonInfoModel pokemonInfo;
-  final PokemonSpecieModel pokemonSpecie;
+  final PokemonInfoModel info;
+  final PokemonSpecieModel specie;
 
-  PokemonModel(this.pokemonInfo, this.pokemonSpecie)
+  PokemonModel(this.info, this.specie)
       : super(
-          pokemonInfo: pokemonInfo,
-          pokemonSpecie: pokemonSpecie,
+          info: info,
+          specie: specie,
         );
 }

@@ -15,9 +15,9 @@ class PokemonHeader extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     final String artwork =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.pokemonSpecie.id}.png";
-    final types = pokemon.pokemonInfo.getTypes;
-    final genus = pokemon.pokemonSpecie.genera
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.specie.id}.png";
+    final types = pokemon.info.getTypes;
+    final genus = pokemon.specie.genera
         .where((genera) => genera.language.name == 'en')
         .toList()
         .first
@@ -31,14 +31,14 @@ class PokemonHeader extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: size.height * 0.05),
             child: OfficialArtworkView(
-                artwork: artwork, height: 150, tag: pokemon.pokemonSpecie.id),
+                artwork: artwork, height: 150, tag: pokemon.specie.id),
           ),
           Positioned(
             top: 0,
             left: 20,
             child: PokemonHeaderInfo(
-              name: pokemon.pokemonSpecie.name,
-              id: pokemon.pokemonSpecie.getPokemonId(),
+              name: pokemon.specie.name,
+              id: pokemon.specie.getPokemonId(),
               genus: genus,
               types: types,
             ),
