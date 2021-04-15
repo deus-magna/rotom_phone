@@ -124,6 +124,7 @@ class Stat extends StatelessWidget {
     if (value > 80 && value <= 100) return Colors.yellow;
     if (value > 100 && value <= 140) return Colors.lightGreen;
     if (value > 140) return Colors.green;
+    return Colors.red;
   }
 
   @override

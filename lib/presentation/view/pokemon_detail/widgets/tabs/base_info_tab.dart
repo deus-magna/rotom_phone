@@ -18,7 +18,7 @@ class BaseInfoTab extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          PokedexEntry(entries: pokemon.pokedexEntries('en')),
+          PokedexEntry(entries: pokemon.pokedexEntries('es')),
           PokemonTypesRow(
             types: pokemon.info.getTypes,
             buttonsForm: ButtonForm.Stadium,

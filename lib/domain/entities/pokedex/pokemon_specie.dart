@@ -129,9 +129,20 @@ class FlavorTextEntry extends Equatable {
   final ResourcePath language;
   final ResourcePath version;
 
-  String get versionAcronym => version.name.length >= 2
-      ? version.name.substring(0, 2).capitalize()
-      : version.name.toUpperCase();
+  String get versionAcronym {
+    if (version.name.length >= 2) {
+      if (version.name.contains('-')) {
+        final names = version.name.split('-');
+        String versionAcronym = '';
+        for (var name in names) {
+          versionAcronym += name.substring(0, 1);
+        }
+        return versionAcronym.capitalize();
+      }
+      return version.name.substring(0, 2).capitalize();
+    }
+    return version.name.toUpperCase();
+  }
 
   @override
   List<Object> get props => [flavorText, language, version];
