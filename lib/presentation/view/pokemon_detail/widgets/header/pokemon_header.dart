@@ -24,16 +24,16 @@ class PokemonHeader extends StatelessWidget {
         .genus;
 
     return Container(
-      margin: EdgeInsets.only(top: 90),
+      margin: EdgeInsets.only(top: 100),
       width: double.infinity,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: size.height * 0.05),
+            padding: EdgeInsets.only(top: size.height * 0.04),
             child: OfficialArtworkView(
                 artwork: artwork,
-                height: size.height * 0.184,
+                height: size.height * 0.1477,
                 tag: pokemon.specie.id),
           ),
           Positioned(

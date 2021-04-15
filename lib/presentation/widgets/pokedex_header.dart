@@ -23,8 +23,10 @@ class PokedexHeader extends StatelessWidget {
         PokedexHeaderBackground(
           innerHeight: innerHeight,
           outerHeight: outerHeight,
+          background: backgroundWidget != null
+              ? backgroundWidget
+              : _DefaultBackgroundImage(),
         ),
-        backgroundWidget != null ? backgroundWidget : _DefaultBackgroundImage(),
         child,
       ],
     );

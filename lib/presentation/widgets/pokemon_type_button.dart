@@ -128,7 +128,7 @@ class _StadiumType extends StatelessWidget {
       onPrimary: Colors.black87,
       primary: color,
       minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       shape: StadiumBorder(),
     );
     final Widget svg = SvgPicture.asset('assets/images/types/$name.svg');
@@ -140,7 +140,6 @@ class _StadiumType extends StatelessWidget {
         child: Row(
           children: [
             svg,
-            SizedBox(width: 5),
             Text(
               name.toUpperCase(),
               style: TextStyle(color: Colors.white),

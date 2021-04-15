@@ -57,11 +57,14 @@ class PokemonDetailView extends StatelessWidget {
                       outerHeight: size.height * 0.33,
                       height: size.height * 0.25,
                       backgroundWidget: Positioned(
-                        top: -40,
-                        right: 0,
-                        child: Image.asset(
-                          'assets/images/pokeball_header.png',
-                          height: size.height * 0.3325,
+                        top: 120,
+                        right: -10,
+                        child: RotationTransition(
+                          turns: AlwaysStoppedAnimation(-30 / 365),
+                          child: Image.asset(
+                            'assets/images/pokeball_header.png',
+                            height: size.height * 0.25,
+                          ),
                         ),
                       ),
                     ),
