@@ -1,7 +1,7 @@
-<svg id="Stats" xmlns="http://www.w3.org/2000/svg" width="28" height="26.809" viewBox="0 0 28 26.809">
-  <path id="Trazado_16" data-name="Trazado 16" d="M5288.372-773.893l-5.212,3.168v6.245l5.212,2.97,5.017-2.97-5.017-2.774Z" transform="translate(-5273.942 781.178)" fill="#fff" stroke="#fff" stroke-width="1"/>
-  <g id="Polígono_1" data-name="Polígono 1" transform="translate(9.218) rotate(30)" fill="none">
-    <path d="M16.266,0l5.422,9.218-5.422,9.218H5.422L0,9.218,5.422,0Z" stroke="none"/>
-    <path d="M 5.994027137756348 1 L 1.160173416137695 9.217549324035645 L 5.994027137756348 17.43509864807129 L 15.69432258605957 17.43509864807129 L 20.52816772460938 9.217549324035645 L 15.69432258605957 1 L 5.994027137756348 1 M 5.422084808349609 0 L 16.26626586914062 0 L 21.68834495544434 9.217549324035645 L 16.26626586914062 18.43509864807129 L 5.422084808349609 18.43509864807129 L -3.814697265625e-06 9.217549324035645 L 5.422084808349609 0 Z" stroke="none" fill="#fff"/>
+<svg id="Componente_30_2" data-name="Componente 30 – 2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_698" data-name="Grupo 698" transform="translate(-5277.76 351.549)">
+    <path id="Trazado_25" data-name="Trazado 25" d="M5289.062-348.549l8.224,5.054v8.993l-8.224,4.793-8.3-4.793v-8.993Z" fill="none" stroke="#fff" stroke-width="1"/>
+    <path id="Trazado_26" data-name="Trazado 26" d="M5284.527-336.552v-5.327l4.466-2.28v5.394l4.243,2.412-4.136,2.494Z" fill="#fff" stroke="#fff" stroke-width="1"/>
   </g>
+  <rect id="Rectángulo_468" data-name="Rectángulo 468" width="24" height="24" fill="none"/>
 </svg>

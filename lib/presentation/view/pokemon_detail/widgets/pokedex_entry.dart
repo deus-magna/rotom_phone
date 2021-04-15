@@ -17,9 +17,6 @@ class _PokedexEntryState extends State<PokedexEntry> {
   String version = '';
   @override
   Widget build(BuildContext context) {
-    final entriesString =
-        widget.entries.where((entry) => entry.language.name == 'en').toList();
-
     return Container(
       margin: EdgeInsets.all(20),
       child: Column(
@@ -36,12 +33,12 @@ class _PokedexEntryState extends State<PokedexEntry> {
           Container(
             height: 70,
             child: PageView.builder(
-              itemCount: entriesString.length,
+              itemCount: widget.entries.length,
               itemBuilder: (context, index) {
-                version = entriesString[index]?.version?.name ?? 'unknown';
+                version = widget.entries[index]?.version?.name ?? 'unknown';
                 return Center(
                   child: Text(
-                    entriesString[index]?.flavorText?.replaceAll('\n', ' ') ??
+                    widget.entries[index]?.flavorText?.replaceAll('\n', ' ') ??
                         'unknown',
                     maxLines: 4,
                     textAlign: TextAlign.center,

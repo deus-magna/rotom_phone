@@ -42,6 +42,10 @@ class PokemonSpecie extends Equatable {
             : '#${this.id}';
   }
 
+  List<FlavorTextEntry> pokedexEntries(String language) => flavorTextEntries
+      .where((entry) => entry.language.name == language)
+      .toList();
+
   final int baseHappiness;
   final int captureRate;
   final ResourcePath color;

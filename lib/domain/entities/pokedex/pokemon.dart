@@ -8,6 +8,9 @@ class Pokemon extends Equatable {
 
   Pokemon({this.specie, this.info});
 
+  List<FlavorTextEntry> pokedexEntries(String language) =>
+      specie.pokedexEntries(language);
+
   @override
   List<Object> get props => [info, specie];
 }

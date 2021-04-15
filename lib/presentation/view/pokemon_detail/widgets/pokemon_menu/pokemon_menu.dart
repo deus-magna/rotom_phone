@@ -21,7 +21,7 @@ class _PokemonMenuState extends State<PokemonMenu> {
   final List<String> _items = [
     'assets/images/about_menu.svg',
     'assets/images/stats_menu.svg',
-    'assets/images/about_menu.svg',
+    'assets/images/moves_menu.svg',
     'assets/images/about_menu.svg'
   ];
 

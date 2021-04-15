@@ -58,7 +58,7 @@ class PokedexView extends StatelessWidget {
       BuildContext context, List<LocalPokedexEntryModel> pokedexEntries) {
     return Column(
       children: [
-        _pokemonHeader(context),
+        _pokedexHeader(context),
         Expanded(
           child: PokedexList(
             pokedexEntries: pokedexEntries,
@@ -71,9 +71,11 @@ class PokedexView extends StatelessWidget {
     );
   }
 
-  Widget _pokemonHeader(BuildContext context) {
+  Widget _pokedexHeader(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return PokedexHeader(
+      innerHeight: size.height * 0.29,
+      outerHeight: size.height * 0.33,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         color: Colors.transparent,

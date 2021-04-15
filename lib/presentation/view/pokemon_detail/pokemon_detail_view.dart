@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/injector/injection_container.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/header/pokemon_header.dart';
@@ -20,9 +19,10 @@ class PokemonDetailView extends StatelessWidget {
               icon: Icon(Icons.favorite_border_rounded),
               onPressed: () => print('Add to favorite')),
         ],
-        backgroundColor: primary,
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: MultiBlocProvider(
           providers: [
@@ -53,13 +53,15 @@ class PokemonDetailView extends StatelessWidget {
                   children: [
                     PokedexHeader(
                       child: PokemonHeader(pokemon: pokemonDetail),
+                      innerHeight: size.height * 0.29,
+                      outerHeight: size.height * 0.33,
                       height: size.height * 0.25,
                       backgroundWidget: Positioned(
                         top: -40,
-                        right: -20,
+                        right: 0,
                         child: Image.asset(
                           'assets/images/pokeball_header.png',
-                          height: 300,
+                          height: size.height * 0.3325,
                         ),
                       ),
                     ),
