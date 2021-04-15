@@ -1,5 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
+import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
+import '../../../../core/utils/pokemon_utils.dart' as pokemonUtils;
+
+class EntryVersion extends StatelessWidget {
+  final Color color;
+  final String name;
+
+  const EntryVersion({
+    Key key,
+    this.color = Colors.grey,
+    @required this.name,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(child: Text(name)),
+    );
+  }
+}
 
 class PokedexEntry extends StatefulWidget {
   final List<FlavorTextEntry> entries;
@@ -15,20 +41,29 @@ class PokedexEntry extends StatefulWidget {
 
 class _PokedexEntryState extends State<PokedexEntry> {
   String version = '';
+
+  List<FlavorTextEntry> get entries => widget.entries;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
+    final versions = entries
+        .map(
+          (entry) => EntryVersion(
+            name: entry.versionAcronym,
+            color: pokemonUtils.versionColor(entry.version.name),
+          ),
+        )
+        .toList();
+
+    return RoundedCard(
       child: Column(
         children: [
           Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10),
+            height: 50,
+            child: ListView(
+              children: versions,
+              scrollDirection: Axis.horizontal,
             ),
-            child: Text(version),
           ),
           Container(
             height: 70,

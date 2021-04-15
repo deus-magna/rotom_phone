@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../name.dart';
 import '../resource_path.dart';
+import '../../../core/extensions/string_extension.dart';
 
 class PokemonSpecie extends Equatable {
   PokemonSpecie({
@@ -127,6 +128,10 @@ class FlavorTextEntry extends Equatable {
   final String flavorText;
   final ResourcePath language;
   final ResourcePath version;
+
+  String get versionAcronym => version.name.length >= 2
+      ? version.name.substring(0, 2).capitalize()
+      : version.name.toUpperCase();
 
   @override
   List<Object> get props => [flavorText, language, version];
