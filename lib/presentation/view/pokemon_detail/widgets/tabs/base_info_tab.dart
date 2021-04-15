@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_types_row.dart';
+import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 import '../pokedex_entry.dart';
 
@@ -47,8 +48,7 @@ class AboutRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
+    return RoundedCard(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
