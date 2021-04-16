@@ -107,6 +107,37 @@ class _PokedexEntryState extends State<PokedexEntry> {
   }
 }
 
+class EntryVersionList extends StatelessWidget {
+  const EntryVersionList({
+    Key key,
+    @required this.entries,
+    this.onItemSelected,
+    this.selectedIndex = 0,
+  }) : super(key: key);
+
+  final List<FlavorTextEntry> entries;
+  final Function(int) onItemSelected;
+  final int selectedIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      height: 50,
+      child: ListView.builder(
+        itemCount: entries.length,
+        itemBuilder: (context, index) => EntryVersion(
+          name: entries[index].versionAcronym,
+          color: pokemonUtils.versionColor(entries[index].version.name),
+          isSelected: selectedIndex == index,
+          onTap: () => onItemSelected(index),
+        ),
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
+}
+
 class EntryVersion extends StatelessWidget {
   final Color color;
   final String name;
@@ -156,36 +187,5 @@ class EntryVersion extends StatelessWidget {
       default:
         return Colors.white;
     }
-  }
-}
-
-class EntryVersionList extends StatelessWidget {
-  const EntryVersionList({
-    Key key,
-    @required this.entries,
-    this.onItemSelected,
-    this.selectedIndex = 0,
-  }) : super(key: key);
-
-  final List<FlavorTextEntry> entries;
-  final Function(int) onItemSelected;
-  final int selectedIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      height: 50,
-      child: ListView.builder(
-        itemCount: entries.length,
-        itemBuilder: (context, index) => EntryVersion(
-          name: entries[index].versionAcronym,
-          color: pokemonUtils.versionColor(entries[index].version.name),
-          isSelected: selectedIndex == index,
-          onTap: () => onItemSelected(index),
-        ),
-        scrollDirection: Axis.horizontal,
-      ),
-    );
   }
 }

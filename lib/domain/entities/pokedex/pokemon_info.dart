@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
+import '../../../core/extensions/string_extension.dart';
 
 class PokemonInfo extends Equatable {
   PokemonInfo({
@@ -81,6 +82,8 @@ class Ability extends Equatable {
   final ResourcePath ability;
   final bool isHidden;
   final int slot;
+
+  String get name => ability.name.replaceAll('-', ' ').capitalize();
 
   @override
   List<Object> get props => [ability, isHidden, slot];

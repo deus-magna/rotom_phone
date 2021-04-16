@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rotom_phone/core/framework/colors.dart';
 import 'core/router/routing.dart';
 import 'injector/injection_container.dart' as di;
 
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rotom Phone',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        primaryColor: primary,
+        accentColor: primary,
+      ),
       darkTheme: ThemeData.dark(),
       initialRoute: '/pokedex',
       routes: getApplicationRoutes(),
