@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/domain/entities/pokedex/move_learn_method.dart';
+import 'enums.dart';
 import 'utils.dart' as utils;
 
 MoveLearnMethodType learnMethodType(String name) {
@@ -8,6 +9,10 @@ MoveLearnMethodType learnMethodType(String name) {
     MoveLearnMethodType.values,
     name?.toUpperCase()?.replaceAll('-', '_'),
   );
+}
+
+PokemonType pokemonType(String type) {
+  return utils.enumFromString(PokemonType.values, type);
 }
 
 Color versionColor(String version) {

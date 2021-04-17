@@ -1,28 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
-import '../../core/extensions/string_extension.dart';
-
-enum PokemonType {
-  Bug,
-  Dark,
-  Dragon,
-  Electric,
-  Fairy,
-  Fighting,
-  Fire,
-  Flying,
-  Ghost,
-  Grass,
-  Ground,
-  Ice,
-  Normal,
-  Poison,
-  Psychic,
-  Rock,
-  Steel,
-  Water,
-}
+import '../../core/utils/pokemon_utils.dart' as pokemonUtils;
 
 enum ButtonForm { Stadium, Circular }
 
@@ -39,7 +19,7 @@ class PokemonTypeButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final pokemonType = type.name.enumFromString(PokemonType.values);
+    final pokemonType = pokemonUtils.pokemonType(type.name);
 
     Color color = Color(0xFF000000);
 
