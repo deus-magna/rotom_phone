@@ -24,58 +24,58 @@ class PokemonTypeButton extends StatelessWidget {
     Color color = Color(0xFF000000);
 
     switch (pokemonType) {
-      case PokemonType.Grass:
+      case PokemonType.GRASS:
         color = Color(0xFF5DBE62);
         break;
-      case PokemonType.Poison:
+      case PokemonType.POISON:
         color = Color(0xFFB563CE);
         break;
-      case PokemonType.Water:
+      case PokemonType.WATER:
         color = Color(0xFF559EDF);
         break;
-      case PokemonType.Bug:
+      case PokemonType.BUG:
         color = Color(0xFF9DC130);
         break;
-      case PokemonType.Dark:
+      case PokemonType.DARK:
         color = Color(0xFF5F606D);
         break;
-      case PokemonType.Dragon:
+      case PokemonType.DRAGON:
         color = Color(0xFF0773C7);
         break;
-      case PokemonType.Electric:
+      case PokemonType.ELECTRIC:
         color = Color(0xFFEDD53F);
         break;
-      case PokemonType.Fairy:
+      case PokemonType.FAIRY:
         color = Color(0xFFEF97E6);
         break;
-      case PokemonType.Fighting:
+      case PokemonType.FIGHTING:
         color = Color(0xFFD94256);
         break;
-      case PokemonType.Fire:
+      case PokemonType.FIRE:
         color = Color(0xFFF8A54F);
         break;
-      case PokemonType.Flying:
+      case PokemonType.FLYING:
         color = Color(0xFF9BB4E8);
         break;
-      case PokemonType.Ghost:
+      case PokemonType.GHOST:
         color = Color(0xFF6970C5);
         break;
-      case PokemonType.Ground:
+      case PokemonType.GROUND:
         color = Color(0xFFD78555);
         break;
-      case PokemonType.Ice:
+      case PokemonType.ICE:
         color = Color(0xFF7ED4C9);
         break;
-      case PokemonType.Normal:
+      case PokemonType.NORMAL:
         color = Color(0xFF9A9DA1);
         break;
-      case PokemonType.Steel:
+      case PokemonType.STEEL:
         color = Color(0xFF5596A4);
         break;
-      case PokemonType.Psychic:
+      case PokemonType.PSYCHIC:
         color = Color(0xFFF87C7A);
         break;
-      case PokemonType.Rock:
+      case PokemonType.ROCK:
         color = Color(0xFFCEC18C);
         break;
       default:
