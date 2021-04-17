@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
 import '../../../core/extensions/string_extension.dart';
 import 'move_learn_method.dart';
@@ -49,6 +50,38 @@ class PokemonInfo extends Equatable {
 
   double get getWeight => weight / 10;
   double get getHeight => height / 10;
+
+  List<Move> getMovesByLearnMethod(MoveLearnMethodType method) {
+    final String version = 'x-y';
+    final filteredMoves = moves.where((move) {
+      print('MOVE: ${move.move.name}');
+      final versionGroupDetails = move.versionGroupDetails;
+      final data = versionGroupDetails.where((versionGroupDetail) {
+        if (versionGroupDetail.moveLearnMethod.name == method &&
+            versionGroupDetail.versionGroup.name == version) {
+          return true;
+        }
+        return false;
+      }).toList();
+      print('DATA: ${data.length}');
+      if (data.length > 0) {
+        return true;
+      }
+      return false;
+    }).toList();
+
+    final List<Move> theMoves = [];
+    for (var move in filteredMoves) {
+      for (var versionGroupDetail in move.versionGroupDetails) {
+        if (versionGroupDetail.moveLearnMethod.name == method &&
+            versionGroupDetail.versionGroup.name == version) {
+          theMoves.add(
+              Move(move: move.move, versionGroupDetails: [versionGroupDetail]));
+        }
+      }
+    }
+    return theMoves;
+  }
 
   @override
   List<Object> get props => [

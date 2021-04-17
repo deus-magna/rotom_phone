@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
+import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 
 class MovesTab extends StatelessWidget {
@@ -11,9 +12,11 @@ class MovesTab extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final moves = pokemon.info.moves;
+    final moves =
+        pokemon.info.getMovesByLearnMethod(MoveLearnMethodType.MACHINE);
+    print('LENGHT: ${moves.length}');
     return Container(
-      height: 300,
+      height: 500,
       child: ListView.builder(
         itemCount: moves.length,
         itemBuilder: (context, index) {
@@ -21,7 +24,14 @@ class MovesTab extends StatelessWidget {
             color: primary,
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            child: Text(moves[index].move.name),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(moves[index].move.name),
+                Text(
+                    'Lv. ${moves[index].versionGroupDetails.first.levelLearnedAt}'),
+              ],
+            ),
           );
         },
       ),
