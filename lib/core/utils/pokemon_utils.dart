@@ -6,7 +6,7 @@ import 'utils.dart' as utils;
 MoveLearnMethodType learnMethodType(String name) {
   return utils.enumFromString(
     MoveLearnMethodType.values,
-    name.toUpperCase().replaceAll('-', '_'),
+    name?.toUpperCase()?.replaceAll('-', '_'),
   );
 }
 
@@ -86,7 +86,6 @@ Color versionColor(String version) {
       return swordVersion;
     case 'shield':
       return shieldVersion;
-
     default:
       return Colors.grey;
   }
