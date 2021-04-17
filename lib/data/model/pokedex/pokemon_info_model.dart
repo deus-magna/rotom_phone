@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:rotom_phone/data/model/pokedex/move_learn_method_model.dart';
 import 'package:rotom_phone/data/model/resource_path_model.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon_info.dart';
 
@@ -244,7 +245,7 @@ class VersionGroupDetailModel extends VersionGroupDetail {
             versionGroup: versionGroup);
 
   final int levelLearnedAt;
-  final ResourcePathModel moveLearnMethod;
+  final MoveLearnMethodModel moveLearnMethod;
   final ResourcePathModel versionGroup;
 
   factory VersionGroupDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -253,7 +254,7 @@ class VersionGroupDetailModel extends VersionGroupDetail {
             json["level_learned_at"] == null ? null : json["level_learned_at"],
         moveLearnMethod: json["move_learn_method"] == null
             ? null
-            : ResourcePathModel.fromJson(json["move_learn_method"]),
+            : MoveLearnMethodModel.fromJson(json["move_learn_method"]),
         versionGroup: json["version_group"] == null
             ? null
             : ResourcePathModel.fromJson(json["version_group"]),

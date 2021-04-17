@@ -31,7 +31,7 @@ class PokemonTabs extends StatelessWidget {
               children: [
                 BaseInfoTab(pokemon: pokemon),
                 StatsTab(pokemon: pokemon),
-                MovesTab(),
+                MovesTab(pokemon: pokemon),
                 EvolutionsTab(),
               ],
             );

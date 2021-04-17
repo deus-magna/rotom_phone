@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
 import '../../../core/extensions/string_extension.dart';
+import 'move_learn_method.dart';
 
 class PokemonInfo extends Equatable {
   PokemonInfo({
@@ -123,7 +124,7 @@ class VersionGroupDetail extends Equatable {
   });
 
   final int levelLearnedAt;
-  final ResourcePath moveLearnMethod;
+  final MoveLearnMethod moveLearnMethod;
   final ResourcePath versionGroup;
 
   @override
