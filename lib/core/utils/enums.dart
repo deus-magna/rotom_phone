@@ -18,3 +18,16 @@ enum PokemonType {
   Steel,
   Water,
 }
+
+enum MoveLearnMethodType {
+  LEVEL_UP,
+  EGG,
+  TUTOR,
+  MACHINE,
+  STADIUM_SURFING_PIKACHU,
+  LIGHT_BALL_EGG,
+  COLOSSEUM_PURIFICATION,
+  XD_SHADOW,
+  XD_PURIFICATION,
+  FORM_CHANGE,
+}

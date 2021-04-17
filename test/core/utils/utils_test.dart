@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rotom_phone/domain/entities/pokedex/move_learn_method.dart';
+import 'package:rotom_phone/core/utils/enums.dart';
 import '../../../lib/core/utils/utils.dart' as utils;
 
 main() {

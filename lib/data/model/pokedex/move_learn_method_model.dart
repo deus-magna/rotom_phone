@@ -1,3 +1,4 @@
+import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/core/utils/pokemon_utils.dart';
 import 'package:rotom_phone/domain/entities/pokedex/move_learn_method.dart';
 
