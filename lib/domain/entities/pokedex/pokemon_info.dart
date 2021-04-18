@@ -54,7 +54,6 @@ class PokemonInfo extends Equatable {
   List<Move> getMovesByLearnMethod(MoveLearnMethodType method) {
     final String version = 'x-y';
     final filteredMoves = moves.where((move) {
-      print('MOVE: ${move.move.name}');
       final versionGroupDetails = move.versionGroupDetails;
       final data = versionGroupDetails.where((versionGroupDetail) {
         if (versionGroupDetail.moveLearnMethod.name == method &&
@@ -63,7 +62,7 @@ class PokemonInfo extends Equatable {
         }
         return false;
       }).toList();
-      print('DATA: ${data.length}');
+
       if (data.length > 0) {
         return true;
       }

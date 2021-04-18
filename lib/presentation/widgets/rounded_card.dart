@@ -32,3 +32,19 @@ class RoundedCard extends StatelessWidget {
     );
   }
 }
+
+class RoundedCardTitle extends StatelessWidget {
+  final String title;
+  const RoundedCardTitle({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+    );
+  }
+}

@@ -15,7 +15,7 @@ class AbilitiesCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _CardTitle(title: 'Abilities'),
+          RoundedCardTitle(title: 'Abilities'),
           ...buildAbilities(abilities),
         ],
       ),
@@ -91,22 +91,6 @@ class AbilityButton extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _CardTitle extends StatelessWidget {
-  final String title;
-  const _CardTitle({
-    Key key,
-    @required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
     );
   }
 }
