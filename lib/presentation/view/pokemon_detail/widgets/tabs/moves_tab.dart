@@ -5,7 +5,7 @@ import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
-class MovesTab extends StatelessWidget {
+class MovesTab extends StatefulWidget {
   final Pokemon pokemon;
 
   const MovesTab({
@@ -14,9 +14,22 @@ class MovesTab extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _MovesTabState createState() => _MovesTabState();
+}
+
+class _MovesTabState extends State<MovesTab> {
+  String version;
+
+  @override
+  void initState() {
+    version = 'x-y';
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final moves =
-        pokemon.info.getMovesByLearnMethod(MoveLearnMethodType.MACHINE);
+    final moves = widget.pokemon.info
+        .getMovesByLearnMethod(MoveLearnMethodType.LEVEL_UP, version);
 
     return Column(
       children: [
@@ -30,7 +43,7 @@ class MovesTab extends StatelessWidget {
             itemBuilder: (context, index) {
               return Container(
                 color: primary,
-                margin: EdgeInsets.all(10),
+                // margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +61,36 @@ class MovesTab extends StatelessWidget {
     );
   }
 
-  onGenerationChanged(int index) {}
+  onGenerationChanged(int index) {
+    switch (index) {
+      case 0:
+        version = 'yellow';
+        break;
+      case 1:
+        version = 'crystal';
+        break;
+      case 2:
+        version = 'firered-leafgreen';
+        break;
+      case 3:
+        version = 'heartgold-soulsilver';
+        break;
+      case 4:
+        version = 'black-2-white-2';
+        break;
+      case 5:
+        version = 'omega-ruby-alpha-sapphire';
+        break;
+      case 6:
+        version = 'ultra-sun-ultra-moon';
+        break;
+      case 7:
+        version = 'sword-shield';
+        break;
+      default:
+    }
+    setState(() {});
+  }
 }
 
 class GenerationsCard extends StatefulWidget {

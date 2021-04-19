@@ -51,8 +51,7 @@ class PokemonInfo extends Equatable {
   double get getWeight => weight / 10;
   double get getHeight => height / 10;
 
-  List<Move> getMovesByLearnMethod(MoveLearnMethodType method) {
-    final String version = 'x-y';
+  List<Move> getMovesByLearnMethod(MoveLearnMethodType method, String version) {
     final filteredMoves = moves.where((move) {
       final versionGroupDetails = move.versionGroupDetails;
       final data = versionGroupDetails.where((versionGroupDetail) {
