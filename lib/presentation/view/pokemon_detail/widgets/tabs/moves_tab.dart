@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
+import 'package:rotom_phone/domain/entities/pokedex/pokemon_info.dart';
+import 'package:rotom_phone/presentation/widgets/galar_button.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class MovesTab extends StatefulWidget {
@@ -19,46 +21,42 @@ class MovesTab extends StatefulWidget {
 
 class _MovesTabState extends State<MovesTab> {
   String version;
+  MoveLearnMethodType learnMethodType;
 
   @override
   void initState() {
     version = 'x-y';
+    learnMethodType = MoveLearnMethodType.LEVEL_UP;
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final moves = widget.pokemon.info
-        .getMovesByLearnMethod(MoveLearnMethodType.LEVEL_UP, version);
+    final moves =
+        widget.pokemon.info.getMovesByLearnMethod(learnMethodType, version);
 
     return Column(
       children: [
         GenerationsCard(
           onItemSelected: onGenerationChanged,
         ),
-        Container(
-          height: 500,
-          child: ListView.builder(
-            itemCount: moves.length,
-            itemBuilder: (context, index) {
-              return Container(
-                color: primary,
-                // margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(moves[index].move.name),
-                    Text(
-                        'Lv. ${moves[index].versionGroupDetails.first.levelLearnedAt}'),
-                  ],
-                ),
-              );
-            },
-          ),
+        MovesCard(
+          moves: moves,
+          selectedMethod: learnMethodType,
+          onItemSelected: onLearnMethodTypeChanged,
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.1,
         ),
       ],
     );
+  }
+
+  onLearnMethodTypeChanged(MoveLearnMethodType method) {
+    setState(() {
+      learnMethodType = method;
+    });
   }
 
   onGenerationChanged(int index) {
@@ -90,6 +88,93 @@ class _MovesTabState extends State<MovesTab> {
       default:
     }
     setState(() {});
+  }
+}
+
+class MovesCard extends StatelessWidget {
+  final List<Move> moves;
+  final MoveLearnMethodType selectedMethod;
+  final Function(MoveLearnMethodType) onItemSelected;
+
+  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.white,
+    primary: primary,
+  );
+  final ButtonStyle selectedButtonStyle = ElevatedButton.styleFrom(
+    onPrimary: Colors.white,
+    primary: secondary,
+  );
+
+  MovesCard({
+    Key key,
+    @required this.moves,
+    @required this.selectedMethod,
+    this.onItemSelected,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return RoundedCard(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                style: selectedMethod == MoveLearnMethodType.LEVEL_UP
+                    ? selectedButtonStyle
+                    : raisedButtonStyle,
+                onPressed: () => onItemSelected(MoveLearnMethodType.LEVEL_UP),
+                child: Text('Level'),
+              ),
+              ElevatedButton(
+                style: selectedMethod == MoveLearnMethodType.MACHINE
+                    ? selectedButtonStyle
+                    : raisedButtonStyle,
+                onPressed: () => onItemSelected(MoveLearnMethodType.MACHINE),
+                child: Text('MT/DT'),
+              ),
+              ElevatedButton(
+                style: selectedMethod == MoveLearnMethodType.EGG
+                    ? selectedButtonStyle
+                    : raisedButtonStyle,
+                onPressed: () => onItemSelected(MoveLearnMethodType.EGG),
+                child: Text('Egg'),
+              ),
+              ElevatedButton(
+                style: selectedMethod == MoveLearnMethodType.TUTOR
+                    ? selectedButtonStyle
+                    : raisedButtonStyle,
+                onPressed: () => onItemSelected(MoveLearnMethodType.TUTOR),
+                child: Text('Tutor'),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          ...buildMovesButtonList(moves),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> buildMovesButtonList(List<Move> moves) {
+    return moves.map((move) => MoveButton(move: move)).toList();
+  }
+}
+
+class MoveButton extends StatelessWidget {
+  final Move move;
+
+  const MoveButton({
+    Key key,
+    @required this.move,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GalarButton(
+      title: move.move.name,
+      subtitle: 'Lv. ${move.versionGroupDetails.first.levelLearnedAt}',
+    );
   }
 }
 
