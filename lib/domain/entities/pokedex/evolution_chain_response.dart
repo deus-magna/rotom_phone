@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class EvolutionChain extends Equatable {
-  EvolutionChain({
+class EvolutionChainResponse extends Equatable {
+  EvolutionChainResponse({
     this.babyTriggerItem,
     this.chain,
     this.id,
