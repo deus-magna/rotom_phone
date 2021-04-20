@@ -1,4 +1,5 @@
 import 'package:rotom_phone/core/errors/exceptions.dart';
+import 'package:rotom_phone/data/model/pokedex/evolution_chain_response_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokedex_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_info_model.dart';
 import 'package:rotom_phone/data/model/pokedex/pokemon_model.dart';
@@ -19,17 +20,24 @@ abstract class PokedexLocalDataSource {
   Future<PokemonModel> getCachedPokemonDetail(int entryNumber);
 
   Future<void> cachePokemonDetail(PokemonModel pokemonModel);
+
+  Future<EvolutionChainResponseModel> getCachedEvolutionChain(
+      int evolutionChainId);
+
+  Future<void> cacheEvolutionChain(EvolutionChainResponseModel evolutionChain);
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
   final PokedexBox regionalPokedexBox;
   final PokemonSpecieBox pokemonSpecieBox;
   final PokemonInfoBox pokemonInfoBox;
+  final EvolutionChainBox evolutionChainBox;
 
   PokedexLocalDataSourceImpl(
     this.regionalPokedexBox,
     this.pokemonSpecieBox,
     this.pokemonInfoBox,
+    this.evolutionChainBox,
   );
 
   @override
@@ -67,6 +75,26 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
       final pokemonModel = PokemonModel(pokemonInfoModelFromJson(infoString),
           pokemonSpecieModelFromJson(specieString));
       return Future.value(pokemonModel);
+    } else {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> cacheEvolutionChain(
+      EvolutionChainResponseModel evolutionChain) async {
+    await evolutionChainBox.put(
+        evolutionChain.id, evolutionChainResponseModelToJson(evolutionChain));
+
+    return Future.value(true);
+  }
+
+  @override
+  Future<EvolutionChainResponseModel> getCachedEvolutionChain(
+      int evolutionChainId) {
+    final jsonString = evolutionChainBox.get(evolutionChainId);
+    if (jsonString != null) {
+      return Future.value(evolutionChainResponseModelFromJson(jsonString));
     } else {
       throw CacheException();
     }

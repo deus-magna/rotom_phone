@@ -46,6 +46,7 @@ Future<void> initPokedex() async {
       sl<PokedexBox>(),
       sl<PokemonSpecieBox>(),
       sl<PokemonInfoBox>(),
+      sl<EvolutionChainBox>(),
     ),
   );
 
@@ -58,9 +59,12 @@ Future<void> initPokedex() async {
   final pokemonSpecieBox =
       PokemonSpecieBox(await Hive.openBox('pokemon_specie'));
   final pokemonInfoBox = PokemonInfoBox(await Hive.openBox('pokemon_info'));
+  final evolutionChainBox =
+      EvolutionChainBox(await Hive.openBox('evolution_chain'));
   sl.registerLazySingleton(() => regionalPokedexBox);
   sl.registerLazySingleton(() => pokemonSpecieBox);
   sl.registerLazySingleton(() => pokemonInfoBox);
+  sl.registerLazySingleton(() => evolutionChainBox);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }
