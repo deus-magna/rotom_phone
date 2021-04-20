@@ -5,6 +5,7 @@ import 'package:rotom_phone/core/errors/failure.dart';
 import 'package:rotom_phone/core/network/network_info.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_local_datasource.dart';
 import 'package:rotom_phone/data/datasource/pokedex/pokedex_remote_datasource.dart';
+import 'package:rotom_phone/domain/entities/pokedex/evolution_chain_response.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokedex.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
@@ -62,5 +63,12 @@ class PokedexRepositoryImpl implements PokedexRepository {
         return Left(ServerFailure());
       }
     }
+  }
+
+  @override
+  Future<Either<Failure, EvolutionChainResponse>> getEvolutionChain(
+      {String evolutionChain}) {
+    // TODO: implement getEvolutionChain
+    throw UnimplementedError();
   }
 }
