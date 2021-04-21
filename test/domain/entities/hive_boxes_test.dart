@@ -10,12 +10,14 @@ class MockBox extends Mock implements Box<String> {}
 void main() {
   PokedexBox pokedexBox;
   PokemonSpecieBox pokemonDetailBox;
+  EvolutionChainBox evolutionChainBox;
   MockBox mockBox;
 
   setUp(() {
     mockBox = MockBox();
     pokedexBox = PokedexBox(mockBox);
     pokemonDetailBox = PokemonSpecieBox(mockBox);
+    evolutionChainBox = EvolutionChainBox(mockBox);
   });
 
   group('PokedexBox', () {
@@ -58,6 +60,28 @@ void main() {
       await pokemonDetailBox.put(key, fixture('pokemon_specie.json'));
       // assert
       verify(pokemonDetailBox.put(key, fixture('pokemon_specie.json')));
+    });
+  });
+
+  group('EvolutionChainBox', () {
+    test('Should call MockBox.get', () {
+      final int key = 1;
+      // arrange
+      when(evolutionChainBox.get(any))
+          .thenReturn(fixture('evolution_chain.json'));
+      // act
+      final result = evolutionChainBox.get(key);
+      // assert
+      verify(evolutionChainBox.get(key));
+      expect(result, fixture('evolution_chain.json'));
+    });
+
+    test('Should call MockBox.put', () async {
+      final int key = 1;
+      // act
+      await evolutionChainBox.put(key, fixture('evolution_chain.json'));
+      // assert
+      verify(evolutionChainBox.put(key, fixture('evolution_chain.json')));
     });
   });
 }

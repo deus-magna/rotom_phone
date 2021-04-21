@@ -19,19 +19,27 @@ class MockPokemonSpecieBox extends Mock implements PokemonSpecieBox {}
 
 class MockPokemonInfoBox extends Mock implements PokemonInfoBox {}
 
+class MockEvolutionChainBox extends Mock implements EvolutionChainBox {}
+
 void main() {
   PokedexLocalDataSource localDataSource;
   MockPokedexBox mockPokedexBox;
   MockPokemonSpecieBox mockPokemonSpecieBox;
   MockPokemonInfoBox mockPokemonInfoBox;
+  MockEvolutionChainBox mockEvolutionChainBox;
 
   setUp(() async {
     mockPokemonSpecieBox = MockPokemonSpecieBox();
     mockPokedexBox = MockPokedexBox();
     mockPokemonSpecieBox = MockPokemonSpecieBox();
     mockPokemonInfoBox = MockPokemonInfoBox();
+    mockEvolutionChainBox = MockEvolutionChainBox();
     localDataSource = PokedexLocalDataSourceImpl(
-        mockPokedexBox, mockPokemonSpecieBox, mockPokemonInfoBox);
+      mockPokedexBox,
+      mockPokemonSpecieBox,
+      mockPokemonInfoBox,
+      mockEvolutionChainBox,
+    );
   });
 
   group('PokemonDetail', () {
