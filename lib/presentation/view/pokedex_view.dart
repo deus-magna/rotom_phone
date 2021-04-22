@@ -15,15 +15,11 @@ class PokedexView extends StatelessWidget {
         child: BlocBuilder<PokedexCubit, PokedexState>(
           builder: (context, state) {
             if (state is PokedexInitial) {
+              final pokedexCubit = context.read<PokedexCubit>();
+              pokedexCubit.getRegionalPokedex(1);
               return Container(
                 child: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final pokedexCubit = context.read<PokedexCubit>();
-                      pokedexCubit.getRegionalPokedex(1);
-                    },
-                    child: Text('Init Pokedex'),
-                  ),
+                  child: CircularProgressIndicator(),
                 ),
               );
             } else if (state is PokedexLoading) {
