@@ -48,6 +48,13 @@ class PokedexRemoteDataSourceImpl implements PokedexRemoteDataSource {
     return pokemonInfoModelFromJson(response.body);
   }
 
+  @override
+  Future<EvolutionChainResponseModel> getEvolutionChain(
+      {String evolutionChain}) async {
+    final response = await _getFromServer(evolutionChain);
+    return evolutionChainResponseModelFromJson(response.body);
+  }
+
   Future<http.Response> _getFromServer(String url) async {
     final response = await client.get(url);
 
@@ -56,12 +63,5 @@ class PokedexRemoteDataSourceImpl implements PokedexRemoteDataSource {
     } else {
       throw ServerException();
     }
-  }
-
-  @override
-  Future<EvolutionChainResponseModel> getEvolutionChain(
-      {String evolutionChain}) async {
-    final response = await _getFromServer(evolutionChain);
-    return evolutionChainResponseModelFromJson(response.body);
   }
 }
