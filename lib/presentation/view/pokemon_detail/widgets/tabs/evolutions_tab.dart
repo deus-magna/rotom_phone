@@ -17,6 +17,8 @@ class EvolutionsTab extends StatelessWidget {
           child: Column(
             children: [
               RoundedCardTitle(title: 'Evolution'),
+              RoundedCardTitle(title: 'Evolution'),
+              RoundedCardTitle(title: 'Evolution'),
             ],
           ),
         )
