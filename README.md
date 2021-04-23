@@ -16,7 +16,7 @@
   </p>
 
   <p align="center">
-    <a href="#demo">View Demo</a>
+    <a href="#demo">Ver demo</a>
     ·
     <a href="https://github.com/deus-magna/rotom_phone/issues/new/choose">Report Bug</a>
     ·
