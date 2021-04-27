@@ -34,8 +34,14 @@ class EvolutionChainView extends StatelessWidget {
                     Text(state.evolutionChain.chain.species.name),
                   ],
                 );
+              } else if (state is EvolutionChainError) {
+                return Container(
+                  child: Text(state.message),
+                );
               } else {
-                return Container();
+                return Container(
+                  child: Text('Ocurrio un error'),
+                );
               }
             }),
           ),
