@@ -25,7 +25,7 @@ class PokemonDetailCubit extends Cubit<PokemonDetailState> {
     getPokemonDetail(entryNumber: entryNumber);
   }
 
-  getPokemonDetals(int entryNumber) async {
+  getPokemonDetails(int entryNumber) async {
     emit(PokemonDetailLoading());
     final failureOrPokemonList =
         await getPokemonDetail(entryNumber: entryNumber);

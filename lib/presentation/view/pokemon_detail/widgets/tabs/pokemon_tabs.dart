@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/presentation/cubit/pokemon_detail/pokemon_detail_cubit.dart';
+import 'package:rotom_phone/presentation/view/pokemon_detail/evolution_chain/evolution_chain_view.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/pokemon_menu/pokemon_menu.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/base_info_tab.dart';
-import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/evolutions_tab.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/moves_tab.dart';
 import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/tabs/stats_tab.dart';
 
@@ -32,7 +32,7 @@ class PokemonTabs extends StatelessWidget {
                 BaseInfoTab(pokemon: pokemon),
                 StatsTab(pokemon: pokemon),
                 MovesTab(pokemon: pokemon),
-                EvolutionsTab(pokemon: pokemon),
+                EvolutionChainView(pokemon: pokemon),
               ],
             );
           },
