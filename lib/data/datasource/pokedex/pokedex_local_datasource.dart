@@ -22,7 +22,7 @@ abstract class PokedexLocalDataSource {
   Future<void> cachePokemonDetail(PokemonModel pokemonModel);
 
   Future<EvolutionChainResponseModel> getCachedEvolutionChain(
-      int evolutionChainId);
+      String evolutionChainId);
 
   Future<void> cacheEvolutionChain(EvolutionChainResponseModel evolutionChain);
 }
@@ -91,7 +91,7 @@ class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
 
   @override
   Future<EvolutionChainResponseModel> getCachedEvolutionChain(
-      int evolutionChainId) {
+      String evolutionChainId) {
     final jsonString = evolutionChainBox.get(evolutionChainId);
     if (jsonString != null) {
       return Future.value(evolutionChainResponseModelFromJson(jsonString));

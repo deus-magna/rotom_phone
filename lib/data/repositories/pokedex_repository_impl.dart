@@ -67,8 +67,24 @@ class PokedexRepositoryImpl implements PokedexRepository {
 
   @override
   Future<Either<Failure, EvolutionChainResponse>> getEvolutionChain(
-      {String evolutionChain}) {
-    // TODO: implement getEvolutionChain
-    throw UnimplementedError();
+      {String evolutionChain}) async {
+    try {
+      final localEvolutionChain =
+          await localDataSource.getCachedEvolutionChain(evolutionChain);
+      return Right(localEvolutionChain);
+    } on CacheException {
+      if (await networkInfo.hasConnection) {
+        try {
+          final remoteEvolutionChain = await remoteDataSource.getEvolutionChain(
+              evolutionChain: evolutionChain);
+          localDataSource.cacheEvolutionChain(remoteEvolutionChain);
+          return Right(remoteEvolutionChain);
+        } on ServerException {
+          return Left(ServerFailure());
+        }
+      } else {
+        return Left(ServerFailure());
+      }
+    }
   }
 }

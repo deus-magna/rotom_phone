@@ -2,7 +2,9 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
 import 'package:rotom_phone/domain/entities/hive_boxes.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
+import 'package:rotom_phone/domain/usercases/pokedex/get_evolution_chain.dart';
 import 'package:rotom_phone/domain/usercases/pokedex/get_pokemon_detail.dart';
+import 'package:rotom_phone/presentation/cubit/evolution_chain/evolution_chain_cubit.dart';
 import 'package:rotom_phone/presentation/cubit/pokedex/pokedex_cubit.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,17 +19,21 @@ import 'injection_container.dart';
 
 Future<void> initPokedex() async {
   //! Features - Pokedex
-  // Provider
+  // Cubit
   sl.registerFactory(() => PokedexCubit(
         sl(),
       ));
   sl.registerFactory(() => PokemonDetailCubit(
         sl(),
       ));
+  sl.registerFactory(() => EvolutionchainCubit(
+        sl(),
+      ));
 
   // use cases
   sl.registerLazySingleton(() => GetRegionalPokedex(sl()));
   sl.registerLazySingleton(() => GetPokemonDetails(sl()));
+  sl.registerLazySingleton(() => GetEvolutionChain(sl()));
 
   // Repository
   sl.registerLazySingleton<PokedexRepository>(() => PokedexRepositoryImpl(
