@@ -62,13 +62,43 @@
 - Como implementar un caso de uso
 - Como implementar el patron repository y sus data sources
 
+## 🤝 Contribuciones
+
+Todas las contribuciones son bienvenidas: solucion de bugs, pull requests, sugerencias y nuevas caracteristicas.
+
+Antes de enviar un pull request mira los [issues en GitHub](https://github.com/deus-magna/rotom_phone/issues) para saber si alguien ya trabajo en el 😋
+
+Para contribuir en la pokedex:
+
+- [Has Fork del proyecto a tu propio perfil de GitHub](https://help.github.com/articles/fork-a-repo/)
+
+- Descarga el proyecto usando git clone:
+
+    ```sh
+    git clone https://github.com/<YOUR_USERNAME>/rotom_phone.git
+    ```
+
+- Crea una nueva branch con un nombre descriptivo:
+
+    ```sh
+    git checkout -b pokemon_9na_generacion
+    ```
+
+- Escribe código, arregla algo y agrega los test para estar seguro que funciona. *No aceptare pull requests que no pasen los test, o si el código nuevo no tiene tests unitarios.*
+
+- Has un commit de tu código y dale push a GitHub
+
+- [Abre un nuevo pull request](https://help.github.com/articles/creating-a-pull-request/) y describe los cambios que has hecho.
+
+- Aceptare tus cambios luego de hacerles un review!
+
 ## Como instalar?
 
 Este es un proyecto hecho con Flutter, primero debes descargar el framework desde [aqui](https://flutter.dev/docs/get-started/install).
 
 Ejecuta estos comandos en tu terminal
 
-```
+```sh
 git clone https://github.com/deus-magna/rotom_phone
 cd rotom_phone
 flutter packages get
