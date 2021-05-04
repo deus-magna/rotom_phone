@@ -1,11 +1,11 @@
 <p align="center">
  <img width="100px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1619156157/github/rotom_phone.svg" align="center" alt="GitHub Readme Stats" />
  <h1 align="center">Rotom Phone</h1>
- <p align="center">La pokedex mas completa hecha con Flutter!</p>
+ <p align="center">The most complete pokedex build with Flutter!</p>
 </p>
   <p align="center">
     <a href="">
-      <img src="coverage_badge.svg" />
+      <img src="../coverage_badge.svg" />
     </a>
     <a href="https://github.com/deus-magna/rotom_phone/issues">
       <img alt="Issues" src="https://img.shields.io/github/issues/deus-magna/rotom_phone?color=0088ff" />
@@ -16,20 +16,19 @@
   </p>
 
   <p align="center">
-    <a href="#demo">Ver demo</a>
+    <a href="#demo">View demo</a>
     ·
-    <a href="https://github.com/deus-magna/rotom_phone/issues/new/choose">Reportar un Bug</a>
+    <a href="https://github.com/deus-magna/rotom_phone/issues/new/choose">Report Bug</a>
     ·
-    <a href="https://github.com/deus-magna/rotom_phone/issues/new/choose">Solicitar una mejora</a>
+    <a href="https://github.com/deus-magna/rotom_phone/issues/new/choose">Request Feature</a>
   </p>
   <p align="center">
+    <a href="readme.md">Spanish </a>
     ·
-    <a href="/docs/readme_en.md">Ver en inglés</a>
-    ·
+    <a href="/docs/readme_en.md">English</a>
   </p>
 </p>
 
-## Características
 
 ## Getting Started
 
