@@ -13,6 +13,18 @@
     <a href="https://github.com/deus-magna/rotom_phone/pulls">
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/deus-magna/rotom_phone?color=0088ff" />
     </a>
+    <a href="https://img.shields.io/badge/version-1.0.0-blue">
+      <img alt="version" src="https://img.shields.io/badge/version-1.0.0-blue" />
+    </a>
+    <a href="https://img.shields.io/badge/documentation-yes-success">
+      <img alt="documentation" src="https://img.shields.io/badge/documentation-yes-success" />
+    </a>
+    <a href="https://img.shields.io/badge/License-MIT-yellow.svg">
+      <img alt="license" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+    </a>
+     <a href="https://img.shields.io/twitter/follow/deus_magna?style=social">
+      <img alt="twitter" src="https://img.shields.io/twitter/follow/deus_magna?style=social" />
+    </a>
   </p>
 
   <p align="center">
@@ -28,6 +40,7 @@
     ·
   </p>
 </p>
+<p align="center">⭐️⭐️⭐️ Te gusta este proyecto? Por favor ayuda a que llegue a mas personas dandole una estrella! ⭐️⭐️⭐️
 
 ## Características
 - Pokedex completa de la 1ra a la 8va generación
