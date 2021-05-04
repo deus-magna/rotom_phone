@@ -30,6 +30,24 @@
 </p>
 
 ## Características
+- Pokedex completa de la 1ra a la 8va generación
+- Busqueda de pokemons
+- Todos los detalles de cada pokemon. Info, movimientos, stats, evoluciones, etc.
+- Diseño inspirado en la región de Galar
+
+## Que aprenderas?
+- Manejo de estados con Cubit
+- Inyección de dependencias con Get_it
+- Una correcta implementacion de Clean Architecture con Flutter
+- Base de datos local con Hive
+- Requests a la API de pokeapi.co utilizando HTTPS
+- Validar correctamente si un dispositivo tiene acceso a internet
+- Uso eficiente de las pruebas unitarias (unit test)
+- Cobertura de código
+- Los principios de programación S.O.L.I.D.
+- Estructuración de carpetas
+- Como implementar un caso de uso
+- Como implementar el patron repository y sus data sources
 
 ## Como instalar?
 
