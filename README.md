@@ -41,6 +41,9 @@
   </p>
 </p>
 <p align="center">⭐️⭐️⭐️ Te gusta este proyecto? Por favor ayuda a que llegue a mas personas dandole una estrella! ⭐️⭐️⭐️
+<br>
+<br>
+<img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1620198066/github/rotom_portada.png"/>
 
 ## Características
 - Pokedex completa de la 1ra a la 8va generación
