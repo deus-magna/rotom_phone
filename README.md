@@ -48,7 +48,7 @@
 - Todos los detalles de cada pokemon. Info, movimientos, stats, evoluciones, etc.
 - Diseño inspirado en la región de Galar
 
-## Que aprenderas?
+## ¿Qué aprenderas?
 - Manejo de estados con Cubit
 - Inyección de dependencias con Get_it
 - Una correcta implementacion de Clean Architecture con Flutter
@@ -61,6 +61,16 @@
 - Estructuración de carpetas
 - Como implementar un caso de uso
 - Como implementar el patron repository y sus data sources
+
+## 👨🏻‍💻 Sobre mi
+👋 Hola, mi nombre es Renato Montufar, soy desarrollador de aplicaciónes móviles. Tengo poco mas de nueve años de experiencia desarrollando aplicaciones con Java/Kotlin y Swift. Conocí flutter en 2019 y desde entonces he decidido pulir mis habilidades con estre framework. Me gusta hacer código open source para ayudar a los demas y asi tambien dar a conocer mi trabajo. Me gusta mucho el UI/UX. Vivo en Guatemala 🇬🇹 😀
+
+Si quieres que estemos en contanco, puedes seguirme en redes sociales, si tienes dudas de alguno de mis proyectos, no dudes en consultarme.
+
+- [LinkedIn](https://www.linkedin.com/in/deus-magna/)
+- [GitHub](https://github.com/deus-magna/)
+- [Twitter](https://twitter.com/deus_magna)
+- [Instagram](https://www.instagram.com/deus_magna/) 
 
 ## 🤝 Contribuciones
 
@@ -92,7 +102,7 @@ Para contribuir en la pokedex:
 
 - Aceptare tus cambios luego de hacerles un review!
 
-## Como instalar?
+## ¿Cómo instalar?
 
 Este es un proyecto hecho con Flutter, primero debes descargar el framework desde [aqui](https://flutter.dev/docs/get-started/install).
 
