@@ -17,13 +17,6 @@ class GalarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: Colors.white,
-      primary: secondary,
-      minimumSize: Size(88, 44),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      shape: StadiumBorder(),
-    );
 
     final style = TextStyle(
       fontWeight: FontWeight.w700,
@@ -35,36 +28,52 @@ class GalarButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10),
       child: Stack(
         children: [
-          ButtonTheme(
-            height: 44,
-            child: ElevatedButton(
-              style: raisedButtonStyle,
-              onPressed: () => print('Show ability'),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(subtitle, style: style),
-                  SizedBox(width: 10),
-                  icon != null ? icon : SizedBox.shrink(),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 2,
-            child: ClipPath(
-              clipper: FrontMenuClipper(),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: 44,
-                width: size.width * 0.62,
-                color: primary,
-                alignment: Alignment.centerLeft,
-                child: Text(title, style: style),
-              ),
-            ),
-          ),
+          _buildButtonBack(style),
+          _buildButtonFront(size, style),
         ],
+      ),
+    );
+  }
+
+  ButtonTheme _buildButtonBack(TextStyle style) {
+    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+      onPrimary: Colors.white,
+      primary: secondary,
+      minimumSize: Size(88, 44),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      shape: StadiumBorder(),
+    );
+
+    return ButtonTheme(
+      height: 44,
+      child: ElevatedButton(
+        style: raisedButtonStyle,
+        onPressed: () => print('Show ability'),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(subtitle, style: style),
+            SizedBox(width: 10),
+            icon != null ? icon : SizedBox.shrink(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Positioned _buildButtonFront(Size size, TextStyle style) {
+    return Positioned(
+      top: 2,
+      child: ClipPath(
+        clipper: FrontMenuClipper(),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          height: 44,
+          width: size.width * 0.62,
+          color: primary,
+          alignment: Alignment.centerLeft,
+          child: Text(title, style: style),
+        ),
       ),
     );
   }
