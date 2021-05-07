@@ -47,9 +47,15 @@
 
 ## Características
 - Pokedex completa de la 1ra a la 8va generación
-- Busqueda de pokemons
+- Busqueda de pokemon
 - Todos los detalles de cada pokemon. Info, movimientos, stats, evoluciones, etc.
 - Diseño inspirado en la región de Galar
+
+## Demo
+<img src="https://media.giphy.com/media/yiWCl9U98dMo9024bV/giphy.gif" width="250">
+
+<br>
+<br>
 
 ## ¿Qué aprenderas?
 - Manejo de estados con Cubit
