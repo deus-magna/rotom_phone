@@ -55,7 +55,6 @@
 <img src="https://media.giphy.com/media/yiWCl9U98dMo9024bV/giphy.gif" width="250">
 
 <br>
-<br>
 
 ## ¿Qué aprenderas?
 - Manejo de estados con Cubit
