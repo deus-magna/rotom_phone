@@ -9,6 +9,9 @@
 .history
 .svn/
 
+# Ignore Flutter version manager
+.fvm/flutter_sdk
+
 # Ignore test-related files
 /coverage.data
 /coverage/
