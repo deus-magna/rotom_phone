@@ -41,6 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  very_good_analysis: ^1.0.4
   mockito: ^4.1.0
   flutter_coverage_badge: ^0.0.1+1
 
