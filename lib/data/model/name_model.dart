@@ -11,14 +11,14 @@ class NameModel extends Name {
   final String name;
 
   factory NameModel.fromJson(Map<String, dynamic> json) => NameModel(
-        language: json["language"] == null
+        language: json['language'] == null
             ? null
-            : ResourcePathModel.fromJson(json["language"]),
-        name: json["name"] == null ? null : json["name"],
+            : ResourcePathModel.fromJson(json['language']),
+        name: json['name'] == null ? null : json['name'],
       );
 
   Map<String, dynamic> toJson() => {
-        "language": language == null ? null : language.toJson(),
-        "name": name == null ? null : name,
+        'language': language == null ? null : language.toJson(),
+        'name': name == null ? null : name,
       };
 }

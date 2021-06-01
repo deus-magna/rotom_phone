@@ -28,17 +28,17 @@ abstract class PokedexLocalDataSource {
 }
 
 class PokedexLocalDataSourceImpl implements PokedexLocalDataSource {
-  final PokedexBox regionalPokedexBox;
-  final PokemonSpecieBox pokemonSpecieBox;
-  final PokemonInfoBox pokemonInfoBox;
-  final EvolutionChainBox evolutionChainBox;
-
   PokedexLocalDataSourceImpl(
     this.regionalPokedexBox,
     this.pokemonSpecieBox,
     this.pokemonInfoBox,
     this.evolutionChainBox,
   );
+
+  final PokedexBox regionalPokedexBox;
+  final PokemonSpecieBox pokemonSpecieBox;
+  final PokemonInfoBox pokemonInfoBox;
+  final EvolutionChainBox evolutionChainBox;
 
   @override
   Future<PokedexModel> getCachedRegionalPokedex(int region) {
