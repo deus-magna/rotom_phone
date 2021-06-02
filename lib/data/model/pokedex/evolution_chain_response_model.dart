@@ -25,16 +25,16 @@ class EvolutionChainResponseModel extends EvolutionChainResponse {
 
   factory EvolutionChainResponseModel.fromJson(Map<String, dynamic> json) =>
       EvolutionChainResponseModel(
-        babyTriggerItem: json["baby_trigger_item"],
+        babyTriggerItem: json['baby_trigger_item'],
         chain:
-            json["chain"] == null ? null : ChainModel.fromJson(json["chain"]),
-        id: json["id"] == null ? null : json["id"],
+            json['chain'] == null ? null : ChainModel.fromJson(json['chain']),
+        id: json['id'] == null ? null : json['id'],
       );
 
   Map<String, dynamic> toJson() => {
-        "baby_trigger_item": babyTriggerItem,
-        "chain": chain == null ? null : chain.toJson(),
-        "id": id == null ? null : id,
+        'baby_trigger_item': babyTriggerItem,
+        'chain': chain == null ? null : chain.toJson(),
+        'id': id == null ? null : id,
       };
 }
 
@@ -57,29 +57,29 @@ class ChainModel extends Chain {
   final SpeciesModel species;
 
   factory ChainModel.fromJson(Map<String, dynamic> json) => ChainModel(
-        evolutionDetails: json["evolution_details"] == null
+        evolutionDetails: json['evolution_details'] == null
             ? null
-            : List<EvolutionDetail>.from(json["evolution_details"]
+            : List<EvolutionDetail>.from(json['evolution_details']
                 .map((x) => EvolutionDetailModel.fromJson(x))),
-        evolvesTo: json["evolves_to"] == null
+        evolvesTo: json['evolves_to'] == null
             ? null
             : List<Chain>.from(
-                json["evolves_to"].map((x) => ChainModel.fromJson(x))),
-        isBaby: json["is_baby"] == null ? null : json["is_baby"],
-        species: json["species"] == null
+                json['evolves_to'].map((x) => ChainModel.fromJson(x))),
+        isBaby: json['is_baby'] == null ? null : json['is_baby'],
+        species: json['species'] == null
             ? null
-            : SpeciesModel.fromJson(json["species"]),
+            : SpeciesModel.fromJson(json['species']),
       );
 
   Map<String, dynamic> toJson() => {
-        "evolution_details": evolutionDetails == null
+        'evolution_details': evolutionDetails == null
             ? null
             : List<dynamic>.from(evolutionDetails.map((x) => x.toJson())),
-        "evolves_to": evolvesTo == null
+        'evolves_to': evolvesTo == null
             ? null
             : List<dynamic>.from(evolvesTo.map((x) => x.toJson())),
-        "is_baby": isBaby == null ? null : isBaby,
-        "species": species == null ? null : species.toJson(),
+        'is_baby': isBaby == null ? null : isBaby,
+        'species': species == null ? null : species.toJson(),
       };
 }
 
@@ -145,51 +145,51 @@ class EvolutionDetailModel extends EvolutionDetail {
 
   factory EvolutionDetailModel.fromJson(Map<String, dynamic> json) =>
       EvolutionDetailModel(
-        gender: json["gender"],
-        heldItem: json["held_item"],
-        item: json["item"],
-        knownMove: json["known_move"],
-        knownMoveType: json["known_move_type"],
-        location: json["location"],
-        minAffection: json["min_affection"],
-        minBeauty: json["min_beauty"],
-        minHappiness: json["min_happiness"],
-        minLevel: json["min_level"] == null ? null : json["min_level"],
-        needsOverworldRain: json["needs_overworld_rain"] == null
+        gender: json['gender'],
+        heldItem: json['held_item'],
+        item: json['item'],
+        knownMove: json['known_move'],
+        knownMoveType: json['known_move_type'],
+        location: json['location'],
+        minAffection: json['min_affection'],
+        minBeauty: json['min_beauty'],
+        minHappiness: json['min_happiness'],
+        minLevel: json['min_level'] == null ? null : json['min_level'],
+        needsOverworldRain: json['needs_overworld_rain'] == null
             ? null
-            : json["needs_overworld_rain"],
-        partySpecies: json["party_species"],
-        partyType: json["party_type"],
-        relativePhysicalStats: json["relative_physical_stats"],
-        timeOfDay: json["time_of_day"] == null ? null : json["time_of_day"],
-        tradeSpecies: json["trade_species"],
-        trigger: json["trigger"] == null
+            : json['needs_overworld_rain'],
+        partySpecies: json['party_species'],
+        partyType: json['party_type'],
+        relativePhysicalStats: json['relative_physical_stats'],
+        timeOfDay: json['time_of_day'] == null ? null : json['time_of_day'],
+        tradeSpecies: json['trade_species'],
+        trigger: json['trigger'] == null
             ? null
-            : SpeciesModel.fromJson(json["trigger"]),
+            : SpeciesModel.fromJson(json['trigger']),
         turnUpsideDown:
-            json["turn_upside_down"] == null ? null : json["turn_upside_down"],
+            json['turn_upside_down'] == null ? null : json['turn_upside_down'],
       );
 
   Map<String, dynamic> toJson() => {
-        "gender": gender,
-        "held_item": heldItem,
-        "item": item,
-        "known_move": knownMove,
-        "known_move_type": knownMoveType,
-        "location": location,
-        "min_affection": minAffection,
-        "min_beauty": minBeauty,
-        "min_happiness": minHappiness,
-        "min_level": minLevel == null ? null : minLevel,
-        "needs_overworld_rain":
+        'gender': gender,
+        'held_item': heldItem,
+        'item': item,
+        'known_move': knownMove,
+        'known_move_type': knownMoveType,
+        'location': location,
+        'min_affection': minAffection,
+        'min_beauty': minBeauty,
+        'min_happiness': minHappiness,
+        'min_level': minLevel == null ? null : minLevel,
+        'needs_overworld_rain':
             needsOverworldRain == null ? null : needsOverworldRain,
-        "party_species": partySpecies,
-        "party_type": partyType,
-        "relative_physical_stats": relativePhysicalStats,
-        "time_of_day": timeOfDay == null ? null : timeOfDay,
-        "trade_species": tradeSpecies,
-        "trigger": trigger == null ? null : trigger.toJson(),
-        "turn_upside_down": turnUpsideDown == null ? null : turnUpsideDown,
+        'party_species': partySpecies,
+        'party_type': partyType,
+        'relative_physical_stats': relativePhysicalStats,
+        'time_of_day': timeOfDay == null ? null : timeOfDay,
+        'trade_species': tradeSpecies,
+        'trigger': trigger == null ? null : trigger.toJson(),
+        'turn_upside_down': turnUpsideDown == null ? null : turnUpsideDown,
       };
 }
 
@@ -203,12 +203,12 @@ class SpeciesModel extends Species {
   final String url;
 
   factory SpeciesModel.fromJson(Map<String, dynamic> json) => SpeciesModel(
-        name: json["name"] == null ? null : json["name"],
-        url: json["url"] == null ? null : json["url"],
+        name: json['name'] == null ? null : json['name'],
+        url: json['url'] == null ? null : json['url'],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name == null ? null : name,
-        "url": url == null ? null : url,
+        'name': name == null ? null : name,
+        'url': url == null ? null : url,
       };
 }

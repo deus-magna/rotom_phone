@@ -13,11 +13,6 @@ class LocalPokedexEntryModel extends Equatable {
     this.officialArtwork,
   });
 
-  final String name;
-  final String url;
-  final int id;
-  final String officialArtwork;
-
   factory LocalPokedexEntryModel.fromPokedexEntry(PokemonEntry pokemonData) {
     final officialArtwork =
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData.entryNumber}.png';
@@ -29,14 +24,24 @@ class LocalPokedexEntryModel extends Equatable {
     );
   }
 
+  final String name;
+  final String url;
+  final int id;
+  final String officialArtwork;
+
   String getPokemonId() {
-    return (this.id < 10)
-        ? '#00${this.id}'
-        : (this.id < 100)
-            ? '#0${this.id}'
-            : '#${this.id}';
+    return (id < 10)
+        ? '#00$id'
+        : (id < 100)
+            ? '#0$id'
+            : '#$id';
   }
 
   @override
-  List<Object> get props => [name, url, id, officialArtwork];
+  List<Object> get props => [
+        name,
+        url,
+        id,
+        officialArtwork,
+      ];
 }
