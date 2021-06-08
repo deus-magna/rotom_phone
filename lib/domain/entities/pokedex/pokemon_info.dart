@@ -62,15 +62,15 @@ class PokemonInfo extends Equatable {
         return false;
       }).toList();
 
-      if (data.length > 0) {
+      if (data.isNotEmpty) {
         return true;
       }
       return false;
     }).toList();
 
-    final List<Move> theMoves = [];
-    for (var move in filteredMoves) {
-      for (var versionGroupDetail in move.versionGroupDetails) {
+    final theMoves = [];
+    for (final move in filteredMoves) {
+      for (final versionGroupDetail in move.versionGroupDetails) {
         if (versionGroupDetail.moveLearnMethod.name == method &&
             versionGroupDetail.versionGroup.name == version) {
           theMoves.add(

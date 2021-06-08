@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../core/extensions/string_extension.dart';
 import '../name.dart';
 import '../resource_path.dart';
-import '../../../core/extensions/string_extension.dart';
 
 class PokemonSpecie extends Equatable {
   PokemonSpecie({
@@ -36,11 +36,11 @@ class PokemonSpecie extends Equatable {
   });
 
   String getPokemonId() {
-    return (this.id < 10)
-        ? '#00${this.id}'
-        : (this.id < 100)
-            ? '#0${this.id}'
-            : '#${this.id}';
+    return (id < 10)
+        ? '#00$id'
+        : (id < 100)
+            ? '#0$id'
+            : '#$id';
   }
 
   List<FlavorTextEntry> pokedexEntries(String language) => flavorTextEntries
@@ -133,8 +133,8 @@ class FlavorTextEntry extends Equatable {
     if (version.name.length >= 2) {
       if (version.name.contains('-')) {
         final names = version.name.split('-');
-        String versionAcronym = '';
-        for (var name in names) {
+        var versionAcronym = '';
+        for (final name in names) {
           versionAcronym += name.substring(0, 1);
         }
         return versionAcronym.capitalize();

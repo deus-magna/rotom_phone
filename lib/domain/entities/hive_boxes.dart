@@ -6,8 +6,9 @@ abstract class HiveBox {
 }
 
 class PokedexBox implements HiveBox {
-  final Box<String> box;
   PokedexBox(this.box);
+
+  final Box<String> box;
 
   @override
   Future<void> put(dynamic key, String data) => box.put(key, data);
@@ -18,8 +19,9 @@ class PokedexBox implements HiveBox {
 }
 
 class PokemonSpecieBox implements HiveBox {
-  final Box<String> box;
   PokemonSpecieBox(this.box);
+
+  final Box<String> box;
 
   @override
   Future<void> put(dynamic key, String data) => box.put(key, data);
@@ -30,8 +32,9 @@ class PokemonSpecieBox implements HiveBox {
 }
 
 class PokemonInfoBox implements HiveBox {
-  final Box<String> box;
   PokemonInfoBox(this.box);
+
+  final Box<String> box;
 
   @override
   Future<void> put(dynamic key, String data) => box.put(key, data);
@@ -42,8 +45,9 @@ class PokemonInfoBox implements HiveBox {
 }
 
 class EvolutionChainBox implements HiveBox {
-  final Box<String> box;
   EvolutionChainBox(this.box);
+
+  final Box<String> box;
 
   @override
   Future<void> put(dynamic key, String data) => box.put(key, data);
