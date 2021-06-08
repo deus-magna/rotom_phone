@@ -19,10 +19,6 @@ class EvolutionChainResponseModel extends EvolutionChainResponse {
           id: id,
         );
 
-  final dynamic babyTriggerItem;
-  final ChainModel chain;
-  final int id;
-
   factory EvolutionChainResponseModel.fromJson(Map<String, dynamic> json) =>
       EvolutionChainResponseModel(
         babyTriggerItem: json['baby_trigger_item'],
@@ -30,6 +26,10 @@ class EvolutionChainResponseModel extends EvolutionChainResponse {
             json['chain'] == null ? null : ChainModel.fromJson(json['chain']),
         id: json['id'] == null ? null : json['id'],
       );
+
+  final dynamic babyTriggerItem;
+  final ChainModel chain;
+  final int id;
 
   Map<String, dynamic> toJson() => {
         'baby_trigger_item': babyTriggerItem,

@@ -15,11 +15,11 @@ abstract class PokedexRemoteDataSource {
 }
 
 class PokedexRemoteDataSourceImpl implements PokedexRemoteDataSource {
-  final http.Client client;
-
   PokedexRemoteDataSourceImpl({
     @required this.client,
   });
+
+  final http.Client client;
 
   @override
   Future<PokedexModel> getRegionalPokedex({int region}) async {

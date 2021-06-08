@@ -11,15 +11,15 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class PokedexRepositoryImpl implements PokedexRepository {
-  final PokedexRemoteDataSource remoteDataSource;
-  final PokedexLocalDataSource localDataSource;
-  final NetworkInfo networkInfo;
-
   PokedexRepositoryImpl({
     @required this.localDataSource,
     @required this.remoteDataSource,
     @required this.networkInfo,
   });
+
+  final PokedexRemoteDataSource remoteDataSource;
+  final PokedexLocalDataSource localDataSource;
+  final NetworkInfo networkInfo;
 
   @override
   Future<Either<Failure, Pokedex>> getRegionalPokedex({int region}) async {
@@ -32,7 +32,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final regionalPokedex =
               await remoteDataSource.getRegionalPokedex(region: region);
-          localDataSource.cacheRegionalPokedex(regionalPokedex);
+          await localDataSource.cacheRegionalPokedex(regionalPokedex);
           return Right(regionalPokedex);
         } on ServerException {
           return Left(ServerFailure());
@@ -54,7 +54,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final pokemonDetail = await remoteDataSource.getPokemonDetails(
               entryNumber: entryNumber);
-          localDataSource.cachePokemonDetail(pokemonDetail);
+          await localDataSource.cachePokemonDetail(pokemonDetail);
           return Right(pokemonDetail);
         } on ServerException {
           return Left(ServerFailure());
@@ -77,7 +77,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
         try {
           final remoteEvolutionChain = await remoteDataSource.getEvolutionChain(
               evolutionChain: evolutionChain);
-          localDataSource.cacheEvolutionChain(remoteEvolutionChain);
+          await localDataSource.cacheEvolutionChain(remoteEvolutionChain);
           return Right(remoteEvolutionChain);
         } on ServerException {
           return Left(ServerFailure());
