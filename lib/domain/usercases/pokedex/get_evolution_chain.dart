@@ -5,9 +5,9 @@ import 'package:rotom_phone/domain/entities/pokedex/evolution_chain_response.dar
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class GetEvolutionChain {
-  final PokedexRepository pokedexRepository;
-
   GetEvolutionChain(this.pokedexRepository) : assert(pokedexRepository != null);
+
+  final PokedexRepository pokedexRepository;
 
   Future<Either<Failure, EvolutionChainResponse>> call({
     @required String evolutionChain,

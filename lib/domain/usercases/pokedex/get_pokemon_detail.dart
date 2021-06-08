@@ -5,9 +5,9 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/domain/repositories/pokedex_repository.dart';
 
 class GetPokemonDetails {
-  final PokedexRepository pokedexRepository;
-
   GetPokemonDetails(this.pokedexRepository) : assert(pokedexRepository != null);
+
+  final PokedexRepository pokedexRepository;
 
   Future<Either<Failure, Pokemon>> call({
     @required int entryNumber,

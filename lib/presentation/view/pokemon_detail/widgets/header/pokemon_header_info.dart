@@ -23,25 +23,25 @@ class PokemonHeaderInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.only(right: 40),
+          padding: const EdgeInsets.only(right: 40),
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(id, style: TextStyle(color: Colors.white)),
+              Text(id, style: const TextStyle(color: Colors.white)),
               Text(
                 genus,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               )
             ],
           ),
         ),
         Text(
           name.capitalize(),
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         PokemonTypesRow(types: types),
       ],
     );
