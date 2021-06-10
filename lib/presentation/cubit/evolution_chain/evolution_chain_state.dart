@@ -12,18 +12,18 @@ class EvolutionchainInitial extends EvolutionchainState {}
 class EvolutionChainLoading extends EvolutionchainState {}
 
 class EvolutionChainLoaded extends EvolutionchainState {
-  final EvolutionChainResponse evolutionChain;
-
   EvolutionChainLoaded({@required this.evolutionChain});
+
+  final EvolutionChainResponse evolutionChain;
 
   @override
   List<Object> get props => [evolutionChain];
 }
 
 class EvolutionChainError extends EvolutionchainState {
-  final String message;
-
   EvolutionChainError({@required this.message});
+
+  final String message;
 
   @override
   List<Object> get props => [message];

@@ -12,18 +12,18 @@ class PokemonDetailInitial extends PokemonDetailState {}
 class PokemonDetailLoading extends PokemonDetailState {}
 
 class PokemonDetailLoaded extends PokemonDetailState {
-  final Pokemon pokemonDetail;
-
   PokemonDetailLoaded({@required this.pokemonDetail});
+
+  final Pokemon pokemonDetail;
 
   @override
   List<Object> get props => [pokemonDetail];
 }
 
 class PokemonDetailError extends PokemonDetailState {
-  final String message;
-
   PokemonDetailError({@required this.message});
+
+  final String message;
 
   @override
   List<Object> get props => [message];

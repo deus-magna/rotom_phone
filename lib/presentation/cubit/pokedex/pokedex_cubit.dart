@@ -10,13 +10,13 @@ import 'package:rotom_phone/domain/usercases/pokedex/get_regional_pokedex.dart';
 part 'pokedex_state.dart';
 
 class PokedexCubit extends Cubit<PokedexState> {
-  final GetRegionalPokedex getPaginatedPokemonList;
-
   PokedexCubit(this.getPaginatedPokemonList)
       : assert(getPaginatedPokemonList != null),
         super(PokedexInitial());
 
-  getRegionalPokedex(int region) async {
+  final GetRegionalPokedex getPaginatedPokemonList;
+
+  void getRegionalPokedex(int region) async {
     emit(PokedexLoading());
     final failureOrPokemonList = await getPaginatedPokemonList(region: region);
     emit(_eitherLoadedOrErrorState(failureOrPokemonList));
@@ -41,7 +41,7 @@ class PokedexCubit extends Cubit<PokedexState> {
 
   List<LocalPokedexEntryModel> getPokedexEntries(Pokedex pokedex) {
     return pokedex.pokemonEntries
-        .map((pokemonData) => localPokedexEntryFromPokedexEntry(pokemonData))
+        .map(localPokedexEntryFromPokedexEntry)
         .toList();
   }
 }

@@ -17,16 +17,12 @@ class PokedexView extends StatelessWidget {
             if (state is PokedexInitial) {
               final pokedexCubit = context.read<PokedexCubit>();
               pokedexCubit.getRegionalPokedex(1);
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             } else if (state is PokedexLoading) {
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             } else if (state is PokedexLoaded) {
               final pokedexEntries = state.pokedexEntries;
@@ -73,7 +69,7 @@ class PokedexView extends StatelessWidget {
       innerHeight: size.height * 0.29,
       outerHeight: size.height * 0.33,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         color: Colors.transparent,
         width: double.infinity,
         height: size.height * 0.3,

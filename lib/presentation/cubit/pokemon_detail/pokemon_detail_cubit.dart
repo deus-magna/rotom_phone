@@ -11,21 +11,21 @@ part 'pokemon_detail_state.dart';
 class PokemonMenuCubit extends Cubit<int> {
   PokemonMenuCubit() : super(0);
 
-  onItemChanged(int index) => emit(index);
+  void onItemChanged(int index) => emit(index);
 }
 
 class PokemonDetailCubit extends Cubit<PokemonDetailState> {
-  final GetPokemonDetails getPokemonDetail;
-
   PokemonDetailCubit(this.getPokemonDetail)
       : assert(getPokemonDetail != null),
         super(PokemonDetailInitial());
 
-  init(int entryNumber) {
+  final GetPokemonDetails getPokemonDetail;
+
+  void init(int entryNumber) {
     getPokemonDetail(entryNumber: entryNumber);
   }
 
-  getPokemonDetails(int entryNumber) async {
+  void getPokemonDetails(int entryNumber) async {
     emit(PokemonDetailLoading());
     final failureOrPokemonList =
         await getPokemonDetail(entryNumber: entryNumber);

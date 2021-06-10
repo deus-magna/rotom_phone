@@ -15,11 +15,11 @@ class EvolutionchainCubit extends Cubit<EvolutionchainState> {
 
   GetEvolutionChain getEvolutionChain;
 
-  init(String evolutionChain) {
+  void init(String evolutionChain) {
     getEvolutionChain(evolutionChain: evolutionChain);
   }
 
-  getPokemonEvolutions(String evolutionChain) async {
+  void getPokemonEvolutions(String evolutionChain) async {
     emit(EvolutionChainLoading());
     final failureOrEvolutionChain =
         await getEvolutionChain(evolutionChain: evolutionChain);
