@@ -6,6 +6,13 @@ import 'package:rotom_phone/presentation/widgets/galar_button.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class MovesCard extends StatelessWidget {
+  MovesCard({
+    Key key,
+    @required this.moves,
+    @required this.selectedMethod,
+    this.onItemSelected,
+  }) : super(key: key);
+
   final List<Move> moves;
   final MoveLearnMethodType selectedMethod;
   final Function(MoveLearnMethodType) onItemSelected;
@@ -19,12 +26,6 @@ class MovesCard extends StatelessWidget {
     primary: secondary,
   );
 
-  MovesCard({
-    Key key,
-    @required this.moves,
-    @required this.selectedMethod,
-    this.onItemSelected,
-  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return RoundedCard(
@@ -38,32 +39,32 @@ class MovesCard extends StatelessWidget {
                     ? selectedButtonStyle
                     : raisedButtonStyle,
                 onPressed: () => onItemSelected(MoveLearnMethodType.LEVEL_UP),
-                child: Text('Level'),
+                child: const Text('Level'),
               ),
               ElevatedButton(
                 style: selectedMethod == MoveLearnMethodType.MACHINE
                     ? selectedButtonStyle
                     : raisedButtonStyle,
                 onPressed: () => onItemSelected(MoveLearnMethodType.MACHINE),
-                child: Text('MT/DT'),
+                child: const Text('MT/DT'),
               ),
               ElevatedButton(
                 style: selectedMethod == MoveLearnMethodType.EGG
                     ? selectedButtonStyle
                     : raisedButtonStyle,
                 onPressed: () => onItemSelected(MoveLearnMethodType.EGG),
-                child: Text('Egg'),
+                child: const Text('Egg'),
               ),
               ElevatedButton(
                 style: selectedMethod == MoveLearnMethodType.TUTOR
                     ? selectedButtonStyle
                     : raisedButtonStyle,
                 onPressed: () => onItemSelected(MoveLearnMethodType.TUTOR),
-                child: Text('Tutor'),
+                child: const Text('Tutor'),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ...buildMovesButtonList(moves),
         ],
       ),
@@ -76,12 +77,12 @@ class MovesCard extends StatelessWidget {
 }
 
 class MoveButton extends StatelessWidget {
-  final Move move;
-
   const MoveButton({
     Key key,
     @required this.move,
   }) : super(key: key);
+
+  final Move move;
 
   @override
   Widget build(BuildContext context) {

@@ -3,14 +3,14 @@ import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class GenerationsCard extends StatefulWidget {
-  final Function(int) onItemSelected;
-  final int initialIndex;
-
   const GenerationsCard({
     Key key,
     @required this.onItemSelected,
     this.initialIndex = 6,
   }) : super(key: key);
+
+  final Function(int) onItemSelected;
+  final int initialIndex;
 
   @override
   _GenerationsCardState createState() => _GenerationsCardState();
@@ -27,11 +27,10 @@ class _GenerationsCardState extends State<GenerationsCard> {
   @override
   Widget build(BuildContext context) {
     return RoundedCard(
-      child: Container(
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RoundedCardTitle(title: 'Generation'),
+          const RoundedCardTitle(title: 'Generation'),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,7 +56,7 @@ class _GenerationsCardState extends State<GenerationsCard> {
               )
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -84,11 +83,11 @@ class _GenerationsCardState extends State<GenerationsCard> {
             ],
           ),
         ],
-      )),
+      ),
     );
   }
 
-  changeSelectedItem(int index) {
+  void changeSelectedItem(int index) {
     setState(() => _currentIndex = index);
     widget.onItemSelected(index);
   }
