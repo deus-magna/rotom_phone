@@ -54,32 +54,32 @@ class _StatsTabState extends State<StatsTab>
           animation: _animation,
           label: 'HP',
           value: pokemon.info.stats[0].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
           animation: _animation,
           label: 'ATK',
           value: pokemon.info.stats[1].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
           animation: _animation,
           label: 'DEF',
           value: pokemon.info.stats[2].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
           animation: _animation,
           label: 'SATK',
           value: pokemon.info.stats[3].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
           animation: _animation,
           label: 'SDEF',
           value: pokemon.info.stats[4].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
           animation: _animation,
           label: 'SPD',
           value: pokemon.info.stats[5].baseStat),
-      SizedBox(height: 14),
+      const SizedBox(height: 14),
       Stat(
         animation: _animation,
         label: 'TOT',
