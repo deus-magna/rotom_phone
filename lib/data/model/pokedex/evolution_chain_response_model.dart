@@ -195,12 +195,12 @@ class EvolutionDetailModel extends EvolutionDetail {
 
 class SpeciesModel extends Species {
   SpeciesModel({
-    this.name,
-    this.url,
+    String name,
+    String url,
   }) : super(name: name, url: url);
 
-  final String name;
-  final String url;
+  // final String name;
+  // final String url;
 
   factory SpeciesModel.fromJson(Map<String, dynamic> json) => SpeciesModel(
         name: json['name'] == null ? null : json['name'],

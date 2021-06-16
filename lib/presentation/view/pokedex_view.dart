@@ -15,8 +15,7 @@ class PokedexView extends StatelessWidget {
         child: BlocBuilder<PokedexCubit, PokedexState>(
           builder: (context, state) {
             if (state is PokedexInitial) {
-              final pokedexCubit = context.read<PokedexCubit>();
-              pokedexCubit.getRegionalPokedex(1);
+              context.read<PokedexCubit>().getRegionalPokedex(1);
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -34,10 +33,8 @@ class PokedexView extends StatelessWidget {
                 ),
               );
             } else {
-              return Container(
-                child: Center(
-                  child: Text('Error'),
-                ),
+              return const Center(
+                child: Text('Error'),
               );
             }
           },
@@ -77,11 +74,11 @@ class PokedexView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Pokédex',
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextField(
               decoration: InputDecoration(
                 filled: true,

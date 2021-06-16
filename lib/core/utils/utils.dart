@@ -6,5 +6,5 @@ T enumFromString<T>(Iterable<T> values, String value) {
 // T enumFromString<T>(List<T> values) =>
 //       values.firstWhere((v) => this == _enumToString(v), orElse: () => null);
 
-///   String _enumToString(Object o) => o.toString()
+/// String _enumToString(Object o) => o.toString()
 /// .split('.').last.toLowerCase();

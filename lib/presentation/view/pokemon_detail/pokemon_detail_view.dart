@@ -10,13 +10,13 @@ import 'widgets/tabs/pokemon_tabs.dart';
 class PokemonDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final int entryNumber = ModalRoute.of(context).settings.arguments as int;
+    final entryNumber = ModalRoute.of(context).settings.arguments as int;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-              icon: Icon(Icons.favorite_border_rounded),
+              icon: const Icon(Icons.favorite_border_rounded),
               onPressed: () => print('Add to favorite')),
         ],
         backgroundColor: Colors.transparent,
@@ -34,18 +34,15 @@ class PokemonDetailView extends StatelessWidget {
           child: BlocBuilder<PokemonDetailCubit, PokemonDetailState>(
             builder: (context, state) {
               if (state is PokemonDetailInitial) {
-                final pokemonDetailCubit = context.read<PokemonDetailCubit>();
-                pokemonDetailCubit.getPokemonDetails(entryNumber);
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                context
+                    .read<PokemonDetailCubit>()
+                    .getPokemonDetails(entryNumber);
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               } else if (state is PokemonDetailLoading) {
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               } else if (state is PokemonDetailLoaded) {
                 final pokemonDetail = state.pokemonDetail;
@@ -60,7 +57,7 @@ class PokemonDetailView extends StatelessWidget {
                         top: 120,
                         right: -10,
                         child: RotationTransition(
-                          turns: AlwaysStoppedAnimation(-30 / 365),
+                          turns: const AlwaysStoppedAnimation(-30 / 365),
                           child: Image.asset(
                             'assets/images/pokeball_header.png',
                             height: size.height * 0.25,
@@ -72,17 +69,9 @@ class PokemonDetailView extends StatelessWidget {
                   ],
                 );
               } else if (state is PokemonDetailError) {
-                return Container(
-                  child: Center(
-                    child: Text(state.message),
-                  ),
-                );
+                return Center(child: Text(state.message));
               } else {
-                return Container(
-                  child: Center(
-                    child: Text('Error'),
-                  ),
-                );
+                return const Center(child: Text('Error'));
               }
             },
           ),
