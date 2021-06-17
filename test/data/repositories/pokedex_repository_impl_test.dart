@@ -64,7 +64,7 @@ void main() {
   }
 
   group('getPokemonDetail', () {
-    final int tEntryNumber = 1;
+    const tEntryNumber = 1;
     final tPokemonSpecieModel =
         pokemonSpecieModelFromJson(fixture('pokemon_specie.json'));
     final tPokemonInfoModel =
@@ -111,9 +111,8 @@ void main() {
                 .thenThrow(CacheException());
           });
 
-          test(
-              'Should return remote data when call the remote data source is seccesful',
-              () async {
+          test('''Should return remote data when call the 
+              remote data source is seccesful''', () async {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
@@ -127,9 +126,8 @@ void main() {
             expect(result, equals(Right(tPokemon)));
           });
 
-          test(
-              'Should cache the data locally when call the remote data source is seccesful',
-              () async {
+          test('''Should cache the data locally when call
+              the remote data source is seccesful''', () async {
             // arrange
             when(mockRemoteDataSource.getPokemonDetails(
                     entryNumber: anyNamed('entryNumber')))
@@ -166,7 +164,7 @@ void main() {
   });
 
   group('getRegionalPokedex', () {
-    final int tRegion = 1;
+    const tRegion = 1;
 
     final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
     final Pokedex tPokedex = tPokedexModel;
@@ -207,9 +205,8 @@ void main() {
               .thenThrow(CacheException());
         });
 
-        test(
-            'Should return remote data when call the remote data source is seccesful',
-            () async {
+        test('''Should return remote data when call 
+            the remote data source is seccesful''', () async {
           // arrange
           when(mockRemoteDataSource.getRegionalPokedex(region: tRegion))
               .thenAnswer((_) async => tPokedexModel);
@@ -221,9 +218,8 @@ void main() {
           expect(result, equals(Right(tPokedex)));
         });
 
-        test(
-            'Should cache the data locally when call the remote data source is seccesful',
-            () async {
+        test('''Should cache the data locally when call 
+            the remote data source is seccesful''', () async {
           // arrange
           when(mockRemoteDataSource.getRegionalPokedex(region: tRegion))
               .thenAnswer((_) async => tPokedexModel);

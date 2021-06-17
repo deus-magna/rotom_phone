@@ -35,7 +35,7 @@ void main() {
     expect(pokedexCubit.state, equals(PokedexInitial()));
   });
 
-  final int tRegion = 1;
+  const tRegion = 1;
   group('getRegionalPokedex', () {
     setUp(() {
       when(mockGetRegionalPokedex(region: anyNamed('region')))
