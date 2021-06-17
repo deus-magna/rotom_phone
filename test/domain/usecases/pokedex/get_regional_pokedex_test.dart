@@ -21,7 +21,7 @@ void main() {
 
   /// Mock de los parametros que necesitamos enviar para obtener la
   /// lista de pokemon
-  final int tRegion = 1;
+  const tRegion = 1;
 
   /// Mock de la respuesta tras obtener la lista de pokemon
   final tPokemonPaginatedResponseModel =

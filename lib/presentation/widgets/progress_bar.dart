@@ -17,7 +17,7 @@ class ProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final child = Container(
       decoration: ShapeDecoration(
-        shape: StadiumBorder(),
+        shape: const StadiumBorder(),
         color: color,
       ),
     );
@@ -27,13 +27,13 @@ class ProgressBar extends StatelessWidget {
       height: 8,
       alignment: Alignment.centerLeft,
       decoration: ShapeDecoration(
-        shape: StadiumBorder(),
+        shape: const StadiumBorder(),
         color: Colors.grey[200],
       ),
       child: enableAnimation
           ? AnimatedAlign(
-              duration: Duration(milliseconds: 260),
-              alignment: Alignment(1, 0),
+              duration: const Duration(milliseconds: 260),
+              alignment: const Alignment(1, 0),
               widthFactor: progress,
               child: child,
             )

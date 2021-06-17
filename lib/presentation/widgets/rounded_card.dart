@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rotom_phone/core/framework/decorations.dart';
 
 class RoundedCard extends StatelessWidget {
-  final EdgeInsets margin;
-  final EdgeInsets padding;
-  final double borderRadius;
-  final Widget child;
-
   const RoundedCard({
     Key key,
     this.margin = const EdgeInsets.all(20),
@@ -15,10 +10,15 @@ class RoundedCard extends StatelessWidget {
     this.child,
   }) : super(key: key);
 
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  final double borderRadius;
+  final Widget child;
+
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final CardTheme cardTheme = CardTheme.of(context);
+    final theme = Theme.of(context);
+    final cardTheme = CardTheme.of(context);
 
     return Container(
       margin: margin,
@@ -28,23 +28,24 @@ class RoundedCard extends StatelessWidget {
         boxShadow: boxSahdow,
         color: cardTheme.color ?? theme.cardColor,
       ),
-      child: child ?? SizedBox.shrink(),
+      child: child ?? const SizedBox.shrink(),
     );
   }
 }
 
 class RoundedCardTitle extends StatelessWidget {
-  final String title;
   const RoundedCardTitle({
     Key key,
     @required this.title,
   }) : super(key: key);
 
+  final String title;
+
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
     );
   }
 }
