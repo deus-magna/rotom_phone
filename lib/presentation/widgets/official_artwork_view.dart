@@ -20,7 +20,7 @@ class OfficialArtworkView extends StatelessWidget {
       child: Hero(
         tag: tag,
         child: FadeInImage(
-            placeholder: AssetImage('assets/images/white_pokeball.png'),
+            placeholder: const AssetImage('assets/images/white_pokeball.png'),
             height: height,
             image: CachedNetworkImageProvider(artwork)),
       ),

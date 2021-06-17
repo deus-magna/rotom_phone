@@ -22,7 +22,7 @@ void main() {
 
   group('PokedexBox', () {
     test('Should call MockBox.get', () {
-      final int key = 1;
+      const key = 1;
       // arrange
       when(mockBox.get(any)).thenReturn(fixture('pokedex.json'));
       // act
@@ -33,7 +33,7 @@ void main() {
     });
 
     test('Should call MockBox.put', () async {
-      final int key = 1;
+      const key = 1;
       // act
       await pokedexBox.put(key, fixture('pokedex.json'));
       // assert
@@ -43,7 +43,7 @@ void main() {
 
   group('PokemonDetailBox', () {
     test('Should call MockBox.get', () {
-      final int key = 1;
+      const key = 1;
       // arrange
       when(pokemonDetailBox.get(any))
           .thenReturn(fixture('pokemon_specie.json'));
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('Should call MockBox.put', () async {
-      final int key = 1;
+      const key = 1;
       // act
       await pokemonDetailBox.put(key, fixture('pokemon_specie.json'));
       // assert
@@ -65,7 +65,7 @@ void main() {
 
   group('EvolutionChainBox', () {
     test('Should call MockBox.get', () {
-      final int key = 1;
+      const key = 1;
       // arrange
       when(evolutionChainBox.get(any))
           .thenReturn(fixture('evolution_chain.json'));
@@ -77,7 +77,7 @@ void main() {
     });
 
     test('Should call MockBox.put', () async {
-      final int key = 1;
+      const key = 1;
       // act
       await evolutionChainBox.put(key, fixture('evolution_chain.json'));
       // assert
