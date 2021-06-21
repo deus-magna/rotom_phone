@@ -35,31 +35,31 @@ class MovesCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
-                style: selectedMethod == MoveLearnMethodType.LEVEL_UP
+                style: selectedMethod == MoveLearnMethodType.levelUp
                     ? selectedButtonStyle
                     : raisedButtonStyle,
-                onPressed: () => onItemSelected(MoveLearnMethodType.LEVEL_UP),
+                onPressed: () => onItemSelected(MoveLearnMethodType.levelUp),
                 child: const Text('Level'),
               ),
               ElevatedButton(
-                style: selectedMethod == MoveLearnMethodType.MACHINE
+                style: selectedMethod == MoveLearnMethodType.machine
                     ? selectedButtonStyle
                     : raisedButtonStyle,
-                onPressed: () => onItemSelected(MoveLearnMethodType.MACHINE),
+                onPressed: () => onItemSelected(MoveLearnMethodType.machine),
                 child: const Text('MT/DT'),
               ),
               ElevatedButton(
-                style: selectedMethod == MoveLearnMethodType.EGG
+                style: selectedMethod == MoveLearnMethodType.egg
                     ? selectedButtonStyle
                     : raisedButtonStyle,
-                onPressed: () => onItemSelected(MoveLearnMethodType.EGG),
+                onPressed: () => onItemSelected(MoveLearnMethodType.egg),
                 child: const Text('Egg'),
               ),
               ElevatedButton(
-                style: selectedMethod == MoveLearnMethodType.TUTOR
+                style: selectedMethod == MoveLearnMethodType.tutor
                     ? selectedButtonStyle
                     : raisedButtonStyle,
-                onPressed: () => onItemSelected(MoveLearnMethodType.TUTOR),
+                onPressed: () => onItemSelected(MoveLearnMethodType.tutor),
                 child: const Text('Tutor'),
               ),
             ],

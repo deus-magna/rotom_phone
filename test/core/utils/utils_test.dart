@@ -11,7 +11,7 @@ main() {
 
     test('Should return MoveLearnMethodType if type String match', () {
       final result = utils.enumFromString(MoveLearnMethodType.values, 'EGG');
-      expect(result, MoveLearnMethodType.EGG);
+      expect(result, MoveLearnMethodType.egg);
     });
   });
 }

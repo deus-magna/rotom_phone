@@ -30,7 +30,7 @@ main() {
 
   test('Should return the pokemon moves', () {
     expect(
-        tPokemonInfo.getMovesByLearnMethod(MoveLearnMethodType.LEVEL_UP, 'x-y'),
+        tPokemonInfo.getMovesByLearnMethod(MoveLearnMethodType.levelUp, 'x-y'),
         isA<List<Move>>());
   });
 }

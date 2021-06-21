@@ -21,7 +21,7 @@ main() {
         'Should return MoveLearnMethodType when the string from service is valid',
         () {
       final result = pokemonUtils.learnMethodType('form-change');
-      expect(result, equals(MoveLearnMethodType.FORM_CHANGE));
+      expect(result, equals(MoveLearnMethodType.formChange));
     });
   });
 

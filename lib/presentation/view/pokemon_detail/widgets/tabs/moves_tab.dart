@@ -25,7 +25,7 @@ class _MovesTabState extends State<MovesTab> {
   @override
   void initState() {
     version = 'x-y';
-    learnMethodType = MoveLearnMethodType.LEVEL_UP;
+    learnMethodType = MoveLearnMethodType.levelUp;
 
     super.initState();
   }
