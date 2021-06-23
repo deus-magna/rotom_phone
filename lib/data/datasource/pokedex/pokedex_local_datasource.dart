@@ -10,7 +10,7 @@ abstract class PokedexLocalDataSource {
   /// Gets the cached [PokedexModel] wich was gotten the last time
   /// the user had an internet connection.
   ///
-  /// Throws [CacheDataException] if no cached data is present
+  /// Throws [CacheException] if no cached data is present
   Future<PokedexModel> getCachedRegionalPokedex(int offset);
 
   /// Store the pokedex as a String into a Box using Hive, use [PokedexModel.id]
