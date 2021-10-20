@@ -5,7 +5,7 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon_info.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
-main() {
+void main() {
   final PokemonInfo tPokemonInfo =
       pokemonInfoModelFromJson(fixture('pokemon_info.json'));
   test('Should return the correct types for Bulbasaur', () {

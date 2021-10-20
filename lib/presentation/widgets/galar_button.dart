@@ -18,7 +18,7 @@ class GalarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final style = TextStyle(
+    const style = TextStyle(
       fontWeight: FontWeight.w700,
       color: Colors.white,
       fontSize: 14,
@@ -36,12 +36,12 @@ class GalarButton extends StatelessWidget {
   }
 
   ButtonTheme _buildButtonBack(TextStyle style) {
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    final raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
       primary: secondary,
-      minimumSize: Size(88, 44),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      shape: StadiumBorder(),
+      minimumSize: const Size(88, 44),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      shape: const StadiumBorder(),
     );
 
     return ButtonTheme(

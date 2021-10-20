@@ -3,12 +3,12 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/presentation/widgets/progress_bar.dart';
 
 class StatsTab extends StatefulWidget {
-  final Pokemon pokemon;
-
   const StatsTab({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
 
   @override
   _StatsTabState createState() => _StatsTabState();
@@ -31,11 +31,10 @@ class _StatsTabState extends State<StatsTab>
   @override
   void initState() {
     super.initState();
-    print('Init State');
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
 
     final curvedAnimation = CurvedAnimation(
@@ -92,7 +91,7 @@ class _StatsTabState extends State<StatsTab>
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.max,
@@ -119,12 +118,11 @@ class Stat extends StatelessWidget {
 
   Color getStatColor(int value) {
     if (value <= 40) return Colors.red;
-    if (value > 40 && value <= 60) return Colors.orange;
-    if (value > 60 && value <= 80) return Colors.orange[200];
-    if (value > 80 && value <= 100) return Colors.yellow;
-    if (value > 100 && value <= 140) return Colors.lightGreen;
-    if (value > 140) return Colors.green;
-    return Colors.red;
+    if (value <= 60) return Colors.orange;
+    if (value <= 80) return Colors.orange[200];
+    if (value <= 100) return Colors.yellow;
+    if (value <= 140) return Colors.lightGreen;
+    return Colors.green;
   }
 
   @override
@@ -138,7 +136,7 @@ class Stat extends StatelessWidget {
           flex: 1,
           child: Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w600,
               fontSize: 12,
@@ -148,7 +146,7 @@ class Stat extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Text('$value',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w400,
                 fontSize: 14,

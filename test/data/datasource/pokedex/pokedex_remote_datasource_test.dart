@@ -33,17 +33,16 @@ void main() {
   }
 
   group('get Pokemon detail', () {
-    final int tEntryNumber = 1;
-    final String tPokemonSpecieResponse = fixture('pokemon_specie.json');
-    final String tPokemonInfoResponse = fixture('pokemon_info.json');
+    const tEntryNumber = 1;
+    final tPokemonSpecieResponse = fixture('pokemon_specie.json');
+    final tPokemonInfoResponse = fixture('pokemon_info.json');
     final tPokemonSpecieModel =
         pokemonSpecieModelFromJson(tPokemonSpecieResponse);
 
     final tPokemonInfoModel =
         pokemonInfoModelFromJson(fixture('pokemon_info.json'));
 
-    final PokemonModel tPokemonModel =
-        PokemonModel(tPokemonInfoModel, tPokemonSpecieModel);
+    final tPokemonModel = PokemonModel(tPokemonInfoModel, tPokemonSpecieModel);
 
     test('Should make a GET request to pokemon_specie endpoint', () {
       // arrange
@@ -90,8 +89,8 @@ void main() {
   });
 
   group('get regional pokedex', () {
-    final int tRegion = 1;
-    final String tPokedexResponse = fixture('pokemon_specie.json');
+    const tRegion = 1;
+    final tPokedexResponse = fixture('pokemon_specie.json');
     final tPokedexModel = pokedexModelFromJson(tPokedexResponse);
 
     test(

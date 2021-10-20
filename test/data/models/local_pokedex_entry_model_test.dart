@@ -12,7 +12,7 @@ void main() {
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png');
 
   test('Deberia crear un PokedexEntry desde un Result', () {
-    final PokemonEntryModel tPokemonEntryModel = PokemonEntryModel(
+    final tPokemonEntryModel = PokemonEntryModel(
       entryNumber: 1,
       pokemonSpecies: PokemonSpeciesModel(
           name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/'),
@@ -22,7 +22,7 @@ void main() {
   });
 
   test('Deberia regresar un String con 00+Id si el id del pokemon es < 10', () {
-    final PokemonEntryModel tPokemonEntryModel = PokemonEntryModel(
+    final tPokemonEntryModel = PokemonEntryModel(
       entryNumber: 1,
       pokemonSpecies: PokemonSpeciesModel(
           name: 'bulbasaur', url: 'https://pokeapi.co/api/v2/pokemon/1/'),
@@ -33,7 +33,7 @@ void main() {
   });
 
   test('Deberia regresar un String con 0+Id si el id del pokemon es < 100', () {
-    final PokemonEntryModel tPokemonEntryModel = PokemonEntryModel(
+    final tPokemonEntryModel = PokemonEntryModel(
       entryNumber: 18,
       pokemonSpecies: PokemonSpeciesModel(
           name: 'pidgeot', url: 'https://pokeapi.co/api/v2/pokemon/18/'),
@@ -45,7 +45,7 @@ void main() {
   });
 
   test('Deberia regresar un String con Id si el id del pokemon es = 100', () {
-    final PokemonEntryModel tPokemonEntryModel = PokemonEntryModel(
+    final tPokemonEntryModel = PokemonEntryModel(
       entryNumber: 100,
       pokemonSpecies: PokemonSpeciesModel(
           name: 'voltorb', url: 'https://pokeapi.co/api/v2/pokemon/100/'),
@@ -57,7 +57,7 @@ void main() {
   });
 
   test('Deberia regresar un String con Id si el id del pokemon es > 100', () {
-    final PokemonEntryModel tPokemonEntryModel = PokemonEntryModel(
+    final tPokemonEntryModel = PokemonEntryModel(
       entryNumber: 150,
       pokemonSpecies: PokemonSpeciesModel(
           name: 'mewtwo', url: 'https://pokeapi.co/api/v2/pokemon/150/'),

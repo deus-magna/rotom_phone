@@ -15,7 +15,7 @@ class MockGetRegionalPokedex extends Mock implements GetRegionalPokedex {}
 void main() {
   PokedexCubit pokedexCubit;
   MockGetRegionalPokedex mockGetRegionalPokedex;
-  List<LocalPokedexEntryModel> pokedexEntries = [];
+  var pokedexEntries = <LocalPokedexEntryModel>[];
 
   setUp(() {
     mockGetRegionalPokedex = MockGetRegionalPokedex();

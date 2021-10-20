@@ -24,7 +24,7 @@ class EvolutionChainResponseModel extends EvolutionChainResponse {
         babyTriggerItem: json['baby_trigger_item'],
         chain:
             json['chain'] == null ? null : ChainModel.fromJson(json['chain']),
-        id: json['id'] == null ? null : json['id'],
+        id: json['id'],
       );
 
   final dynamic babyTriggerItem;
