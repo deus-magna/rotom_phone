@@ -53,8 +53,8 @@ class GalarButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(subtitle, style: style),
-            SizedBox(width: 10),
-            icon != null ? icon : SizedBox.shrink(),
+            const SizedBox(width: 10),
+            icon ?? const SizedBox.shrink(),
           ],
         ),
       ),
@@ -67,7 +67,7 @@ class GalarButton extends StatelessWidget {
       child: ClipPath(
         clipper: FrontMenuClipper(),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           height: 44,
           width: size.width * 0.62,
           color: primary,

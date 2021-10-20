@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rotom_phone/presentation/widgets/pokedex_header_background.dart';
 
 class PokedexHeader extends StatelessWidget {
-  final Widget child;
-  final Positioned backgroundWidget;
-  final double height;
-  final double innerHeight;
-  final double outerHeight;
-
   const PokedexHeader({
     Key key,
     this.child,
@@ -16,6 +10,13 @@ class PokedexHeader extends StatelessWidget {
     @required this.innerHeight,
     @required this.outerHeight,
   }) : super(key: key);
+
+  final Widget child;
+  final Positioned backgroundWidget;
+  final double height;
+  final double innerHeight;
+  final double outerHeight;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,9 +24,7 @@ class PokedexHeader extends StatelessWidget {
         PokedexHeaderBackground(
           innerHeight: innerHeight,
           outerHeight: outerHeight,
-          background: backgroundWidget != null
-              ? backgroundWidget
-              : _DefaultBackgroundImage(),
+          background: backgroundWidget ?? _DefaultBackgroundImage(),
         ),
         child,
       ],

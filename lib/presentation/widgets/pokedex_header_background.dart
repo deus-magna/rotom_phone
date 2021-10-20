@@ -3,16 +3,16 @@ import 'package:rotom_phone/core/framework/colors.dart';
 import 'package:rotom_phone/core/framework/painters/pokedex_header_clipper.dart';
 
 class PokedexHeaderBackground extends StatelessWidget {
-  final double outerHeight;
-  final double innerHeight;
-  final Widget background;
-
   const PokedexHeaderBackground({
     Key key,
     @required this.outerHeight,
     @required this.innerHeight,
     @required this.background,
   }) : super(key: key);
+
+  final double outerHeight;
+  final double innerHeight;
+  final Widget background;
 
   @override
   Widget build(BuildContext context) {

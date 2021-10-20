@@ -5,22 +5,22 @@ import 'package:rotom_phone/data/model/pokedex/local_pokedex_entry_model.dart';
 import '../../core/extensions/string_extension.dart';
 
 class PokedexList extends StatefulWidget {
-  final List<LocalPokedexEntryModel> pokedexEntries;
-  final Function(int) nextPage;
-
   const PokedexList({
     Key key,
     @required this.pokedexEntries,
     @required this.nextPage,
   }) : super(key: key);
 
+  final List<LocalPokedexEntryModel> pokedexEntries;
+  final Function(int) nextPage;
+
   @override
   _PokedexListState createState() => _PokedexListState();
 }
 
 class _PokedexListState extends State<PokedexList> {
-  ScrollController _scrollController = ScrollController();
-  List<LocalPokedexEntryModel> _localPokedexEntries = [];
+  final _scrollController = ScrollController();
+  final _localPokedexEntries = <LocalPokedexEntryModel>[];
   int offset = 0;
 
   @override
@@ -50,7 +50,7 @@ class _PokedexListState extends State<PokedexList> {
       itemCount: _localPokedexEntries.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 10,
           ),
@@ -61,8 +61,8 @@ class _PokedexListState extends State<PokedexList> {
                 arguments: _localPokedexEntries[index].id),
             child: Stack(
               children: [
-                _PokemonEntryActions(),
-                _BackgroundPokeball(),
+                const _PokemonEntryActions(),
+                const _BackgroundPokeball(),
                 _PokemonId(id: _localPokedexEntries[index].getPokemonId()),
                 Row(
                   children: [
@@ -92,7 +92,7 @@ class _PokemonEntryActions extends StatelessWidget {
     return Positioned(
       right: 20,
       child: IconButton(
-          icon: Icon(Icons.favorite_border_rounded),
+          icon: const Icon(Icons.favorite_border_rounded),
           onPressed: () => print('add to favorite')),
     );
   }
@@ -132,7 +132,7 @@ class _OfficialArtwork extends StatelessWidget {
       child: Hero(
         tag: tag,
         child: FadeInImage(
-            placeholder: AssetImage('assets/images/white_pokeball.png'),
+            placeholder: const AssetImage('assets/images/white_pokeball.png'),
             height: 60,
             image: CachedNetworkImageProvider(artwork)),
       ),
@@ -152,7 +152,7 @@ class _PokemonName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       name.capitalize(),
-      style: TextStyle(
+      style: const TextStyle(
           color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
     );
   }
