@@ -7,12 +7,12 @@ import '../generation_card.dart';
 import '../moves_card.dart';
 
 class MovesTab extends StatefulWidget {
-  final Pokemon pokemon;
-
   const MovesTab({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
 
   @override
   _MovesTabState createState() => _MovesTabState();
@@ -52,13 +52,13 @@ class _MovesTabState extends State<MovesTab> {
     );
   }
 
-  onLearnMethodTypeChanged(MoveLearnMethodType method) {
+  void onLearnMethodTypeChanged(MoveLearnMethodType method) {
     setState(() {
       learnMethodType = method;
     });
   }
 
-  onGenerationChanged(int index) {
+  void onGenerationChanged(int index) {
     switch (index) {
       case 0:
         version = 'yellow';

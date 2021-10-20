@@ -8,46 +8,45 @@ import '../abilities_card.dart';
 import '../pokedex_entry.dart';
 
 class BaseInfoTab extends StatelessWidget {
-  final Pokemon pokemon;
-
   const BaseInfoTab({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          PokedexEntry(entries: pokemon.pokedexEntries('en')),
-          PokemonTypesRow(
-            types: pokemon.info.getTypes,
-            buttonsForm: ButtonForm.stadium,
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          AboutRow(
-              id: pokemon.specie.getPokemonId(),
-              weight: pokemon.info.getWeight,
-              height: pokemon.info.getHeight),
-          AbilitiesCard(abilities: pokemon.info.abilities),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-        ],
-      ),
+    return Column(
+      children: [
+        PokedexEntry(entries: pokemon.pokedexEntries('en')),
+        PokemonTypesRow(
+          types: pokemon.info.getTypes,
+          buttonsForm: ButtonForm.stadium,
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+        AboutRow(
+            id: pokemon.specie.getPokemonId(),
+            weight: pokemon.info.getWeight,
+            height: pokemon.info.getHeight),
+        AbilitiesCard(abilities: pokemon.info.abilities),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+      ],
     );
   }
 }
 
 class AboutRow extends StatelessWidget {
-  final String id;
-  final double weight;
-  final double height;
-
   const AboutRow({
     Key key,
     @required this.id,
     @required this.weight,
     @required this.height,
   }) : super(key: key);
+
+  final String id;
+  final double weight;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +88,11 @@ class AboutView extends StatelessWidget {
       children: [
         Text(
           id,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: Color(0xFF8C8B90)),

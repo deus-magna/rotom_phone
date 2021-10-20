@@ -3,12 +3,13 @@ import 'package:rotom_phone/domain/entities/pokedex/pokemon.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class EvolutionsTab extends StatelessWidget {
-  final Pokemon pokemon;
-
   const EvolutionsTab({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,9 +17,9 @@ class EvolutionsTab extends StatelessWidget {
         RoundedCard(
           child: Column(
             children: [
-              RoundedCardTitle(title: 'Evolution'),
-              RoundedCardTitle(title: 'Evolution'),
-              RoundedCardTitle(title: 'Evolution'),
+              const RoundedCardTitle(title: 'Evolution'),
+              const RoundedCardTitle(title: 'Evolution'),
+              const RoundedCardTitle(title: 'Evolution'),
             ],
           ),
         )
