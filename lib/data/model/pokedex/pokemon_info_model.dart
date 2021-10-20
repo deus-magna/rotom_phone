@@ -12,26 +12,26 @@ String pokemonInfoModelToJson(PokemonInfoModel data) =>
 
 class PokemonInfoModel extends PokemonInfo {
   PokemonInfoModel({
-    this.abilities,
-    this.baseExperience,
+    this.abilitiesModel,
+    baseExperience,
     this.forms,
     this.gameIndices,
-    this.height,
+    height,
     this.heldItems,
-    this.id,
-    this.isDefault,
-    this.locationAreaEncounters,
+    id,
+    isDefault,
+    locationAreaEncounters,
     this.moves,
-    this.name,
-    this.order,
+    name,
+    order,
     this.pastTypes,
     this.species,
     this.sprites,
     this.stats,
     this.types,
-    this.weight,
+    weight,
   }) : super(
-            abilities: abilities,
+            abilities: abilitiesModel,
             baseExperience: baseExperience,
             forms: forms,
             gameIndices: gameIndices,
@@ -50,33 +50,24 @@ class PokemonInfoModel extends PokemonInfo {
             types: types,
             weight: weight);
 
-  final List<AbilityModel> abilities;
-  final int baseExperience;
+  final List<AbilityModel> abilitiesModel;
   final List<ResourcePathModel> forms;
   final List<GameIndexModel> gameIndices;
-  final int height;
   final List<dynamic> heldItems;
-  final int id;
-  final bool isDefault;
-  final String locationAreaEncounters;
   final List<MoveModel> moves;
-  final String name;
-  final int order;
   final List<dynamic> pastTypes;
   final ResourcePathModel species;
   final SpritesModel sprites;
   final List<StatModel> stats;
   final List<TypeModel> types;
-  final int weight;
 
   factory PokemonInfoModel.fromJson(Map<String, dynamic> json) =>
       PokemonInfoModel(
-        abilities: json['abilities'] == null
+        abilitiesModel: json['abilities'] == null
             ? null
             : List<AbilityModel>.from(
                 json['abilities'].map((x) => AbilityModel.fromJson(x))),
-        baseExperience:
-            json['base_experience'] == null ? null : json['base_experience'],
+        baseExperience: json['base_experience'],
         forms: json['forms'] == null
             ? null
             : List<ResourcePathModel>.from(
@@ -85,21 +76,19 @@ class PokemonInfoModel extends PokemonInfo {
             ? null
             : List<GameIndexModel>.from(
                 json['game_indices'].map((x) => GameIndexModel.fromJson(x))),
-        height: json['height'] == null ? null : json['height'],
+        height: json['height'],
         heldItems: json['held_items'] == null
             ? null
             : List<dynamic>.from(json['held_items'].map((x) => x)),
-        id: json['id'] == null ? null : json['id'],
-        isDefault: json['is_default'] == null ? null : json['is_default'],
-        locationAreaEncounters: json['location_area_encounters'] == null
-            ? null
-            : json['location_area_encounters'],
+        id: json['id'],
+        isDefault: json['is_default'],
+        locationAreaEncounters: json['location_area_encounters'],
         moves: json['moves'] == null
             ? null
             : List<MoveModel>.from(
                 json['moves'].map((x) => MoveModel.fromJson(x))),
-        name: json['name'] == null ? null : json['name'],
-        order: json['order'] == null ? null : json['order'],
+        name: json['name'],
+        order: json['order'],
         pastTypes: json['past_types'] == null
             ? null
             : List<dynamic>.from(json['past_types'].map((x) => x)),
@@ -117,33 +106,32 @@ class PokemonInfoModel extends PokemonInfo {
             ? null
             : List<TypeModel>.from(
                 json['types'].map((x) => TypeModel.fromJson(x))),
-        weight: json['weight'] == null ? null : json['weight'],
+        weight: json['weight'],
       );
 
   Map<String, dynamic> toJson() => {
-        'abilities': abilities == null
+        'abilities': abilitiesModel == null
             ? null
-            : List<dynamic>.from(abilities.map((x) => x.toJson())),
-        'base_experience': baseExperience == null ? null : baseExperience,
+            : List<dynamic>.from(abilitiesModel.map((x) => x.toJson())),
+        'base_experience': baseExperience,
         'forms': forms == null
             ? null
             : List<dynamic>.from(forms.map((x) => x.toJson())),
         'game_indices': gameIndices == null
             ? null
             : List<dynamic>.from(gameIndices.map((x) => x.toJson())),
-        'height': height == null ? null : height,
+        'height': height,
         'held_items': heldItems == null
             ? null
             : List<dynamic>.from(heldItems.map((x) => x)),
-        'id': id == null ? null : id,
-        'is_default': isDefault == null ? null : isDefault,
-        'location_area_encounters':
-            locationAreaEncounters == null ? null : locationAreaEncounters,
+        'id': id,
+        'is_default': isDefault,
+        'location_area_encounters': locationAreaEncounters,
         'moves': moves == null
             ? null
             : List<dynamic>.from(moves.map((x) => x.toJson())),
-        'name': name == null ? null : name,
-        'order': order == null ? null : order,
+        'name': name,
+        'order': order,
         'past_types': pastTypes == null
             ? null
             : List<dynamic>.from(pastTypes.map((x) => x)),
@@ -155,7 +143,7 @@ class PokemonInfoModel extends PokemonInfo {
         'types': types == null
             ? null
             : List<dynamic>.from(types.map((x) => x.toJson())),
-        'weight': weight == null ? null : weight,
+        'weight': weight,
       };
 }
 
@@ -174,14 +162,14 @@ class AbilityModel extends Ability {
         ability: json['ability'] == null
             ? null
             : ResourcePathModel.fromJson(json['ability']),
-        isHidden: json['is_hidden'] == null ? null : json['is_hidden'],
-        slot: json['slot'] == null ? null : json['slot'],
+        isHidden: json['is_hidden'],
+        slot: json['slot'],
       );
 
   Map<String, dynamic> toJson() => {
         'ability': ability == null ? null : ability.toJson(),
-        'is_hidden': isHidden == null ? null : isHidden,
-        'slot': slot == null ? null : slot,
+        'is_hidden': isHidden,
+        'slot': slot,
       };
 }
 
@@ -195,14 +183,14 @@ class GameIndexModel extends GameIndex {
   final ResourcePathModel version;
 
   factory GameIndexModel.fromJson(Map<String, dynamic> json) => GameIndexModel(
-        gameIndex: json['game_index'] == null ? null : json['game_index'],
+        gameIndex: json['game_index'],
         version: json['version'] == null
             ? null
             : ResourcePathModel.fromJson(json['version']),
       );
 
   Map<String, dynamic> toJson() => {
-        'game_index': gameIndex == null ? null : gameIndex,
+        'game_index': gameIndex,
         'version': version == null ? null : version.toJson(),
       };
 }
@@ -250,8 +238,7 @@ class VersionGroupDetailModel extends VersionGroupDetail {
 
   factory VersionGroupDetailModel.fromJson(Map<String, dynamic> json) =>
       VersionGroupDetailModel(
-        levelLearnedAt:
-            json['level_learned_at'] == null ? null : json['level_learned_at'],
+        levelLearnedAt: json['level_learned_at'],
         moveLearnMethod: json['move_learn_method'] == null
             ? null
             : MoveLearnMethodModel.fromJson(json['move_learn_method']),
@@ -261,7 +248,7 @@ class VersionGroupDetailModel extends VersionGroupDetail {
       );
 
   Map<String, dynamic> toJson() => {
-        'level_learned_at': levelLearnedAt == null ? null : levelLearnedAt,
+        'level_learned_at': levelLearnedAt,
         'move_learn_method':
             moveLearnMethod == null ? null : moveLearnMethod.toJson(),
         'version_group': versionGroup == null ? null : versionGroup.toJson(),
@@ -435,14 +422,13 @@ class SpritesModel extends Sprites {
   final SpritesModel animated;
 
   factory SpritesModel.fromJson(Map<String, dynamic> json) => SpritesModel(
-        backDefault: json['back_default'] == null ? null : json['back_default'],
+        backDefault: json['back_default'],
         backFemale: json['back_female'],
-        backShiny: json['back_shiny'] == null ? null : json['back_shiny'],
+        backShiny: json['back_shiny'],
         backShinyFemale: json['back_shiny_female'],
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
+        frontDefault: json['front_default'],
         frontFemale: json['front_female'],
-        frontShiny: json['front_shiny'] == null ? null : json['front_shiny'],
+        frontShiny: json['front_shiny'],
         frontShinyFemale: json['front_shiny_female'],
         other:
             json['other'] == null ? null : OtherModel.fromJson(json['other']),
@@ -455,13 +441,13 @@ class SpritesModel extends Sprites {
       );
 
   Map<String, dynamic> toJson() => {
-        'back_default': backDefault == null ? null : backDefault,
+        'back_default': backDefault,
         'back_female': backFemale,
-        'back_shiny': backShiny == null ? null : backShiny,
+        'back_shiny': backShiny,
         'back_shiny_female': backShinyFemale,
-        'front_default': frontDefault == null ? null : frontDefault,
+        'front_default': frontDefault,
         'front_female': frontFemale,
-        'front_shiny': frontShiny == null ? null : frontShiny,
+        'front_shiny': frontShiny,
         'front_shiny_female': frontShinyFemale,
         'other': other == null ? null : other.toJson(),
         'versions': versions == null ? null : versions.toJson(),
@@ -512,18 +498,17 @@ class RedBlueModel extends RedBlue {
   final String frontGray;
 
   factory RedBlueModel.fromJson(Map<String, dynamic> json) => RedBlueModel(
-        backDefault: json['back_default'] == null ? null : json['back_default'],
-        backGray: json['back_gray'] == null ? null : json['back_gray'],
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
-        frontGray: json['front_gray'] == null ? null : json['front_gray'],
+        backDefault: json['back_default'],
+        backGray: json['back_gray'],
+        frontDefault: json['front_default'],
+        frontGray: json['front_gray'],
       );
 
   Map<String, dynamic> toJson() => {
-        'back_default': backDefault == null ? null : backDefault,
-        'back_gray': backGray == null ? null : backGray,
-        'front_default': frontDefault == null ? null : frontDefault,
-        'front_gray': frontGray == null ? null : frontGray,
+        'back_default': backDefault,
+        'back_gray': backGray,
+        'front_default': frontDefault,
+        'front_gray': frontGray,
       };
 }
 
@@ -574,18 +559,17 @@ class CrystalModel extends Crystal {
   final String frontShiny;
 
   factory CrystalModel.fromJson(Map<String, dynamic> json) => CrystalModel(
-        backDefault: json['back_default'] == null ? null : json['back_default'],
-        backShiny: json['back_shiny'] == null ? null : json['back_shiny'],
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
-        frontShiny: json['front_shiny'] == null ? null : json['front_shiny'],
+        backDefault: json['back_default'],
+        backShiny: json['back_shiny'],
+        frontDefault: json['front_default'],
+        frontShiny: json['front_shiny'],
       );
 
   Map<String, dynamic> toJson() => {
-        'back_default': backDefault == null ? null : backDefault,
-        'back_shiny': backShiny == null ? null : backShiny,
-        'front_default': frontDefault == null ? null : frontDefault,
-        'front_shiny': frontShiny == null ? null : frontShiny,
+        'back_default': backDefault,
+        'back_shiny': backShiny,
+        'front_default': frontDefault,
+        'front_shiny': frontShiny,
       };
 }
 
@@ -634,14 +618,13 @@ class EmeraldModel extends Emerald {
   final String frontShiny;
 
   factory EmeraldModel.fromJson(Map<String, dynamic> json) => EmeraldModel(
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
-        frontShiny: json['front_shiny'] == null ? null : json['front_shiny'],
+        frontDefault: json['front_default'],
+        frontShiny: json['front_shiny'],
       );
 
   Map<String, dynamic> toJson() => {
-        'front_default': frontDefault == null ? null : frontDefault,
-        'front_shiny': frontShiny == null ? null : frontShiny,
+        'front_default': frontDefault,
+        'front_shiny': frontShiny,
       };
 }
 
@@ -664,17 +647,16 @@ class GenerationVIModel extends GenerationVi {
 
   factory GenerationVIModel.fromJson(Map<String, dynamic> json) =>
       GenerationVIModel(
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
+        frontDefault: json['front_default'],
         frontFemale: json['front_female'],
-        frontShiny: json['front_shiny'] == null ? null : json['front_shiny'],
+        frontShiny: json['front_shiny'],
         frontShinyFemale: json['front_shiny_female'],
       );
 
   Map<String, dynamic> toJson() => {
-        'front_default': frontDefault == null ? null : frontDefault,
+        'front_default': frontDefault,
         'front_female': frontFemale,
-        'front_shiny': frontShiny == null ? null : frontShiny,
+        'front_shiny': frontShiny,
         'front_shiny_female': frontShinyFemale,
       };
 }
@@ -716,13 +698,12 @@ class DreamWorldModel extends DreamWorld {
 
   factory DreamWorldModel.fromJson(Map<String, dynamic> json) =>
       DreamWorldModel(
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
+        frontDefault: json['front_default'],
         frontFemale: json['front_female'],
       );
 
   Map<String, dynamic> toJson() => {
-        'front_default': frontDefault == null ? null : frontDefault,
+        'front_default': frontDefault,
         'front_female': frontFemale,
       };
 }
@@ -780,59 +761,52 @@ class OfficialArtworkModel extends OfficialArtwork {
 
   factory OfficialArtworkModel.fromJson(Map<String, dynamic> json) =>
       OfficialArtworkModel(
-        frontDefault:
-            json['front_default'] == null ? null : json['front_default'],
+        frontDefault: json['front_default'],
       );
 
   Map<String, dynamic> toJson() => {
-        'front_default': frontDefault == null ? null : frontDefault,
+        'front_default': frontDefault,
       };
 }
 
 class StatModel extends Stat {
   StatModel({
-    this.baseStat,
-    this.effort,
+    baseStat,
+    effort,
     this.stat,
   }) : super(baseStat: baseStat, effort: effort, stat: stat);
 
-  final int baseStat;
-  final int effort;
   final ResourcePathModel stat;
 
   factory StatModel.fromJson(Map<String, dynamic> json) => StatModel(
-        baseStat: json['base_stat'] == null ? null : json['base_stat'],
-        effort: json['effort'] == null ? null : json['effort'],
+        baseStat: json['base_stat'],
+        effort: json['effort'],
         stat: json['stat'] == null
             ? null
             : ResourcePathModel.fromJson(json['stat']),
       );
 
   Map<String, dynamic> toJson() => {
-        'base_stat': baseStat == null ? null : baseStat,
-        'effort': effort == null ? null : effort,
+        'base_stat': baseStat,
+        'effort': effort,
         'stat': stat == null ? null : stat.toJson(),
       };
 }
 
 class TypeModel extends Type {
-  TypeModel({
-    this.slot,
-    this.type,
-  }) : super(slot: slot, type: type);
-
-  final int slot;
-  final ResourcePathModel type;
+  TypeModel({slot, this.typeModel}) : super(slot: slot, type: typeModel);
 
   factory TypeModel.fromJson(Map<String, dynamic> json) => TypeModel(
-        slot: json['slot'] == null ? null : json['slot'],
-        type: json['type'] == null
+        slot: json['slot'],
+        typeModel: json['type'] == null
             ? null
             : ResourcePathModel.fromJson(json['type']),
       );
 
+  final ResourcePathModel typeModel;
+
   Map<String, dynamic> toJson() => {
-        'slot': slot == null ? null : slot,
-        'type': type == null ? null : type.toJson(),
+        'slot': slot,
+        'type': typeModel == null ? null : typeModel.toJson(),
       };
 }

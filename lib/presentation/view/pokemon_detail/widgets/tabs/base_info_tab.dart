@@ -22,7 +22,7 @@ class BaseInfoTab extends StatelessWidget {
           PokedexEntry(entries: pokemon.pokedexEntries('en')),
           PokemonTypesRow(
             types: pokemon.info.getTypes,
-            buttonsForm: ButtonForm.Stadium,
+            buttonsForm: ButtonForm.stadium,
             mainAxisAlignment: MainAxisAlignment.center,
           ),
           AboutRow(

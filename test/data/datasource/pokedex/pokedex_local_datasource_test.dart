@@ -43,7 +43,7 @@ void main() {
   });
 
   group('PokemonDetail', () {
-    final int tEntryNumber = 1;
+    const tEntryNumber = 1;
     final tPokemonSpecieModel =
         pokemonSpecieModelFromJson(fixture('pokemon_specie.json'));
     final tPokemonInfoModel =
@@ -103,13 +103,13 @@ void main() {
 
   group('RegionalPokedex', () {
     final tPokedexModel = pokedexModelFromJson(fixture('pokedex.json'));
-    final int tRegion = 1;
+    const tRegion = 1;
     group('cacheRegionalPokedex', () {
       test(
         'Should call PokedexBox to cache the data',
         () async {
           // act
-          localDataSource.cacheRegionalPokedex(tPokedexModel);
+          await localDataSource.cacheRegionalPokedex(tPokedexModel);
           // assert
           final expectedJsonString = pokedexModelToJson(tPokedexModel);
           verify(mockPokedexBox.put(tRegion, expectedJsonString));

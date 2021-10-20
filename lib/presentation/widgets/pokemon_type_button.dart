@@ -2,81 +2,82 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rotom_phone/core/utils/enums.dart';
 import 'package:rotom_phone/domain/entities/resource_path.dart';
-import '../../core/utils/pokemon_utils.dart' as pokemonUtils;
+import '../../core/utils/pokemon_utils.dart' as pokemon_utils;
 
-enum ButtonForm { Stadium, Circular }
+enum ButtonForm { stadium, circular }
 
 class PokemonTypeButton extends StatelessWidget {
-  final ResourcePath type;
-  final Function onPressed;
-  final ButtonForm form;
-
   const PokemonTypeButton({
     Key key,
     @required this.type,
     this.onPressed,
-    this.form = ButtonForm.Circular,
+    this.form = ButtonForm.circular,
   }) : super(key: key);
+
+  final ResourcePath type;
+  final Function onPressed;
+  final ButtonForm form;
+
   @override
   Widget build(BuildContext context) {
-    final pokemonType = pokemonUtils.pokemonType(type.name);
+    final pokemonType = pokemon_utils.pokemonType(type.name);
 
-    Color color = Color(0xFF000000);
+    var color = const Color(0xFF000000);
 
     switch (pokemonType) {
       case PokemonType.grass:
-        color = Color(0xFF5DBE62);
+        color = const Color(0xFF5DBE62);
         break;
       case PokemonType.poison:
-        color = Color(0xFFB563CE);
+        color = const Color(0xFFB563CE);
         break;
       case PokemonType.water:
-        color = Color(0xFF559EDF);
+        color = const Color(0xFF559EDF);
         break;
       case PokemonType.tBug:
-        color = Color(0xFF9DC130);
+        color = const Color(0xFF9DC130);
         break;
       case PokemonType.dark:
-        color = Color(0xFF5F606D);
+        color = const Color(0xFF5F606D);
         break;
       case PokemonType.dragon:
-        color = Color(0xFF0773C7);
+        color = const Color(0xFF0773C7);
         break;
       case PokemonType.electric:
-        color = Color(0xFFEDD53F);
+        color = const Color(0xFFEDD53F);
         break;
       case PokemonType.fairy:
-        color = Color(0xFFEF97E6);
+        color = const Color(0xFFEF97E6);
         break;
       case PokemonType.fighting:
-        color = Color(0xFFD94256);
+        color = const Color(0xFFD94256);
         break;
       case PokemonType.fire:
-        color = Color(0xFFF8A54F);
+        color = const Color(0xFFF8A54F);
         break;
       case PokemonType.flying:
-        color = Color(0xFF9BB4E8);
+        color = const Color(0xFF9BB4E8);
         break;
       case PokemonType.ghost:
-        color = Color(0xFF6970C5);
+        color = const Color(0xFF6970C5);
         break;
       case PokemonType.ground:
-        color = Color(0xFFD78555);
+        color = const Color(0xFFD78555);
         break;
       case PokemonType.ice:
-        color = Color(0xFF7ED4C9);
+        color = const Color(0xFF7ED4C9);
         break;
       case PokemonType.normal:
-        color = Color(0xFF9A9DA1);
+        color = const Color(0xFF9A9DA1);
         break;
       case PokemonType.steel:
-        color = Color(0xFF5596A4);
+        color = const Color(0xFF5596A4);
         break;
       case PokemonType.psychic:
-        color = Color(0xFFF87C7A);
+        color = const Color(0xFFF87C7A);
         break;
       case PokemonType.rock:
-        color = Color(0xFFCEC18C);
+        color = const Color(0xFFCEC18C);
         break;
       default:
     }
@@ -84,7 +85,7 @@ class PokemonTypeButton extends StatelessWidget {
   }
 
   Widget _buildPokemonTypeButton(String name, Color color, ButtonForm form) {
-    return form == ButtonForm.Circular
+    return form == ButtonForm.circular
         ? _RoundedType(name: name, color: color)
         : _StadiumType(name: name, color: color, onPressed: onPressed);
   }
@@ -104,12 +105,12 @@ class _StadiumType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+    final raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.black87,
       primary: color,
-      minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      shape: StadiumBorder(),
+      minimumSize: const Size(88, 36),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      shape: const StadiumBorder(),
     );
     final Widget svg = SvgPicture.asset('assets/images/types/$name.svg');
     return Padding(
@@ -122,9 +123,9 @@ class _StadiumType extends StatelessWidget {
             svg,
             Text(
               name.toUpperCase(),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
           ],
         ),
       ),
@@ -133,24 +134,24 @@ class _StadiumType extends StatelessWidget {
 }
 
 class _RoundedType extends StatelessWidget {
-  final String name;
-  final Color color;
-
-  final EdgeInsets margin;
-
   const _RoundedType({
     Key key,
     @required this.color,
     @required this.name,
     this.margin = const EdgeInsets.only(right: 10),
   }) : super(key: key);
+
+  final String name;
+  final Color color;
+  final EdgeInsets margin;
+
   @override
   Widget build(BuildContext context) {
     final Widget svg = SvgPicture.asset('assets/images/types/$name.svg');
     return Container(
       margin: margin,
       child: svg,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,
       ),

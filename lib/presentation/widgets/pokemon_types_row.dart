@@ -11,7 +11,7 @@ class PokemonTypesRow extends StatelessWidget {
     Key key,
     @required this.types,
     this.mainAxisAlignment = MainAxisAlignment.start,
-    this.buttonsForm = ButtonForm.Circular,
+    this.buttonsForm = ButtonForm.circular,
   }) : super(key: key);
 
   @override
