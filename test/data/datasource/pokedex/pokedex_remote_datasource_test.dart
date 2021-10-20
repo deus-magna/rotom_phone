@@ -93,9 +93,8 @@ void main() {
     final tPokedexResponse = fixture('pokemon_specie.json');
     final tPokedexModel = pokedexModelFromJson(tPokedexResponse);
 
-    test(
-        'Deberia hacer un request tipo GET al URL de pokemon API con un offset y un limit',
-        () {
+    test('''Deberia hacer un request tipo GET al URL de pokemon API 
+        con un offset y un limit''', () {
       // arrange
       setUpMockHttpClientSuccess200(tPokedexResponse);
       // act

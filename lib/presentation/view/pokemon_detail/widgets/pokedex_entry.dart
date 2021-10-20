@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:rotom_phone/domain/entities/pokedex/pokemon_specie.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
-import '../../../../core/utils/pokemon_utils.dart' as pokemonUtils;
+import '../../../../core/utils/pokemon_utils.dart' as pokemon_utils;
 
 class PokedexEntry extends StatefulWidget {
-  final List<FlavorTextEntry> entries;
-
   const PokedexEntry({
     Key key,
     @required this.entries,
   }) : super(key: key);
+
+  final List<FlavorTextEntry> entries;
 
   @override
   _PokedexEntryState createState() => _PokedexEntryState();
@@ -33,23 +33,23 @@ class _PokedexEntryState extends State<PokedexEntry> {
     super.dispose();
   }
 
-  _animateToPage(index) {
+  void _animateToPage(index) {
     setState(() => _selectedPage = index);
     _controller.animateToPage(index,
-        duration: Duration(milliseconds: 250), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
   }
 
-  _nextPage() {
+  void _nextPage() {
     _controller.nextPage(
-        duration: Duration(milliseconds: 250), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
     if (_selectedPage < entries.length - 1) {
       setState(() => _selectedPage = _selectedPage + 1);
     }
   }
 
-  _prevPage() {
+  void _prevPage() {
     _controller.previousPage(
-        duration: Duration(milliseconds: 250), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
     if (_selectedPage > 0) {
       setState(() => _selectedPage = _selectedPage - 1);
     }
@@ -66,15 +66,16 @@ class _PokedexEntryState extends State<PokedexEntry> {
             onItemSelected: _animateToPage,
             selectedIndex: _selectedPage,
           ),
-          SizedBox(height: 10),
-          Container(
+          const SizedBox(height: 10),
+          SizedBox(
             height: size.height * 0.117,
             child: Row(
               children: [
                 Expanded(
                     flex: 1,
                     child: IconButton(
-                        icon: Icon(Icons.arrow_left), onPressed: _prevPage)),
+                        icon: const Icon(Icons.arrow_left),
+                        onPressed: _prevPage)),
                 Expanded(
                   flex: 6,
                   child: PageView.builder(
@@ -97,7 +98,8 @@ class _PokedexEntryState extends State<PokedexEntry> {
                 Expanded(
                     flex: 1,
                     child: IconButton(
-                        icon: Icon(Icons.arrow_right), onPressed: _nextPage)),
+                        icon: const Icon(Icons.arrow_right),
+                        onPressed: _nextPage)),
               ],
             ),
           ),
@@ -122,13 +124,13 @@ class EntryVersionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 50,
       child: ListView.builder(
         itemCount: entries.length,
         itemBuilder: (context, index) => EntryVersion(
           name: entries[index].versionAcronym,
-          color: pokemonUtils.versionColor(entries[index].version.name),
+          color: pokemon_utils.versionColor(entries[index].version.name),
           isSelected: selectedIndex == index,
           onTap: () => onItemSelected(index),
         ),
@@ -139,11 +141,6 @@ class EntryVersionList extends StatelessWidget {
 }
 
 class EntryVersion extends StatelessWidget {
-  final Color color;
-  final String name;
-  final Function onTap;
-  final bool isSelected;
-
   const EntryVersion({
     Key key,
     this.color = Colors.grey,
@@ -151,6 +148,12 @@ class EntryVersion extends StatelessWidget {
     this.onTap,
     this.isSelected = true,
   }) : super(key: key);
+
+  final Color color;
+  final String name;
+  final Function onTap;
+  final bool isSelected;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -158,7 +161,7 @@ class EntryVersion extends StatelessWidget {
       child: Opacity(
         opacity: isSelected ? 1 : 0.5,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           height: 40,
           width: 40,
           decoration: BoxDecoration(

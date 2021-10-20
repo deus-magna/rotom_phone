@@ -6,12 +6,13 @@ import 'package:rotom_phone/presentation/cubit/evolution_chain/evolution_chain_c
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class EvolutionChainView extends StatelessWidget {
-  final Pokemon pokemon;
-
   const EvolutionChainView({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,9 +23,8 @@ class EvolutionChainView extends StatelessWidget {
             child: BlocBuilder<EvolutionchainCubit, EvolutionchainState>(
                 builder: (context, state) {
               if (state is EvolutionchainInitial) {
-                final evolutionChainCubit = context.read<EvolutionchainCubit>();
-                evolutionChainCubit
-                    .getPokemonEvolutions(pokemon.specie.evolutionChain.url);
+                context.read<EvolutionchainCubit>()
+                  ..getPokemonEvolutions(pokemon.specie.evolutionChain.url);
                 return buildProgressIndicator();
               } else if (state is EvolutionChainLoading) {
                 return buildProgressIndicator();
@@ -35,13 +35,9 @@ class EvolutionChainView extends StatelessWidget {
                   ],
                 );
               } else if (state is EvolutionChainError) {
-                return Container(
-                  child: Text(state.message),
-                );
+                return Text(state.message);
               } else {
-                return Container(
-                  child: Text('Ocurrio un error'),
-                );
+                return const Text('Ocurrio un error');
               }
             }),
           ),
@@ -51,10 +47,8 @@ class EvolutionChainView extends StatelessWidget {
   }
 
   Widget buildProgressIndicator() {
-    return Container(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

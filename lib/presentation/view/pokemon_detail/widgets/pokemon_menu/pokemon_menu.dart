@@ -3,14 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'pokemon_menu_background.dart';
 
 class PokemonMenu extends StatefulWidget {
-  final int initialIndex;
-  final Function(int) onItemChanged;
-
   const PokemonMenu({
     Key key,
     this.initialIndex = 0,
     this.onItemChanged,
   }) : super(key: key);
+
+  final int initialIndex;
+  final Function(int) onItemChanged;
 
   @override
   _PokemonMenuState createState() => _PokemonMenuState();
@@ -34,7 +34,7 @@ class _PokemonMenuState extends State<PokemonMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 25),
+      margin: const EdgeInsets.symmetric(vertical: 25),
       child: Stack(
         children: [
           PokemonMenuBackground(),
@@ -45,7 +45,7 @@ class _PokemonMenuState extends State<PokemonMenu> {
   }
 
   Widget _buildPokemonMenuItems(Size size) {
-    return Container(
+    return SizedBox(
       width: size.width * 0.63,
       height: size.height * 0.058,
       child: Row(
@@ -72,7 +72,7 @@ class _PokemonMenuState extends State<PokemonMenu> {
         color: Colors.black,
       );
 
-  _changeIndex(int index) {
+  void _changeIndex(int index) {
     setState(() => _currentIndex = index);
     widget.onItemChanged(index);
   }

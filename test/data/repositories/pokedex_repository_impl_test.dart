@@ -71,8 +71,7 @@ void main() {
         pokemonInfoModelFromJson(fixture('pokemon_info.json'));
     final PokemonSpecie tPokemonSpecie = tPokemonSpecieModel;
     final PokemonInfo tPokemonInfo = tPokemonInfoModel;
-    final PokemonModel tPokemonModel =
-        PokemonModel(tPokemonInfo, tPokemonSpecie);
+    final tPokemonModel = PokemonModel(tPokemonInfo, tPokemonSpecie);
     final Pokemon tPokemon = tPokemonModel;
 
     test('Should check if the device is online', () {

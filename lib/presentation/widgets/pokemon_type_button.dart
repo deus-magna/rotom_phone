@@ -92,16 +92,16 @@ class PokemonTypeButton extends StatelessWidget {
 }
 
 class _StadiumType extends StatelessWidget {
-  final String name;
-  final Color color;
-  final Function onPressed;
-
   const _StadiumType({
     Key key,
     @required this.name,
     @required this.color,
     this.onPressed,
   }) : super(key: key);
+
+  final String name;
+  final Color color;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
