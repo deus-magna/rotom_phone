@@ -4,18 +4,19 @@ import 'package:rotom_phone/presentation/view/pokemon_detail/widgets/header/poke
 import 'package:rotom_phone/presentation/widgets/official_artwork_view.dart';
 
 class PokemonHeader extends StatelessWidget {
-  final Pokemon pokemon;
-
   const PokemonHeader({
     Key key,
     @required this.pokemon,
   }) : super(key: key);
+
+  final Pokemon pokemon;
+
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
-    final String artwork =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.specie.id}.png";
+    final artwork =
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.specie.id}.png';
     final types = pokemon.info.getTypes;
     final genus = pokemon.specie.genera
         .where((genera) => genera.language.name == 'en')
@@ -24,7 +25,7 @@ class PokemonHeader extends StatelessWidget {
         .genus;
 
     return Container(
-      margin: EdgeInsets.only(top: 100),
+      margin: const EdgeInsets.only(top: 100),
       width: double.infinity,
       child: Stack(
         alignment: Alignment.center,

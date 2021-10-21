@@ -5,8 +5,6 @@ import 'package:rotom_phone/presentation/widgets/galar_button.dart';
 import 'package:rotom_phone/presentation/widgets/rounded_card.dart';
 
 class AbilitiesCard extends StatelessWidget {
-  final List<Ability> abilities;
-
   AbilitiesCard({Key key, this.abilities}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -14,12 +12,14 @@ class AbilitiesCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          RoundedCardTitle(title: 'Abilities'),
+          const RoundedCardTitle(title: 'Abilities'),
           ...buildAbilities(abilities),
         ],
       ),
     );
   }
+
+  final List<Ability> abilities;
 
   List<Widget> buildAbilities(List<Ability> abilities) {
     return abilities.map((ability) {
@@ -29,19 +29,19 @@ class AbilitiesCard extends StatelessWidget {
 }
 
 class AbilityButton extends StatelessWidget {
-  final Ability ability;
-
   const AbilityButton({
     Key key,
     @required this.ability,
   }) : super(key: key);
+
+  final Ability ability;
 
   @override
   Widget build(BuildContext context) {
     return GalarButton(
       title: ability.name,
       subtitle: ability.isHidden ? 'HA' : '',
-      icon: Icon(Icons.info_outline_rounded),
+      icon: const Icon(Icons.info_outline_rounded),
     );
   }
 }

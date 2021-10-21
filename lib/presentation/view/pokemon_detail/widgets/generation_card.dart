@@ -31,7 +31,7 @@ class _GenerationsCardState extends State<GenerationsCard> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const RoundedCardTitle(title: 'Generation'),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

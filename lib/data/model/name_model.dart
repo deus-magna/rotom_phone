@@ -3,22 +3,21 @@ import 'package:rotom_phone/domain/entities/name.dart';
 
 class NameModel extends Name {
   NameModel({
-    this.language,
-    this.name,
-  }) : super(language: language, name: name);
-
-  final ResourcePathModel language;
-  final String name;
+    this.languageModel,
+    name,
+  }) : super(language: languageModel, name: name);
 
   factory NameModel.fromJson(Map<String, dynamic> json) => NameModel(
-        language: json['language'] == null
+        languageModel: json['language'] == null
             ? null
             : ResourcePathModel.fromJson(json['language']),
-        name: json['name'] == null ? null : json['name'],
+        name: json['name'],
       );
 
+  final ResourcePathModel languageModel;
+
   Map<String, dynamic> toJson() => {
-        'language': language == null ? null : language.toJson(),
-        'name': name == null ? null : name,
+        'language': languageModel == null ? null : languageModel.toJson(),
+        'name': name,
       };
 }

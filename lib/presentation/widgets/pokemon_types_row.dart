@@ -3,9 +3,6 @@ import 'package:rotom_phone/domain/entities/resource_path.dart';
 import 'package:rotom_phone/presentation/widgets/pokemon_type_button.dart';
 
 class PokemonTypesRow extends StatelessWidget {
-  final List<ResourcePath> types;
-  final MainAxisAlignment mainAxisAlignment;
-  final ButtonForm buttonsForm;
 
   const PokemonTypesRow({
     Key key,
@@ -13,6 +10,10 @@ class PokemonTypesRow extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.buttonsForm = ButtonForm.circular,
   }) : super(key: key);
+  
+  final List<ResourcePath> types;
+  final MainAxisAlignment mainAxisAlignment;
+  final ButtonForm buttonsForm;
 
   @override
   Widget build(BuildContext context) {
